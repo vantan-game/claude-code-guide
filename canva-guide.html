@@ -1,0 +1,3419 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Canva はじめてガイド | 初心者向け完全ガイド</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,600;9..144,800&family=Zen+Kaku+Gothic+New:wght@400;500;700;900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #F7F2EA;
+  --bg-card: #FFFCF6;
+  --ink: #1C1A17;
+  --ink-soft: #4A4540;
+  --ink-mute: #8A847C;
+  --line: #E5DDD0;
+  --accent: #D97757;
+  --accent-deep: #B85A3F;
+  --accent-soft: #FBE9DF;
+  --navy: #1F2A44;
+  --code-bg: #14110E;
+  --code-border: #2A2520;
+  --code-text: #F0E9DD;
+  --code-mute: #8A847C;
+  --code-accent: #FFB088;
+  --green: #7FA877;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'Zen Kaku Gothic New', -apple-system, sans-serif;
+  background: var(--bg);
+  color: var(--ink);
+  line-height: 1.75;
+  font-size: 16px;
+  font-weight: 400;
+  -webkit-font-smoothing: antialiased;
+  background-image:
+    radial-gradient(ellipse at top left, rgba(217,119,87,0.08), transparent 50%),
+    radial-gradient(ellipse at bottom right, rgba(31,42,68,0.05), transparent 50%);
+  background-attachment: fixed;
+}
+
+.container {
+  max-width: 880px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+/* ---------- Hero ---------- */
+.hero {
+  padding: 80px 0 60px;
+  text-align: center;
+  position: relative;
+}
+
+.eyebrow {
+  display: inline-block;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--accent-deep);
+  background: var(--accent-soft);
+  padding: 6px 14px;
+  border-radius: 100px;
+  margin-bottom: 24px;
+  font-weight: 500;
+}
+
+.hero h1 {
+  font-family: 'Fraunces', serif;
+  font-weight: 400;
+  font-size: clamp(40px, 7vw, 68px);
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+  margin-bottom: 20px;
+  color: var(--ink);
+}
+
+.hero h1 em {
+  font-style: italic;
+  font-weight: 300;
+  color: var(--accent-deep);
+}
+
+.hero .lead {
+  font-size: 17px;
+  color: var(--ink-soft);
+  max-width: 540px;
+  margin: 0 auto 36px;
+  line-height: 1.8;
+}
+
+.hero-buttons {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 13px 22px;
+  border-radius: 10px;
+  font-size: 14px;
+  font-weight: 700;
+  font-family: inherit;
+  text-decoration: none;
+  border: 1.5px solid transparent;
+  transition: all 0.2s ease;
+  cursor: pointer;
+}
+
+.btn-primary {
+  background: var(--ink);
+  color: var(--bg);
+}
+.btn-primary:hover {
+  background: var(--accent-deep);
+  transform: translateY(-1px);
+  box-shadow: 0 8px 20px rgba(184,90,63,0.3);
+}
+
+.btn-secondary {
+  background: transparent;
+  color: var(--ink);
+  border-color: var(--ink);
+}
+.btn-secondary:hover {
+  background: var(--ink);
+  color: var(--bg);
+}
+
+.btn .arrow {
+  font-size: 16px;
+  transition: transform 0.2s;
+}
+.btn:hover .arrow { transform: translate(2px, -2px); }
+
+/* ---------- Section ---------- */
+section.step {
+  padding: 56px 0;
+  border-top: 1px solid var(--line);
+}
+
+.step-number {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--accent-deep);
+  letter-spacing: 0.15em;
+  margin-bottom: 12px;
+}
+
+.step h2 {
+  font-family: 'Fraunces', serif;
+  font-weight: 400;
+  font-size: clamp(28px, 4vw, 40px);
+  line-height: 1.15;
+  letter-spacing: -0.015em;
+  margin-bottom: 16px;
+}
+
+.step h2 strong {
+  font-weight: 600;
+}
+
+.step .desc {
+  font-size: 16px;
+  color: var(--ink-soft);
+  margin-bottom: 32px;
+  max-width: 640px;
+}
+
+/* ---------- Cards ---------- */
+.card {
+  background: var(--bg-card);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  padding: 28px 30px;
+  margin-bottom: 16px;
+}
+
+.card h3 {
+  font-family: 'Fraunces', serif;
+  font-size: 22px;
+  font-weight: 600;
+  margin-bottom: 12px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.card h3 .badge {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  font-weight: 500;
+  background: var(--accent-soft);
+  color: var(--accent-deep);
+  padding: 3px 10px;
+  border-radius: 100px;
+  letter-spacing: 0.05em;
+}
+
+.card p {
+  color: var(--ink-soft);
+  font-size: 15px;
+  margin-bottom: 14px;
+}
+
+.card ul {
+  list-style: none;
+  padding: 0;
+}
+
+.card ul li {
+  padding-left: 24px;
+  position: relative;
+  margin-bottom: 8px;
+  font-size: 15px;
+  color: var(--ink-soft);
+}
+
+.card ul li::before {
+  content: '→';
+  position: absolute;
+  left: 0;
+  color: var(--accent-deep);
+  font-weight: 700;
+}
+
+/* ---------- OS Tabs ---------- */
+.tabs {
+  display: flex;
+  gap: 4px;
+  margin-bottom: 0;
+  background: var(--bg-card);
+  padding: 6px;
+  border-radius: 12px 12px 0 0;
+  border: 1px solid var(--line);
+  border-bottom: none;
+}
+
+.tab-btn {
+  flex: 1;
+  padding: 10px 16px;
+  border: none;
+  background: transparent;
+  color: var(--ink-mute);
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 700;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.tab-btn:hover {
+  color: var(--ink);
+}
+
+.tab-btn.active {
+  background: var(--ink);
+  color: var(--bg);
+}
+
+.tab-content {
+  display: none;
+  background: var(--bg-card);
+  border: 1px solid var(--line);
+  border-radius: 0 0 12px 12px;
+  padding: 28px 30px;
+}
+
+.tab-content.active {
+  display: block;
+  animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(4px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.tab-content h4 {
+  font-size: 15px;
+  font-weight: 700;
+  margin-bottom: 8px;
+  color: var(--ink);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.tab-content h4::before {
+  content: '';
+  width: 6px;
+  height: 6px;
+  background: var(--accent);
+  border-radius: 50%;
+  display: inline-block;
+}
+
+.tab-content p {
+  color: var(--ink-soft);
+  font-size: 15px;
+  margin-bottom: 16px;
+}
+
+.tab-content p + h4 {
+  margin-top: 28px;
+}
+
+/* ---------- Code Block ---------- */
+.code-block {
+  position: relative;
+  background: var(--code-bg);
+  border: 1px solid var(--code-border);
+  border-radius: 10px;
+  padding: 16px 56px 16px 20px;
+  margin: 12px 0 18px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 13.5px;
+  color: var(--code-text);
+  line-height: 1.7;
+  overflow-x: auto;
+  white-space: pre;
+}
+
+.code-block::before {
+  content: '$';
+  color: var(--code-accent);
+  margin-right: 8px;
+  font-weight: 600;
+  user-select: none;
+}
+
+.code-block.no-prompt::before { display: none; }
+
+.copy-btn {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: var(--code-border);
+  color: var(--code-text);
+  border: none;
+  padding: 5px 10px;
+  border-radius: 6px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  cursor: pointer;
+  transition: all 0.15s;
+  font-weight: 500;
+}
+
+.copy-btn:hover {
+  background: var(--accent-deep);
+  color: white;
+}
+
+.copy-btn.copied {
+  background: var(--green);
+  color: white;
+}
+
+/* ---------- Tip Box ---------- */
+.tip {
+  background: var(--accent-soft);
+  border-left: 3px solid var(--accent);
+  border-radius: 0 8px 8px 0;
+  padding: 14px 18px;
+  margin: 18px 0;
+  font-size: 14px;
+  color: var(--ink-soft);
+}
+
+.tip strong {
+  color: var(--accent-deep);
+  display: block;
+  margin-bottom: 4px;
+  font-size: 13px;
+  letter-spacing: 0.05em;
+}
+
+.warning {
+  background: #FFF4D6;
+  border-left: 3px solid #C9A227;
+  color: #6B5410;
+  border-radius: 0 8px 8px 0;
+  padding: 14px 18px;
+  margin: 18px 0;
+  font-size: 14px;
+}
+
+.warning strong {
+  display: block;
+  margin-bottom: 4px;
+  color: #7E641A;
+}
+
+/* ---------- Command Table ---------- */
+.cmd-list {
+  display: grid;
+  gap: 10px;
+}
+
+.cmd-item {
+  display: grid;
+  grid-template-columns: minmax(180px, 220px) 1fr;
+  gap: 20px;
+  align-items: baseline;
+  padding: 14px 0;
+  border-bottom: 1px dashed var(--line);
+}
+
+.cmd-item:last-child { border-bottom: none; }
+
+.cmd-item code {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 13px;
+  background: var(--ink);
+  color: var(--bg);
+  padding: 4px 10px;
+  border-radius: 5px;
+  font-weight: 500;
+  display: inline-block;
+  width: fit-content;
+}
+
+.cmd-item .desc-text {
+  color: var(--ink-soft);
+  font-size: 14.5px;
+}
+
+@media (max-width: 600px) {
+  .cmd-item {
+    grid-template-columns: 1fr;
+    gap: 6px;
+  }
+}
+
+/* ---------- Prompt Examples ---------- */
+.prompt-card {
+  background: var(--bg-card);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 22px 24px;
+  margin-bottom: 14px;
+  position: relative;
+}
+
+.prompt-card .label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  color: var(--accent-deep);
+  font-weight: 700;
+  margin-bottom: 8px;
+  display: block;
+}
+
+.prompt-card .prompt-text {
+  font-size: 15.5px;
+  color: var(--ink);
+  line-height: 1.65;
+  font-weight: 500;
+  font-family: 'Fraunces', serif;
+  font-style: italic;
+}
+
+.prompt-card .prompt-text::before { content: '“'; color: var(--accent); font-size: 22px; margin-right: 4px; }
+.prompt-card .prompt-text::after { content: '”'; color: var(--accent); font-size: 22px; margin-left: 4px; }
+
+.prompt-card .note {
+  font-size: 13px;
+  color: var(--ink-mute);
+  margin-top: 10px;
+  padding-top: 10px;
+  border-top: 1px dashed var(--line);
+}
+
+/* ---------- Resources ---------- */
+.resources {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 14px;
+}
+
+.res-card {
+  background: var(--bg-card);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 22px;
+  text-decoration: none;
+  color: inherit;
+  transition: all 0.2s ease;
+  display: block;
+}
+
+.res-card:hover {
+  border-color: var(--accent);
+  transform: translateY(-2px);
+  box-shadow: 0 12px 24px rgba(28,26,23,0.06);
+}
+
+.res-card .res-title {
+  font-weight: 700;
+  font-size: 15px;
+  margin-bottom: 6px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.res-card .res-title .arrow {
+  color: var(--accent-deep);
+  transition: transform 0.2s;
+}
+
+.res-card:hover .arrow { transform: translate(2px, -2px); }
+
+.res-card .res-desc {
+  font-size: 13px;
+  color: var(--ink-mute);
+  line-height: 1.6;
+}
+
+/* ---------- Footer ---------- */
+footer {
+  padding: 60px 0 40px;
+  text-align: center;
+  border-top: 1px solid var(--line);
+  margin-top: 60px;
+}
+
+footer p {
+  font-size: 13px;
+  color: var(--ink-mute);
+  font-family: 'JetBrains Mono', monospace;
+}
+
+footer p + p { margin-top: 6px; }
+
+/* ---------- Responsive ---------- */
+@media (max-width: 600px) {
+  .hero { padding: 60px 0 40px; }
+  section.step { padding: 40px 0; }
+  .card, .tab-content { padding: 22px 20px; }
+  .code-block { font-size: 12.5px; }
+  .tabs { flex-wrap: wrap; }
+}
+
+/* ===================================
+   Chat Widget
+   =================================== */
+.chat-launcher {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background: var(--accent-deep);
+  color: white;
+  border: none;
+  box-shadow: 0 8px 24px rgba(184,90,63,0.4);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 26px;
+  z-index: 1000;
+  transition: all 0.2s ease;
+  font-family: inherit;
+}
+.chat-launcher:hover {
+  transform: scale(1.06);
+  box-shadow: 0 12px 30px rgba(184,90,63,0.5);
+}
+.chat-launcher.hidden {
+  transform: scale(0);
+  opacity: 0;
+  pointer-events: none;
+}
+
+.chat-launcher::after {
+  content: '?';
+  position: absolute;
+  top: -4px;
+  right: -4px;
+  background: var(--ink);
+  color: var(--bg);
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  font-size: 11px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'JetBrains Mono', monospace;
+}
+
+.chat-window {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  width: 380px;
+  max-width: calc(100vw - 32px);
+  height: 580px;
+  max-height: calc(100vh - 48px);
+  background: var(--bg-card);
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  box-shadow: 0 20px 60px rgba(28,26,23,0.18);
+  display: flex;
+  flex-direction: column;
+  z-index: 1001;
+  overflow: hidden;
+  transform: scale(0.92) translateY(20px);
+  opacity: 0;
+  pointer-events: none;
+  transform-origin: bottom right;
+  transition: transform 0.25s ease, opacity 0.25s ease;
+}
+.chat-window.open {
+  transform: scale(1) translateY(0);
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.chat-header {
+  background: var(--ink);
+  color: var(--bg);
+  padding: 16px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.chat-header-info {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.chat-avatar {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: var(--accent);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 17px;
+  flex-shrink: 0;
+}
+
+.chat-title {
+  font-family: 'Fraunces', serif;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 1.2;
+}
+
+.chat-subtitle {
+  font-size: 10px;
+  color: rgba(247,242,234,0.55);
+  font-family: 'JetBrains Mono', monospace;
+  letter-spacing: 0.1em;
+  margin-top: 2px;
+}
+
+.chat-close {
+  background: transparent;
+  border: none;
+  color: var(--bg);
+  font-size: 22px;
+  line-height: 1;
+  cursor: pointer;
+  opacity: 0.55;
+  transition: all 0.15s;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 6px;
+  font-family: inherit;
+}
+.chat-close:hover {
+  opacity: 1;
+  background: rgba(255,255,255,0.1);
+}
+
+.chat-messages {
+  flex: 1;
+  padding: 20px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  background: var(--bg);
+  scroll-behavior: smooth;
+}
+
+.chat-messages::-webkit-scrollbar { width: 6px; }
+.chat-messages::-webkit-scrollbar-thumb {
+  background: var(--line);
+  border-radius: 3px;
+}
+
+.chat-msg {
+  max-width: 85%;
+  padding: 10px 14px;
+  border-radius: 14px;
+  font-size: 14px;
+  line-height: 1.65;
+  word-wrap: break-word;
+  white-space: pre-wrap;
+  animation: msgIn 0.2s ease;
+}
+@keyframes msgIn {
+  from { opacity: 0; transform: translateY(4px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.chat-msg.bot {
+  background: var(--bg-card);
+  border: 1px solid var(--line);
+  align-self: flex-start;
+  border-bottom-left-radius: 4px;
+  color: var(--ink);
+}
+
+.chat-msg.user {
+  background: var(--accent-deep);
+  color: white;
+  align-self: flex-end;
+  border-bottom-right-radius: 4px;
+}
+
+.chat-msg code {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12.5px;
+  background: rgba(0,0,0,0.08);
+  padding: 1px 6px;
+  border-radius: 4px;
+  display: inline-block;
+}
+.chat-msg.user code {
+  background: rgba(255,255,255,0.22);
+}
+
+.chat-msg strong { font-weight: 700; }
+
+.chat-typing {
+  display: flex;
+  gap: 5px;
+  padding: 14px 16px;
+  background: var(--bg-card);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  border-bottom-left-radius: 4px;
+  align-self: flex-start;
+  width: fit-content;
+}
+.chat-typing span {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--ink-mute);
+  animation: dotBounce 1.2s infinite;
+}
+.chat-typing span:nth-child(2) { animation-delay: 0.15s; }
+.chat-typing span:nth-child(3) { animation-delay: 0.3s; }
+@keyframes dotBounce {
+  0%, 60%, 100% { transform: translateY(0); opacity: 0.4; }
+  30% { transform: translateY(-5px); opacity: 1; }
+}
+
+.chat-suggestions {
+  padding: 0 16px 12px;
+  background: var(--bg);
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  flex-shrink: 0;
+}
+
+.chat-suggestion {
+  font-size: 12px;
+  background: var(--bg-card);
+  border: 1px solid var(--line);
+  padding: 6px 12px;
+  border-radius: 100px;
+  cursor: pointer;
+  color: var(--ink-soft);
+  font-family: inherit;
+  transition: all 0.15s;
+}
+.chat-suggestion:hover {
+  background: var(--accent-soft);
+  border-color: var(--accent);
+  color: var(--accent-deep);
+}
+
+.chat-input-wrap {
+  padding: 12px 14px;
+  background: var(--bg-card);
+  border-top: 1px solid var(--line);
+  display: flex;
+  gap: 8px;
+  align-items: flex-end;
+  flex-shrink: 0;
+}
+
+.chat-input {
+  flex: 1;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  padding: 10px 12px;
+  font-family: inherit;
+  font-size: 14px;
+  resize: none;
+  background: var(--bg);
+  color: var(--ink);
+  max-height: 120px;
+  line-height: 1.5;
+  transition: border-color 0.15s;
+}
+.chat-input:focus {
+  outline: none;
+  border-color: var(--accent);
+}
+
+.chat-send {
+  background: var(--ink);
+  color: var(--bg);
+  border: none;
+  border-radius: 10px;
+  padding: 10px 16px;
+  cursor: pointer;
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 700;
+  transition: all 0.15s;
+  white-space: nowrap;
+  height: 40px;
+}
+.chat-send:hover:not(:disabled) {
+  background: var(--accent-deep);
+}
+.chat-send:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+}
+
+.chat-disclaimer {
+  font-size: 10px;
+  color: var(--ink-mute);
+  text-align: center;
+  padding: 6px 16px 8px;
+  background: var(--bg-card);
+  font-family: 'JetBrains Mono', monospace;
+  letter-spacing: 0.03em;
+  flex-shrink: 0;
+}
+
+@media (max-width: 480px) {
+  .chat-window {
+    bottom: 16px;
+    right: 16px;
+    left: 16px;
+    width: auto;
+    height: calc(100vh - 100px);
+  }
+  .chat-launcher {
+    bottom: 16px;
+    right: 16px;
+  }
+}
+
+/* Help Panel content (replaces chat conversation) */
+.chat-intro {
+  padding: 22px 20px 18px;
+  background: var(--bg);
+  flex: 1;
+  overflow-y: auto;
+}
+.chat-intro::-webkit-scrollbar { width: 6px; }
+.chat-intro::-webkit-scrollbar-thumb { background: var(--line); border-radius: 3px; }
+
+.chat-intro h4 {
+  font-family: 'Fraunces', serif;
+  font-size: 18px;
+  font-weight: 600;
+  margin-bottom: 8px;
+  color: var(--ink);
+  line-height: 1.3;
+}
+
+.chat-intro .lead-text {
+  font-size: 13.5px;
+  color: var(--ink-soft);
+  line-height: 1.7;
+  margin-bottom: 20px;
+}
+
+.chat-section-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  color: var(--ink-mute);
+  text-transform: uppercase;
+  margin: 4px 0 10px;
+}
+
+.chat-q-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.chat-q-card {
+  background: var(--bg-card);
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  padding: 11px 14px;
+  font-size: 13.5px;
+  text-align: left;
+  font-family: inherit;
+  color: var(--ink);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  transition: all 0.15s ease;
+  line-height: 1.45;
+  font-weight: 500;
+}
+.chat-q-card:hover {
+  border-color: var(--accent);
+  background: var(--accent-soft);
+  color: var(--accent-deep);
+}
+.chat-q-card .q-icon {
+  font-size: 10px;
+  color: var(--ink-mute);
+  font-family: 'JetBrains Mono', monospace;
+  letter-spacing: 0.1em;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+.chat-q-card:hover .q-icon {
+  color: var(--accent-deep);
+}
+.chat-q-card.copied {
+  background: var(--green);
+  color: white;
+  border-color: var(--green);
+}
+.chat-q-card.copied .q-icon {
+  color: white;
+}
+
+.chat-cta-wrap {
+  padding: 14px 16px 12px;
+  background: var(--bg-card);
+  border-top: 1px solid var(--line);
+  flex-shrink: 0;
+}
+
+.chat-cta {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  width: 100%;
+  background: var(--ink);
+  color: var(--bg);
+  border: none;
+  border-radius: 10px;
+  padding: 12px 16px;
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  text-decoration: none;
+  transition: all 0.2s ease;
+}
+.chat-cta:hover {
+  background: var(--accent-deep);
+  transform: translateY(-1px);
+  box-shadow: 0 8px 16px rgba(184,90,63,0.25);
+}
+.chat-cta .arrow {
+  transition: transform 0.2s;
+}
+.chat-cta:hover .arrow {
+  transform: translate(2px, -2px);
+}
+
+.chat-tiny {
+  font-size: 10px;
+  color: var(--ink-mute);
+  text-align: center;
+  margin-top: 8px;
+  font-family: 'JetBrains Mono', monospace;
+  letter-spacing: 0.05em;
+}
+
+/* Multi-AI button styles */
+.chat-cta-primary {
+  position: relative;
+}
+
+.recommend-badge {
+  position: absolute;
+  top: -7px;
+  right: 14px;
+  background: var(--accent);
+  color: white;
+  font-size: 9px;
+  letter-spacing: 0.08em;
+  padding: 2px 8px;
+  border-radius: 100px;
+  font-family: 'JetBrains Mono', monospace;
+  font-weight: 700;
+}
+
+.chat-cta-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+  margin-top: 8px;
+}
+
+.chat-cta-secondary {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  background: var(--bg);
+  color: var(--ink);
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  padding: 10px 12px;
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+  text-decoration: none;
+  transition: all 0.2s ease;
+}
+.chat-cta-secondary:hover {
+  border-color: var(--accent);
+  background: var(--accent-soft);
+  color: var(--accent-deep);
+  transform: translateY(-1px);
+}
+
+.ai-logo {
+  width: 16px;
+  height: 16px;
+  border-radius: 4px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 9px;
+  font-weight: 700;
+  flex-shrink: 0;
+  color: white;
+}
+.ai-logo.claude { background: #D97757; }
+.ai-logo.gpt { background: #10A37F; }
+.ai-logo.gemini { background: linear-gradient(135deg, #4285F4, #9B72CB); }
+
+/* =========================
+   Accordion: Phase & Step Cards
+   ========================= */
+.phase-list {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  padding: 36px 0 60px;
+}
+
+.phase-card {
+  background: var(--bg-card);
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  overflow: hidden;
+  transition: border-color 0.25s ease, box-shadow 0.25s ease;
+}
+.phase-card[open] {
+  border-color: var(--accent);
+  box-shadow: 0 10px 28px rgba(184,90,63,0.08);
+}
+
+.phase-summary,
+.step-summary {
+  list-style: none;
+  cursor: pointer;
+  user-select: none;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+.phase-summary::-webkit-details-marker,
+.step-summary::-webkit-details-marker {
+  display: none;
+}
+.phase-summary:focus-visible,
+.step-summary:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: -2px;
+}
+
+.phase-summary {
+  padding: 22px 26px;
+  min-height: 64px;
+  transition: background 0.15s ease;
+}
+.phase-summary:hover {
+  background: linear-gradient(90deg, rgba(217,119,87,0.07), transparent 70%);
+}
+
+.phase-icon {
+  font-size: 26px;
+  flex-shrink: 0;
+  width: 32px;
+  text-align: center;
+}
+
+.phase-text {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  min-width: 0;
+}
+
+.phase-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.18em;
+  color: var(--accent-deep);
+  font-weight: 700;
+}
+
+.phase-name {
+  font-family: 'Fraunces', serif;
+  font-size: 22px;
+  font-weight: 600;
+  color: var(--ink);
+  letter-spacing: -0.01em;
+  line-height: 1.2;
+}
+
+.phase-count {
+  font-size: 11px;
+  font-family: 'JetBrains Mono', monospace;
+  color: var(--ink-soft);
+  letter-spacing: 0.08em;
+  font-weight: 500;
+  background: var(--bg);
+  padding: 4px 11px;
+  border-radius: 100px;
+  flex-shrink: 0;
+  border: 1px solid var(--line);
+}
+
+.chevron {
+  font-size: 26px;
+  color: var(--ink-mute);
+  font-family: 'Fraunces', serif;
+  transition: transform 0.3s cubic-bezier(.4,.0,.2,1);
+  flex-shrink: 0;
+  width: 18px;
+  text-align: center;
+  font-weight: 300;
+  line-height: 1;
+}
+
+[open] > .phase-summary > .chevron,
+[open] > .step-summary > .chevron {
+  transform: rotate(90deg);
+  color: var(--accent-deep);
+}
+
+.phase-body {
+  border-top: 1px solid var(--line);
+  padding: 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  background: var(--bg);
+}
+
+/* Step cards inside a phase */
+.step-card {
+  background: var(--bg-card);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  overflow: hidden;
+  transition: border-color 0.2s ease;
+}
+.step-card[open] {
+  border-color: var(--accent);
+}
+
+.step-summary {
+  padding: 14px 18px;
+  min-height: 56px;
+  transition: background 0.15s ease;
+}
+.step-summary:hover {
+  background: var(--accent-soft);
+}
+.step-card[open] > .step-summary {
+  background: var(--accent-soft);
+  border-bottom: 1px solid var(--line);
+}
+
+.step-badge {
+  width: 34px;
+  height: 34px;
+  border-radius: 8px;
+  background: var(--ink);
+  color: var(--bg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 13px;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+.step-badge-icon {
+  background: var(--accent-soft);
+  color: var(--accent-deep);
+  font-size: 18px;
+  border: 1px solid var(--accent);
+}
+
+
+
+/* ===== Brand Icons ===== */
+.brand-icon {
+  width: 14px;
+  height: 14px;
+  display: inline-block;
+  vertical-align: -2px;
+  margin-right: 5px;
+  flex-shrink: 0;
+}
+.brand-icon-large {
+  width: 38px;
+  height: 38px;
+  display: block;
+  flex-shrink: 0;
+}
+/* Brand colors for large icons */
+.brand-claude { color: #D97757; }
+.brand-github { color: #1C1A17; }
+.brand-canva { color: #00C4CC; }
+
+/* In nav, all icons inherit the link color (currentColor) */
+/* In active state, they pick up the accent-deep color naturally */
+
+/* ===== Top Navigation ===== */
+.top-nav {
+  background: rgba(247, 242, 234, 0.88);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border-bottom: 1px solid rgba(28, 26, 23, 0.08);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  padding: 12px 0;
+}
+.top-nav-inner {
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 0 32px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+.nav-brand {
+  font-family: 'Fraunces', serif;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--ink);
+  letter-spacing: -0.01em;
+  white-space: nowrap;
+}
+.nav-brand .nav-brand-mark {
+  color: var(--accent-deep);
+  margin-right: 6px;
+}
+.nav-brand-link {
+  font-family: 'Fraunces', serif;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--ink);
+  letter-spacing: -0.01em;
+  white-space: nowrap;
+  text-decoration: none;
+  transition: color 0.18s;
+}
+.nav-brand-link:hover { color: var(--accent-deep); }
+
+.nav-links {
+  display: flex;
+  gap: 4px;
+  flex-wrap: wrap;
+}
+.nav-link {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11.5px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  color: var(--ink-mute);
+  text-decoration: none;
+  padding: 7px 13px;
+  border-radius: 7px;
+  transition: all 0.18s cubic-bezier(0.2, 0.7, 0.3, 1);
+  border: 1px solid transparent;
+  white-space: nowrap;
+}
+.nav-link:hover {
+  color: var(--ink);
+  background: rgba(217, 119, 87, 0.07);
+}
+.nav-link.active {
+  color: var(--accent-deep);
+  background: var(--accent-soft);
+  border-color: rgba(217, 119, 87, 0.2);
+}
+@media (max-width: 600px) {
+  .top-nav-inner { padding: 0 16px; gap: 8px; }
+  .nav-brand { font-size: 13px; }
+  .nav-link { font-size: 11px; padding: 6px 10px; }
+}
+
+/* ===== Other Guides Section ===== */
+.other-guides-section {
+  margin: 60px 0 30px;
+  padding: 40px 32px;
+  background: var(--bg-card);
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  position: relative;
+  overflow: hidden;
+}
+.other-guides-section::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--accent), transparent);
+  opacity: 0.5;
+}
+.other-guides-header {
+  text-align: center;
+  margin-bottom: 32px;
+  position: relative;
+}
+.other-guides-header h2 {
+  font-family: 'Fraunces', serif;
+  font-weight: 400;
+  font-size: clamp(24px, 4vw, 32px);
+  line-height: 1.2;
+  color: var(--ink);
+  margin-bottom: 10px;
+  letter-spacing: -0.015em;
+}
+.other-guides-header h2 strong {
+  font-weight: 600;
+  color: var(--accent-deep);
+}
+.other-guides-header p {
+  color: var(--ink-soft);
+  font-size: 14.5px;
+  line-height: 1.7;
+  max-width: 480px;
+  margin: 0 auto;
+}
+.other-guides-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 18px;
+  max-width: 720px;
+  margin: 0 auto;
+}
+@media (max-width: 600px) {
+  .other-guides-grid { grid-template-columns: 1fr; }
+  .other-guides-section { padding: 32px 20px; }
+}
+.guide-card {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 28px 24px;
+  background: var(--bg);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  text-decoration: none;
+  transition: all 0.22s cubic-bezier(0.2, 0.7, 0.3, 1);
+  position: relative;
+  overflow: hidden;
+}
+.guide-card::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, transparent 60%, var(--accent-soft));
+  opacity: 0;
+  transition: opacity 0.22s;
+  pointer-events: none;
+}
+.guide-card:hover {
+  transform: translateY(-3px);
+  border-color: var(--accent);
+  box-shadow: 0 12px 28px rgba(28, 26, 23, 0.08);
+}
+.guide-card:hover::after {
+  opacity: 1;
+}
+.guide-icon {
+  font-size: 36px;
+  line-height: 1;
+  position: relative;
+  z-index: 1;
+}
+.guide-card-eyebrow {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.18em;
+  font-weight: 700;
+  color: var(--ink-mute);
+  text-transform: uppercase;
+  position: relative;
+  z-index: 1;
+}
+.guide-title {
+  font-family: 'Fraunces', serif;
+  font-weight: 600;
+  font-size: 21px;
+  line-height: 1.25;
+  color: var(--ink);
+  margin: 0;
+  letter-spacing: -0.015em;
+  position: relative;
+  z-index: 1;
+}
+.guide-desc {
+  color: var(--ink-soft);
+  font-size: 14px;
+  line-height: 1.6;
+  margin: 0;
+  position: relative;
+  z-index: 1;
+}
+.guide-cta {
+  margin-top: 6px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  color: var(--accent-deep);
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  position: relative;
+  z-index: 1;
+}
+.guide-cta .arrow {
+  transition: transform 0.18s;
+}
+.guide-card:hover .guide-cta .arrow {
+  transform: translateX(4px);
+}
+
+/* ===== Share Section ===== */
+.share-section {
+  background: linear-gradient(135deg, var(--bg-card) 0%, var(--accent-soft) 100%);
+  border: 1px solid var(--accent);
+  border-radius: 18px;
+  padding: 36px 32px;
+  margin: 50px 0 30px;
+  position: relative;
+  overflow: hidden;
+}
+.share-section::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  right: -20%;
+  width: 60%;
+  height: 200%;
+  background: radial-gradient(ellipse, rgba(217,119,87,0.1), transparent 70%);
+  pointer-events: none;
+}
+
+.share-header {
+  position: relative;
+  margin-bottom: 28px;
+  text-align: center;
+}
+.share-header h2 {
+  font-family: 'Fraunces', serif;
+  font-weight: 400;
+  font-size: clamp(24px, 4vw, 32px);
+  line-height: 1.2;
+  color: var(--ink);
+  margin-bottom: 10px;
+  letter-spacing: -0.015em;
+}
+.share-header h2 strong {
+  font-weight: 600;
+  color: var(--accent-deep);
+}
+.share-header p {
+  color: var(--ink-soft);
+  font-size: 14.5px;
+  line-height: 1.7;
+  max-width: 480px;
+  margin: 0 auto;
+}
+
+.share-local-notice {
+  background: var(--bg-card);
+  border: 2px dashed var(--accent);
+  border-radius: 12px;
+  padding: 22px 24px;
+  position: relative;
+}
+.share-local-notice strong {
+  display: block;
+  color: var(--accent-deep);
+  font-size: 15px;
+  margin-bottom: 8px;
+}
+.share-local-notice p {
+  color: var(--ink-soft);
+  font-size: 13.5px;
+  line-height: 1.7;
+  margin: 0;
+}
+
+.share-grid {
+  display: grid;
+  grid-template-columns: 1fr 220px;
+  gap: 14px;
+  margin-bottom: 14px;
+  position: relative;
+}
+@media (max-width: 600px) {
+  .share-grid { grid-template-columns: 1fr; }
+}
+
+.share-url-card,
+.share-qr-card {
+  background: var(--bg-card);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  padding: 18px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.share-card-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.18em;
+  font-weight: 700;
+  color: var(--ink-mute);
+  text-transform: uppercase;
+}
+
+.url-display {
+  background: var(--bg);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 10px 14px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12.5px;
+  color: var(--ink);
+  word-break: break-all;
+  line-height: 1.55;
+  min-height: 38px;
+  display: flex;
+  align-items: center;
+}
+
+.share-btn-copy {
+  background: var(--ink);
+  color: var(--bg);
+  border: none;
+  border-radius: 8px;
+  padding: 11px 16px;
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+.share-btn-copy:hover {
+  background: var(--accent-deep);
+  transform: translateY(-1px);
+}
+.share-btn-copy.copied {
+  background: var(--green);
+  color: white;
+}
+
+.share-qr-card {
+  align-items: center;
+  text-align: center;
+  justify-content: center;
+}
+.qr-wrapper {
+  background: white;
+  padding: 10px;
+  border-radius: 10px;
+  border: 1px solid var(--line);
+  line-height: 0;
+}
+.qr-wrapper img {
+  display: block;
+  width: 140px;
+  height: 140px;
+}
+.qr-note {
+  font-size: 11px;
+  color: var(--ink-mute);
+  font-family: 'JetBrains Mono', monospace;
+  letter-spacing: 0.05em;
+  margin: 0;
+}
+
+.share-social {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 8px;
+  position: relative;
+}
+
+.social-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 12px 14px;
+  border-radius: 10px;
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 700;
+  text-decoration: none;
+  border: none;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  white-space: nowrap;
+}
+
+.social-line {
+  background: #06C755;
+  color: white;
+}
+.social-line:hover {
+  background: #05A849;
+  transform: translateY(-1px);
+  box-shadow: 0 6px 14px rgba(6,199,85,0.3);
+}
+
+.social-x {
+  background: #000;
+  color: white;
+}
+.social-x:hover {
+  background: #1a1a1a;
+  transform: translateY(-1px);
+  box-shadow: 0 6px 14px rgba(0,0,0,0.25);
+}
+
+.social-native {
+  background: var(--bg-card);
+  color: var(--ink);
+  border: 1px solid var(--line);
+}
+.social-native:hover {
+  background: var(--bg);
+  border-color: var(--accent);
+  color: var(--accent-deep);
+}
+
+/* ===== Pre-flight Checklist & Success Box ===== */
+.checklist-card {
+  background: linear-gradient(135deg, #FFFCF6 0%, #FBE9DF 100%);
+  border: 2px solid var(--accent);
+  border-radius: 14px;
+  padding: 28px 26px 24px;
+  margin-bottom: 20px;
+  position: relative;
+}
+
+.checklist-card::before {
+  content: '✓';
+  position: absolute;
+  top: -18px;
+  left: 24px;
+  background: var(--accent-deep);
+  color: white;
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  font-weight: 700;
+  border: 3px solid var(--bg);
+  box-shadow: 0 4px 10px rgba(184,90,63,0.25);
+}
+
+.checklist-card h3 {
+  font-family: 'Fraunces', serif;
+  font-size: 19px;
+  font-weight: 600;
+  margin-top: 6px;
+  margin-bottom: 6px;
+  color: var(--ink);
+}
+
+.checklist-card .checklist-intro {
+  font-size: 13px;
+  color: var(--ink-soft);
+  margin-bottom: 16px;
+  line-height: 1.6;
+}
+
+.checklist {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.checklist li {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 11px 14px;
+  background: var(--bg-card);
+  border-radius: 10px;
+  font-size: 14px;
+  color: var(--ink);
+  border: 1px solid var(--line);
+  line-height: 1.55;
+}
+
+.checklist li::before {
+  content: '';
+  width: 18px;
+  height: 18px;
+  border: 2px solid var(--accent);
+  border-radius: 5px;
+  flex-shrink: 0;
+  margin-top: 1px;
+  background: var(--bg);
+}
+
+.checklist li strong {
+  color: var(--accent-deep);
+}
+
+.checklist li small {
+  display: block;
+  font-size: 12px;
+  color: var(--ink-mute);
+  margin-top: 3px;
+  line-height: 1.5;
+}
+
+/* Success indicator box */
+.success-box {
+  background: linear-gradient(135deg, #F0F7EC, #E5F0E1);
+  border-left: 3px solid var(--green);
+  border-radius: 0 10px 10px 0;
+  padding: 14px 18px;
+  margin: 18px 0;
+  font-size: 14px;
+  color: #2A4A28;
+  line-height: 1.7;
+}
+
+.success-box strong:first-child {
+  display: block;
+  margin-bottom: 6px;
+  color: #1F3D1D;
+  font-size: 12px;
+  letter-spacing: 0.08em;
+  font-family: 'JetBrains Mono', monospace;
+  font-weight: 700;
+}
+
+.success-box code {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12.5px;
+  background: rgba(127, 168, 119, 0.18);
+  padding: 1px 6px;
+  border-radius: 4px;
+  color: #1F3D1D;
+  font-weight: 500;
+}
+
+/* Strong warning */
+.warning-strong {
+  background: #FFF1E5;
+  border: 2px solid var(--accent);
+  border-radius: 10px;
+  padding: 14px 18px;
+  margin: 14px 0;
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+}
+
+.warning-strong .icon {
+  font-size: 22px;
+  flex-shrink: 0;
+  line-height: 1;
+}
+
+.warning-strong .text {
+  flex: 1;
+  font-size: 14px;
+  color: var(--ink);
+  line-height: 1.65;
+}
+
+.warning-strong .text strong {
+  display: block;
+  color: var(--accent-deep);
+  margin-bottom: 4px;
+  font-size: 14px;
+}
+
+/* ===== Idea Cards (project ideas) ===== */
+.idea-level {
+  font-family: 'Fraunces', serif;
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--ink);
+  margin: 28px 0 14px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+.idea-level:first-of-type { margin-top: 8px; }
+
+.idea-level .stars {
+  color: var(--accent);
+  font-size: 17px;
+  letter-spacing: 0.05em;
+}
+
+.idea-level .time {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  color: var(--ink-soft);
+  margin-left: auto;
+  letter-spacing: 0.05em;
+  background: var(--bg);
+  padding: 4px 11px;
+  border-radius: 100px;
+  border: 1px solid var(--line);
+  font-weight: 500;
+}
+
+.idea-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 12px;
+  margin-bottom: 8px;
+}
+
+.idea-card {
+  background: var(--bg-card);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 18px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  transition: all 0.2s ease;
+}
+.idea-card:hover {
+  border-color: var(--accent);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 18px rgba(28,26,23,0.05);
+}
+
+.idea-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.idea-icon {
+  font-size: 26px;
+  flex-shrink: 0;
+  line-height: 1;
+}
+
+.idea-title {
+  font-family: 'Fraunces', serif;
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--ink);
+  line-height: 1.3;
+  margin: 0;
+}
+
+.idea-desc {
+  font-size: 13px;
+  color: var(--ink-soft);
+  line-height: 1.6;
+  margin: 0;
+}
+
+.idea-card .code-block {
+  font-size: 11.5px;
+  padding: 10px 60px 10px 14px;
+  margin: 0;
+  border-radius: 8px;
+  line-height: 1.55;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+.idea-card .code-block::before {
+  content: '📝';
+  margin-right: 6px;
+  font-size: 12px;
+}
+.idea-card .copy-btn {
+  font-size: 10px;
+  padding: 4px 8px;
+  top: 8px;
+  right: 8px;
+}
+
+@media (max-width: 600px) {
+  .idea-grid { grid-template-columns: 1fr; }
+}
+
+/* ===== Video Cards (YouTube) ===== */
+.video-list {
+  display: grid;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.video-card {
+  display: flex;
+  gap: 14px;
+  padding: 12px;
+  background: var(--bg-card);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  text-decoration: none;
+  color: inherit;
+  transition: all 0.2s ease;
+  align-items: center;
+}
+.video-card:hover {
+  border-color: var(--accent);
+  transform: translateY(-1px);
+  box-shadow: 0 8px 18px rgba(28,26,23,0.06);
+}
+
+.video-thumb {
+  width: 140px;
+  aspect-ratio: 16/9;
+  flex-shrink: 0;
+  border-radius: 8px;
+  overflow: hidden;
+  background: linear-gradient(135deg, #2A1A1A, #14110E);
+  position: relative;
+}
+.video-thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.video-thumb::after {
+  content: '▶';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 36px;
+  height: 36px;
+  background: rgba(255, 0, 0, 0.92);
+  color: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 13px;
+  padding-left: 3px;
+  pointer-events: none;
+}
+
+.video-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.video-title {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--ink);
+  line-height: 1.45;
+  margin-bottom: 6px;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.video-meta {
+  font-size: 11px;
+  color: var(--ink-mute);
+  font-family: 'JetBrains Mono', monospace;
+  letter-spacing: 0.05em;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.video-meta .yt-tag {
+  background: #FF0000;
+  color: white;
+  padding: 1px 6px;
+  border-radius: 3px;
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+}
+
+.video-duration {
+  margin-left: auto;
+  background: var(--ink);
+  color: var(--bg);
+  padding: 1px 6px;
+  border-radius: 3px;
+  font-size: 10px;
+}
+
+@media (max-width: 600px) {
+  .video-thumb { width: 100px; }
+  .video-card { padding: 10px; gap: 10px; }
+  .video-title { font-size: 13px; }
+}
+
+.step-text {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  min-width: 0;
+}
+
+.step-eyebrow {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 9px;
+  color: var(--ink-mute);
+  letter-spacing: 0.2em;
+  font-weight: 700;
+}
+
+.step-name {
+  font-family: 'Fraunces', serif;
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--ink);
+  line-height: 1.3;
+}
+
+.step-body {
+  padding: 26px 26px 30px;
+  background: var(--bg-card);
+}
+
+/* H2 inside step-body */
+.step-body > h2 {
+  font-family: 'Fraunces', serif;
+  font-weight: 400;
+  font-size: clamp(22px, 3vw, 28px);
+  line-height: 1.2;
+  margin-bottom: 14px;
+  letter-spacing: -0.015em;
+}
+.step-body > h2 strong { font-weight: 600; }
+.step-body > .desc {
+  font-size: 15px;
+  color: var(--ink-soft);
+  margin-bottom: 28px;
+  max-width: 640px;
+}
+
+/* Mobile */
+@media (max-width: 600px) {
+  .phase-summary { padding: 18px 18px; gap: 12px; }
+  .phase-name { font-size: 18px; }
+  .phase-icon { font-size: 22px; width: 26px; }
+  .phase-count { display: none; }
+  .phase-body { padding: 10px; }
+  .step-summary { padding: 12px 14px; gap: 12px; }
+  .step-badge { width: 30px; height: 30px; font-size: 12px; }
+  .step-name { font-size: 15px; }
+  .step-body { padding: 22px 18px 26px; }
+}
+
+/* ===== Error / Troubleshoot Cards ===== */
+.error-card {
+  background: var(--bg-card);
+  border: 1px solid var(--line);
+  border-left: 3px solid #C84B4B;
+  border-radius: 10px;
+  padding: 22px 24px;
+  margin-bottom: 14px;
+}
+
+.error-card h3 {
+  font-family: 'Fraunces', serif;
+  font-size: 19px;
+  font-weight: 600;
+  margin-bottom: 14px;
+  color: var(--ink);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  line-height: 1.3;
+}
+
+.error-symptom {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12.5px;
+  background: #2A1A1A;
+  color: #FFB4B4;
+  padding: 10px 14px;
+  border-radius: 6px;
+  margin-bottom: 14px;
+  border: 1px solid #4A2828;
+  word-break: break-word;
+  white-space: pre-wrap;
+  line-height: 1.6;
+  position: relative;
+  padding-left: 36px;
+}
+.error-symptom::before {
+  content: '⚠';
+  position: absolute;
+  left: 12px;
+  top: 10px;
+  color: #FF8888;
+  font-weight: 700;
+  font-size: 14px;
+}
+
+.error-card .label {
+  font-size: 10px;
+  font-family: 'JetBrains Mono', monospace;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  color: var(--accent-deep);
+  text-transform: uppercase;
+  margin: 16px 0 6px;
+}
+.error-card .label:first-of-type {
+  margin-top: 0;
+}
+
+.error-card p {
+  color: var(--ink-soft);
+  font-size: 14.5px;
+  margin-bottom: 8px;
+  line-height: 1.7;
+}
+
+.error-card ol,
+.error-card ul {
+  padding-left: 22px;
+  color: var(--ink-soft);
+  font-size: 14.5px;
+  line-height: 1.85;
+}
+.error-card ol li,
+.error-card ul li {
+  margin-bottom: 6px;
+}
+
+.error-card code {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 13px;
+  background: var(--ink);
+  color: var(--bg);
+  padding: 2px 7px;
+  border-radius: 4px;
+}
+</style>
+</head>
+<body>
+
+<nav class="top-nav">
+  <div class="top-nav-inner">
+    <a href="index.html" class="nav-brand-link"><span class="nav-brand-mark">◆</span>Beginner Guides Series</a>
+    <div class="nav-links">
+      <a href="claude-code-guide.html" class="nav-link"><svg class="brand-icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 1.5c0 5.795 4.705 10.5 10.5 10.5C16.705 12 12 16.705 12 22.5 12 16.705 7.295 12 1.5 12 7.295 12 12 7.295 12 1.5z"/></svg>Claude Code</a>
+      <a href="canva-guide.html" class="nav-link active"><svg class="brand-icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10c3.16 0 5.99-1.47 7.83-3.76l-2.9-2.01A6.49 6.49 0 0 1 12 18.5c-3.59 0-6.5-2.91-6.5-6.5S8.41 5.5 12 5.5c2 0 3.78.9 4.97 2.31l2.97-1.94A9.97 9.97 0 0 0 12 2z"/></svg>Canva</a>
+      <a href="github-guide.html" class="nav-link"><svg class="brand-icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></svg>GitHub</a>
+    </div>
+  </div>
+</nav>
+
+
+<div class="container">
+
+  <!-- ===== HERO ===== -->
+  <header class="hero">
+    <span class="eyebrow">FOR BEGINNERS · 2026</span>
+    <h1>Canva で <em>はじめる</em><br>デザインの世界</h1>
+    <p class="lead">
+      アカウント登録から最初の1枚、AI 機能まで。<br>
+      テンプレを選んで文字を変えるだけ。デザインに自信がなくてもキレイに仕上がります。
+    </p>
+    <div class="hero-buttons">
+      <a href="https://www.canva.com/ja_jp/" target="_blank" rel="noopener" class="btn btn-primary">
+        Canva 公式サイト <span class="arrow">↗</span>
+      </a>
+      <a href="https://www.canva.com/help/" target="_blank" rel="noopener" class="btn btn-secondary">
+        ヘルプセンター <span class="arrow">↗</span>
+      </a>
+    </div>
+    <p style="margin-top:28px; font-size:13px; color:var(--ink-mute); font-family:'JetBrains Mono', monospace; letter-spacing:0.05em;">
+      💡 わからないときは右下のボタンから AI(Claude / ChatGPT / Gemini)にきけます
+    </p>
+  </header>
+
+  <div class="phase-list">
+
+  <!-- ============================================ -->
+  <!-- ===== PHASE 1: はじめる ===== -->
+  <!-- ============================================ -->
+  <details class="phase-card" open>
+    <summary class="phase-summary">
+      <span class="phase-icon">🚀</span>
+      <div class="phase-text">
+        <span class="phase-label">PHASE 1</span>
+        <span class="phase-name">はじめる</span>
+      </div>
+      <span class="phase-count">3 ステップ</span>
+      <span class="chevron">›</span>
+    </summary>
+    <div class="phase-body">
+
+      <!-- Step 01 -->
+      <details class="step-card">
+        <summary class="step-summary">
+          <span class="step-badge">01</span>
+          <div class="step-text">
+            <span class="step-eyebrow">STEP 01</span>
+            <span class="step-name">Canva って何ができるの?</span>
+          </div>
+          <span class="chevron">›</span>
+        </summary>
+        <div class="step-body">
+          <h2>Canva で <strong>作れるもの</strong></h2>
+          <p class="desc">「デザインソフトは難しそう…」というイメージを覆した、世界1.7億人が使う定番ツール。テンプレを選んで文字や画像を差し替えるだけ。</p>
+
+          <div class="card">
+            <h3>📋 こんなものが作れます</h3>
+            <ul>
+              <li><strong>SNS 投稿</strong>:Instagram、X、Facebook 用の画像・動画</li>
+              <li><strong>プレゼン資料</strong>:パワポより速く・きれいに</li>
+              <li><strong>チラシ・ポスター</strong>:お店の告知、イベント案内</li>
+              <li><strong>名刺・ロゴ</strong>:数分でプロ風</li>
+              <li><strong>動画編集</strong>:カット・テロップ・BGM</li>
+              <li><strong>ホームページ</strong>:1ページの簡易サイト</li>
+              <li><strong>ドキュメント</strong>:履歴書・企画書・レポート</li>
+            </ul>
+          </div>
+
+          <div class="card" style="background:var(--accent-soft); border-color:var(--accent);">
+            <h3>✨ Canva の3つの強み</h3>
+            <ol style="padding-left:22px; color:var(--ink-soft); font-size:15px; line-height:2;">
+              <li><strong>テンプレ豊富</strong>:160万点以上、選んで編集するだけ</li>
+              <li><strong>ブラウザで完結</strong>:ソフト不要、スマホでも使える</li>
+              <li><strong>AI 機能搭載</strong>:Magic Studio で文章・画像・動画を生成</li>
+            </ol>
+          </div>
+
+          <div class="tip">
+            <strong>💡 Canva が向いている人</strong>
+            デザインの専門知識がなくても見栄えのいいものを作りたい人 / SNS や仕事で頻繁にビジュアルを作る人 / Photoshop は使いこなせないけど何か作りたい人。
+          </div>
+        </div>
+      </details>
+
+      <!-- Step 02 -->
+      <details class="step-card">
+        <summary class="step-summary">
+          <span class="step-badge">02</span>
+          <div class="step-text">
+            <span class="step-eyebrow">STEP 02</span>
+            <span class="step-name">アカウント作成(無料)</span>
+          </div>
+          <span class="chevron">›</span>
+        </summary>
+        <div class="step-body">
+          <h2>無料で <strong>すぐ始められます</strong></h2>
+          <p class="desc">クレジットカード不要、メアド1つでスタート。所要時間 2 分。</p>
+
+          <div class="card">
+            <h3>① 公式サイトへ</h3>
+            <p><a href="https://www.canva.com/ja_jp/" target="_blank" rel="noopener" style="color:var(--accent-deep); font-weight:700;">canva.com/ja_jp</a> にアクセスして「<strong>無料で登録</strong>」をクリック。</p>
+          </div>
+
+          <div class="card">
+            <h3>② 登録方法を選ぶ</h3>
+            <p>下記から1つ選びます。どれでもOK。</p>
+            <ul>
+              <li>📧 メールアドレスで登録</li>
+              <li>🔵 <strong>Google アカウントで登録(おすすめ:1クリック完了)</strong></li>
+              <li>🍎 Apple アカウントで登録</li>
+              <li>🟦 Facebook アカウントで登録</li>
+            </ul>
+          </div>
+
+          <div class="card">
+            <h3>③ 用途を選ぶ</h3>
+            <p>「個人」「学生」「ビジネス」などから選択。あとで変更可能なので、適当でOK。</p>
+          </div>
+
+          <div class="success-box">
+            <strong>✅ こうなれば成功</strong>
+            ホーム画面が表示され、画面中央に「<strong>デザインを作成</strong>」ボタンが見えれば登録完了です。すぐに使い始められます。
+          </div>
+
+          <div class="tip">
+            <strong>📱 スマホアプリも一緒に</strong>
+            iOS / Android アプリも同じアカウントでログインすると、PC で作ったデザインの続きをスマホで編集できます。出先でちょっと修正、が可能に。
+          </div>
+        </div>
+      </details>
+
+      <!-- Step 03 -->
+      <details class="step-card">
+        <summary class="step-summary">
+          <span class="step-badge">03</span>
+          <div class="step-text">
+            <span class="step-eyebrow">STEP 03</span>
+            <span class="step-name">無料 vs Pro どっちがいい?</span>
+          </div>
+          <span class="chevron">›</span>
+        </summary>
+        <div class="step-body">
+          <h2>プラン<strong>選びの結論</strong></h2>
+          <p class="desc">最初は <strong>絶対に無料</strong> でOK。物足りなくなってから Pro を検討する流れがベスト。</p>
+
+          <div class="card">
+            <h3>🆓 無料プランでできること</h3>
+            <ul>
+              <li>テンプレート 100 万点以上</li>
+              <li>無料素材 470 万点以上</li>
+              <li>ストレージ 5GB</li>
+              <li>基本的なデザイン編集</li>
+              <li>Magic Media(AI 画像生成)月 50 回まで</li>
+            </ul>
+            <p style="margin-top:12px; color:var(--ink-soft); font-size:14px;">
+              💡 <strong>個人利用ならこれで十分</strong>。SNS 投稿・名刺・チラシくらいなら無料で完結します。
+            </p>
+          </div>
+
+          <div class="card">
+            <h3>💎 Pro($120/年・約 18,000 円)で追加されるもの</h3>
+            <ul>
+              <li>プレミアム素材 1 億点以上 使い放題</li>
+              <li><strong>背景透過</strong>(背景リムーバ)</li>
+              <li><strong>マジックリサイズ</strong>(SNS 各サイズへ一発変換)</li>
+              <li>ブランドキット(色・フォント統一)</li>
+              <li>Magic Media 月 500 回</li>
+              <li>ストレージ 100GB / 1TB</li>
+              <li>30 日間無料トライアルあり</li>
+            </ul>
+          </div>
+
+          <div class="tip">
+            <strong>💡 こんな人は Pro がおすすめ</strong>
+            SNS の投稿を毎日作る人 / チラシ・名刺を頻繁に作る人 / 動画も作りたい人 / 仕事で使う人。趣味なら無料で十分です。
+          </div>
+
+          <div class="warning">
+            <strong>⚠️ 自動更新に注意</strong>
+            無料トライアルは 30 日経つと自動で課金されます。<strong>続けないなら期限前に解約</strong>を。設定 → 「お支払いとプラン」から解約できます。
+          </div>
+        </div>
+      </details>
+
+    </div>
+  </details>
+
+  <!-- ============================================ -->
+  <!-- ===== PHASE 2: 基本操作 ===== -->
+  <!-- ============================================ -->
+  <details class="phase-card">
+    <summary class="phase-summary">
+      <span class="phase-icon">🎨</span>
+      <div class="phase-text">
+        <span class="phase-label">PHASE 2</span>
+        <span class="phase-name">基本操作</span>
+      </div>
+      <span class="phase-count">3 ステップ</span>
+      <span class="chevron">›</span>
+    </summary>
+    <div class="phase-body">
+
+      <!-- Step 04 -->
+      <details class="step-card">
+        <summary class="step-summary">
+          <span class="step-badge">04</span>
+          <div class="step-text">
+            <span class="step-eyebrow">STEP 04</span>
+            <span class="step-name">最初の1枚を作る</span>
+          </div>
+          <span class="chevron">›</span>
+        </summary>
+        <div class="step-body">
+          <h2>5分で <strong>Instagram 投稿</strong>を作る</h2>
+          <p class="desc">習うより慣れろ。一緒に1枚作ってみましょう。</p>
+
+          <div class="card">
+            <h3>① テンプレを選ぶ</h3>
+            <p>ホーム画面の検索バーに「<strong>Instagram投稿</strong>」と入力 → 好きなテンプレートをクリック。</p>
+            <p style="margin-top:8px; color:var(--ink-soft); font-size:14px;">
+              💡 迷ったら「人気順」で並び替え。プロが作ったテンプレなのでハズレなし。
+            </p>
+          </div>
+
+          <div class="card">
+            <h3>② 文字を編集</h3>
+            <p>テンプレ内の文字を <strong>ダブルクリック</strong> して、自分の言葉に書き換える。フォントや色も上のメニューから変更可能。</p>
+          </div>
+
+          <div class="card">
+            <h3>③ 写真を差し替え</h3>
+            <p>左メニューの「<strong>素材</strong>」または「<strong>写真</strong>」から好きなものをドラッグ&ドロップ。自分の写真を使うなら「<strong>アップロード</strong>」へ。</p>
+          </div>
+
+          <div class="card">
+            <h3>④ ダウンロード</h3>
+            <p>右上の「<strong>共有</strong>」→「ダウンロード」→ ファイル形式を選んで保存。</p>
+            <ul>
+              <li><strong>PNG</strong>:画質キレイ、SNS 投稿に最適</li>
+              <li><strong>JPG</strong>:ファイル小さめ、メール添付に</li>
+              <li><strong>PDF</strong>:印刷物に</li>
+              <li><strong>MP4</strong>:動画</li>
+            </ul>
+          </div>
+
+          <div class="success-box">
+            <strong>✅ ここまでできれば</strong>
+            Canva の基本操作はマスターしたも同然。あとは作りたいものに合わせてテンプレを選ぶだけ。
+          </div>
+        </div>
+      </details>
+
+      <!-- Step 05 -->
+      <details class="step-card">
+        <summary class="step-summary">
+          <span class="step-badge">05</span>
+          <div class="step-text">
+            <span class="step-eyebrow">STEP 05</span>
+            <span class="step-name">画像・素材の操作</span>
+          </div>
+          <span class="chevron">›</span>
+        </summary>
+        <div class="step-body">
+          <h2><strong>編集の基本</strong>を覚えよう</h2>
+          <p class="desc">クリック・ドラッグ・右クリック。3つの動作で大体できます。</p>
+
+          <div class="card">
+            <h3>📐 サイズ・位置の調整</h3>
+            <ul>
+              <li>クリックで選択 → 角を引っ張ってサイズ変更</li>
+              <li>ドラッグで移動</li>
+              <li><strong>Shift キー</strong>を押しながらだと、縦横比キープ</li>
+              <li>複数選択は <strong>Shift+クリック</strong></li>
+            </ul>
+          </div>
+
+          <div class="card">
+            <h3>🎨 色・透明度・エフェクト</h3>
+            <ul>
+              <li>素材を選択 → 上のメニューから色変更</li>
+              <li>透明度のスライダーで薄く・濃く</li>
+              <li>「<strong>エフェクト</strong>」で影やフィルターをワンクリック</li>
+            </ul>
+          </div>
+
+          <div class="card">
+            <h3>📝 テキストの装飾</h3>
+            <ul>
+              <li>フォント・サイズ・色の変更は上メニュー</li>
+              <li>「<strong>エフェクト</strong>」でネオン・3D・カーブ文字も簡単</li>
+              <li>「ブランドキット」で会社・チームのフォントを保存(Pro)</li>
+            </ul>
+          </div>
+
+          <div class="card">
+            <h3>🧱 整列とレイヤー(きれいに見せるコツ)</h3>
+            <ul>
+              <li>複数選択 → 上メニューの「<strong>位置</strong>」→ 整列(中央揃え・等間隔)</li>
+              <li>右クリック → 「最前面/最背面」でレイヤー順を変更</li>
+              <li><strong>Ctrl+G</strong> でグループ化、まとめて移動</li>
+            </ul>
+          </div>
+
+          <div class="tip">
+            <strong>💡 困ったら Ctrl+Z(Mac は ⌘+Z)</strong>
+            <strong>何度でも巻き戻せる</strong>ので、思い切って試してOK。間違えても元に戻せます。
+          </div>
+        </div>
+      </details>
+
+      <!-- Step 06 -->
+      <details class="step-card">
+        <summary class="step-summary">
+          <span class="step-badge">06</span>
+          <div class="step-text">
+            <span class="step-eyebrow">STEP 06</span>
+            <span class="step-name">共有・チームで使う</span>
+          </div>
+          <span class="chevron">›</span>
+        </summary>
+        <div class="step-body">
+          <h2><strong>共有とコラボ</strong></h2>
+          <p class="desc">作ったデザインは、リンクで簡単にシェアできます。</p>
+
+          <div class="card">
+            <h3>🔗 リンク共有</h3>
+            <ol style="padding-left:22px; color:var(--ink-soft); font-size:15px; line-height:2;">
+              <li>右上の「共有」をクリック</li>
+              <li>「<strong>リンクをコピー</strong>」で URL がコピーされる</li>
+              <li>権限を選ぶ:閲覧のみ / コメントOK / 編集OK</li>
+            </ol>
+          </div>
+
+          <div class="card">
+            <h3>👥 チームで同時編集</h3>
+            <p>Google Docs と同じく、<strong>複数人が同時にデザイン</strong>できます。誰がどこを編集しているかリアルタイムで見える。</p>
+          </div>
+
+          <div class="card">
+            <h3>📥 各種フォーマットで書き出し</h3>
+            <ul>
+              <li><strong>SNS 投稿</strong>:そのまま Instagram / X に投稿予約も可能</li>
+              <li><strong>印刷用 PDF</strong>:塗り足し・トンボ付きで印刷所へ</li>
+              <li><strong>動画</strong>:MP4 / GIF</li>
+              <li><strong>透過 PNG</strong>:ロゴなど(Pro)</li>
+            </ul>
+          </div>
+
+          <div class="tip">
+            <strong>💡 Canva プリント</strong>
+            作ったデザインをそのまま印刷発注できる「Canva プリント」もあり。名刺・チラシ・Tシャツなどを Canva 内から注文 → 自宅へ届きます。
+          </div>
+        </div>
+      </details>
+
+    </div>
+  </details>
+
+  <!-- ============================================ -->
+  <!-- ===== PHASE 3: AI機能(Magic Studio) ===== -->
+  <!-- ============================================ -->
+  <details class="phase-card">
+    <summary class="phase-summary">
+      <span class="phase-icon">✨</span>
+      <div class="phase-text">
+        <span class="phase-label">PHASE 3</span>
+        <span class="phase-name">AI 機能を使う(Magic Studio)</span>
+      </div>
+      <span class="phase-count">2 ステップ</span>
+      <span class="chevron">›</span>
+    </summary>
+    <div class="phase-body">
+
+      <!-- Step 07 -->
+      <details class="step-card">
+        <summary class="step-summary">
+          <span class="step-badge">07</span>
+          <div class="step-text">
+            <span class="step-eyebrow">STEP 07</span>
+            <span class="step-name">Magic Media(画像・動画生成)</span>
+          </div>
+          <span class="chevron">›</span>
+        </summary>
+        <div class="step-body">
+          <h2>テキストから <strong>画像・動画</strong>生成</h2>
+          <p class="desc">無料プランでも月 50 回使えます。AI でゼロからビジュアル素材を作れる時代に。</p>
+
+          <div class="card">
+            <h3>🎨 使い方</h3>
+            <ol style="padding-left:22px; color:var(--ink-soft); font-size:15px; line-height:2;">
+              <li>左メニュー「アプリ」→「<strong>Magic Media</strong>」を選択</li>
+              <li>「説明文」に欲しい画像のイメージを日本語で入力</li>
+              <li>スタイル(写真風・イラスト風・3D など)を選ぶ</li>
+              <li>「生成」をクリック → 4 枚候補が出る</li>
+              <li>気に入ったものをクリックでデザインに追加</li>
+            </ol>
+          </div>
+
+          <div class="card">
+            <h3>💬 上手なプロンプト例</h3>
+            <ul>
+              <li><strong>良い例:</strong>「カフェでコーヒーを飲む若い女性、自然光、温かみのある雰囲気、写真風」</li>
+              <li><strong>良い例:</strong>「青い空に浮かぶ雲、ミニマル、イラスト調」</li>
+              <li><strong>悪い例:</strong>「いい感じの画像」(具体性が足りない)</li>
+            </ul>
+            <p style="margin-top:10px; color:var(--ink-soft); font-size:14px;">
+              💡 「何が・どこで・どんな雰囲気で・どんな絵柄で」の 4 つを入れると質が上がります。
+            </p>
+          </div>
+
+          <div class="warning">
+            <strong>⚠️ AI 画像の利用に関する注意</strong>
+            生成された画像は商用利用 OK ですが、<strong>実在の人物・有名キャラクター・ブランドロゴ</strong>を含むプロンプトは避けてください。著作権・肖像権侵害になる恐れがあります。
+          </div>
+        </div>
+      </details>
+
+      <!-- Step 08 -->
+      <details class="step-card">
+        <summary class="step-summary">
+          <span class="step-badge">08</span>
+          <div class="step-text">
+            <span class="step-eyebrow">STEP 08</span>
+            <span class="step-name">Magic Write・Magic Design・他</span>
+          </div>
+          <span class="chevron">›</span>
+        </summary>
+        <div class="step-body">
+          <h2>その他の <strong>AI 機能</strong></h2>
+          <p class="desc">Canva の Magic Studio には、デザイン作業を時短する AI 機能がたくさん詰まっています。</p>
+
+          <div class="card">
+            <h3>✍️ Magic Write(文章生成)</h3>
+            <p>キャッチコピー・説明文・SNS 投稿文などを AI が書いてくれる。テキストエディタの「+」ボタンから。</p>
+            <p style="margin-top:8px; color:var(--ink-soft); font-size:14px;">
+              例:「夏のセール告知のキャッチコピーを 5 つ」「健康食品の紹介文を 200 字で」
+            </p>
+          </div>
+
+          <div class="card">
+            <h3>🎯 Magic Design(自動デザイン)</h3>
+            <p>「説明を書く + 写真をアップ」→ AI が複数のデザイン案を自動生成。テンプレ選びの時間も短縮できます。</p>
+          </div>
+
+          <div class="card">
+            <h3>🔄 Magic Resize(マジックリサイズ)<span style="font-size:11px; padding:2px 6px; background:var(--accent); color:white; border-radius:4px; margin-left:6px;">PRO</span></h3>
+            <p>1 つのデザインから、Instagram 用・X 用・チラシ用と<strong>各サイズへ自動変換</strong>。SNS 運用の必須機能。</p>
+          </div>
+
+          <div class="card">
+            <h3>✂️ 背景リムーバ <span style="font-size:11px; padding:2px 6px; background:var(--accent); color:white; border-radius:4px; margin-left:6px;">PRO</span></h3>
+            <p>写真の背景をワンクリックで削除。透過 PNG として書き出せる。</p>
+          </div>
+
+          <div class="card">
+            <h3>🪄 Magic Eraser(部分消し)<span style="font-size:11px; padding:2px 6px; background:var(--accent); color:white; border-radius:4px; margin-left:6px;">PRO</span></h3>
+            <p>写真の中の不要なものを、なぞるだけで消せる。観光地の人混みや、要らないオブジェクトを消すのに便利。</p>
+          </div>
+
+          <div class="card">
+            <h3>🎬 Magic Animate(自動アニメ)</h3>
+            <p>静止画にワンクリックでアニメーション効果。フェードイン・ポップ・ドリフトなどから選択。SNS の動画投稿にぴったり。</p>
+          </div>
+        </div>
+      </details>
+
+    </div>
+  </details>
+
+  <!-- ============================================ -->
+  <!-- ===== OTHERS ===== -->
+  <!-- ============================================ -->
+  <details class="phase-card">
+    <summary class="phase-summary">
+      <span class="phase-icon">📚</span>
+      <div class="phase-text">
+        <span class="phase-label">OTHERS</span>
+        <span class="phase-name">その他(アイデア・小ワザ・リソース)</span>
+      </div>
+      <span class="phase-count">5 項目</span>
+      <span class="chevron">›</span>
+    </summary>
+    <div class="phase-body">
+
+      <!-- Ideas: 16 things to make -->
+      <details class="step-card">
+        <summary class="step-summary">
+          <span class="step-badge step-badge-icon">💎</span>
+          <span class="step-name">Canva で何が作れる?16 選</span>
+          <span class="chevron">›</span>
+        </summary>
+        <div class="step-body">
+          <h2>作りたいものから <strong>テンプレ</strong>を探そう</h2>
+          <p class="desc">「何作ろう…」と迷ったらここから。Canva のホーム検索バーに <strong>テンプレ名</strong> を入れるだけで、即スタートできます。</p>
+
+          <div class="idea-grid">
+
+            <div class="idea-card">
+              <h4 class="idea-title">📸 Instagram 投稿(正方形)</h4>
+              <p class="idea-desc">1080x1080px の定番サイズ。フィードに並ぶ時の見栄えを意識して。</p>
+              <div class="code-block no-prompt">Instagram投稿<button class="copy-btn">コピー</button></div>
+            </div>
+
+            <div class="idea-card">
+              <h4 class="idea-title">📱 Instagram ストーリー</h4>
+              <p class="idea-desc">縦長 1080x1920。アニメや動画も入れて躍動感を。</p>
+              <div class="code-block no-prompt">Instagramストーリー<button class="copy-btn">コピー</button></div>
+            </div>
+
+            <div class="idea-card">
+              <h4 class="idea-title">🎬 YouTube サムネイル</h4>
+              <p class="idea-desc">16:9 で大きな文字+顔写真が王道。クリック率を左右する重要素材。</p>
+              <div class="code-block no-prompt">YouTubeサムネイル<button class="copy-btn">コピー</button></div>
+            </div>
+
+            <div class="idea-card">
+              <h4 class="idea-title">📊 プレゼン資料</h4>
+              <p class="idea-desc">パワポより速くキレイに。ピッチ・社内資料・授業に。</p>
+              <div class="code-block no-prompt">プレゼンテーション<button class="copy-btn">コピー</button></div>
+            </div>
+
+            <div class="idea-card">
+              <h4 class="idea-title">💼 名刺</h4>
+              <p class="idea-desc">テンプレ → 文字差替 → Canva プリント発注で完了。</p>
+              <div class="code-block no-prompt">名刺<button class="copy-btn">コピー</button></div>
+            </div>
+
+            <div class="idea-card">
+              <h4 class="idea-title">🏷️ ロゴ</h4>
+              <p class="idea-desc">無料で作れるが、商標登録予定なら独自素材推奨。</p>
+              <div class="code-block no-prompt">ロゴ<button class="copy-btn">コピー</button></div>
+            </div>
+
+            <div class="idea-card">
+              <h4 class="idea-title">📰 チラシ・フライヤー</h4>
+              <p class="idea-desc">A4 / B5 が基本。お店の告知やイベント案内に。</p>
+              <div class="code-block no-prompt">チラシ<button class="copy-btn">コピー</button></div>
+            </div>
+
+            <div class="idea-card">
+              <h4 class="idea-title">🖼️ ポスター</h4>
+              <p class="idea-desc">A2 / A3 / B2 など大判印刷向け。インパクト重視で。</p>
+              <div class="code-block no-prompt">ポスター<button class="copy-btn">コピー</button></div>
+            </div>
+
+            <div class="idea-card">
+              <h4 class="idea-title">📃 履歴書・職務経歴書</h4>
+              <p class="idea-desc">日本式テンプレもあり。デザイン履歴書で印象アップ。</p>
+              <div class="code-block no-prompt">履歴書<button class="copy-btn">コピー</button></div>
+            </div>
+
+            <div class="idea-card">
+              <h4 class="idea-title">📺 リール・ショート動画</h4>
+              <p class="idea-desc">縦型動画。テロップ・トランジション・BGM がカンタン。</p>
+              <div class="code-block no-prompt">リール動画<button class="copy-btn">コピー</button></div>
+            </div>
+
+            <div class="idea-card">
+              <h4 class="idea-title">🎨 SNS アイコン</h4>
+              <p class="idea-desc">プロフィール画像・アバター。500x500 の正方形でOK。</p>
+              <div class="code-block no-prompt">プロフィール画像<button class="copy-btn">コピー</button></div>
+            </div>
+
+            <div class="idea-card">
+              <h4 class="idea-title">🍽️ メニュー表</h4>
+              <p class="idea-desc">カフェ・レストラン・テイクアウト用。写真+価格+説明の3点セット。</p>
+              <div class="code-block no-prompt">メニュー<button class="copy-btn">コピー</button></div>
+            </div>
+
+            <div class="idea-card">
+              <h4 class="idea-title">💌 招待状・年賀状</h4>
+              <p class="idea-desc">結婚式・誕生日・年末年始。封筒サイズに合わせて作る。</p>
+              <div class="code-block no-prompt">招待状<button class="copy-btn">コピー</button></div>
+            </div>
+
+            <div class="idea-card">
+              <h4 class="idea-title">📕 ZINE・小冊子</h4>
+              <p class="idea-desc">A5 縦・中綴じ。同人誌、社内報、ハンドメイド作品集に。</p>
+              <div class="code-block no-prompt">ZINE<button class="copy-btn">コピー</button></div>
+            </div>
+
+            <div class="idea-card">
+              <h4 class="idea-title">🛒 オンラインショップバナー</h4>
+              <p class="idea-desc">BASE / Shopify / 楽天市場。サイズ規定を確認してから作る。</p>
+              <div class="code-block no-prompt">ECバナー<button class="copy-btn">コピー</button></div>
+            </div>
+
+            <div class="idea-card">
+              <h4 class="idea-title">📖 PDF ポートフォリオ</h4>
+              <p class="idea-desc">作品集・実績まとめ。共有リンク or PDF で送る。</p>
+              <div class="code-block no-prompt">ポートフォリオ<button class="copy-btn">コピー</button></div>
+            </div>
+
+          </div>
+
+          <div class="tip" style="margin-top:24px;">
+            <strong>💡 検索のコツ</strong>
+            英語のキーワードも試してみると、海外のオシャレなテンプレが出てきます。例:「<code>poster minimal</code>」「<code>menu cafe</code>」など。
+          </div>
+        </div>
+      </details>
+
+      <!-- Shortcuts -->
+      <details class="step-card">
+        <summary class="step-summary">
+          <span class="step-badge step-badge-icon">⌨️</span>
+          <span class="step-name">ショートカット集</span>
+          <span class="chevron">›</span>
+        </summary>
+        <div class="step-body">
+          <h2>作業を加速する <strong>ショートカット</strong></h2>
+
+          <div class="card">
+            <h3>🔥 まず覚えるべき 5 つ</h3>
+            <div class="cmd-list">
+              <div class="cmd-item">
+                <code>Ctrl + Z</code>
+                <div class="desc-text"><strong>元に戻す</strong>(困ったらこれ)</div>
+              </div>
+              <div class="cmd-item">
+                <code>Ctrl + D</code>
+                <div class="desc-text"><strong>選択した要素を複製</strong></div>
+              </div>
+              <div class="cmd-item">
+                <code>Ctrl + S</code>
+                <div class="desc-text">保存(自動保存だけど安心のため)</div>
+              </div>
+              <div class="cmd-item">
+                <code>Ctrl + G</code>
+                <div class="desc-text">複数要素をグループ化</div>
+              </div>
+              <div class="cmd-item">
+                <code>R / C / L / T</code>
+                <div class="desc-text">四角 / 円 / 線 / テキスト挿入</div>
+              </div>
+            </div>
+            <p style="font-size:13px; color:var(--ink-mute); margin-top:12px;">
+              ※ Mac の場合は <code>Ctrl</code> を <code>⌘</code> に置き換え
+            </p>
+          </div>
+
+          <div class="card">
+            <h3>📋 その他便利なショートカット</h3>
+            <div class="cmd-list">
+              <div class="cmd-item">
+                <code>Shift + ドラッグ</code>
+                <div class="desc-text">縦横比をキープしてリサイズ</div>
+              </div>
+              <div class="cmd-item">
+                <code>Alt + ドラッグ</code>
+                <div class="desc-text">中心からリサイズ</div>
+              </div>
+              <div class="cmd-item">
+                <code>方向キー</code>
+                <div class="desc-text">選択要素を 1px ずつ移動</div>
+              </div>
+              <div class="cmd-item">
+                <code>Shift + 方向キー</code>
+                <div class="desc-text">10px ずつ移動</div>
+              </div>
+              <div class="cmd-item">
+                <code>Ctrl + ]</code>
+                <div class="desc-text">前面へ移動(レイヤー順)</div>
+              </div>
+              <div class="cmd-item">
+                <code>Ctrl + [</code>
+                <div class="desc-text">背面へ移動</div>
+              </div>
+              <div class="cmd-item">
+                <code>Ctrl + Enter</code>
+                <div class="desc-text">プレゼンモードへ(プレゼン用)</div>
+              </div>
+              <div class="cmd-item">
+                <code>Ctrl + /</code>
+                <div class="desc-text">ショートカット一覧を表示</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </details>
+
+      <!-- Q&A -->
+      <details class="step-card">
+        <summary class="step-summary">
+          <span class="step-badge step-badge-icon">💡</span>
+          <span class="step-name">こんな時どうする?(よくある質問)</span>
+          <span class="chevron">›</span>
+        </summary>
+        <div class="step-body">
+          <h2><strong>初心者あるある</strong>Q&A</h2>
+
+          <div class="card">
+            <h3>Q. 商用利用していい?</h3>
+            <p><strong>A. 基本 OK です。</strong>無料・Pro どちらも商用利用可能。ただし「<strong>素材だけを商品として売る</strong>」のは禁止(例:Canva のイラストを切り取って販売)。</p>
+          </div>
+
+          <div class="card">
+            <h3>Q. 印刷したらサイズが違う!</h3>
+            <p><strong>A. 作る前にサイズ確認。</strong>「カスタムサイズ」で正確なミリ指定が可能。印刷物は <strong>「塗り足し」</strong>を入れて PDF 印刷用で書き出す。</p>
+          </div>
+
+          <div class="card">
+            <h3>Q. 透過の PNG が作れない</h3>
+            <p><strong>A. 透過は Pro 機能。</strong>無料版では背景が白くなります。透過したいなら 30 日無料トライアルを利用。</p>
+          </div>
+
+          <div class="card">
+            <h3>Q. デザインが見つからない</h3>
+            <p><strong>A. ホーム左の「プロジェクト」</strong>に全デザインが履歴として残ります。検索バーで名前検索もOK。</p>
+          </div>
+
+          <div class="card">
+            <h3>Q. スマホでも使える?</h3>
+            <p><strong>A. 専用アプリあり。</strong>iOS / Android アプリで、PC で作ったデザインの続きをスマホで編集できる。出先で軽い修正が可能。</p>
+          </div>
+
+          <div class="card">
+            <h3>Q. 日本語フォントが少ない・物足りない</h3>
+            <p><strong>A. 「テキスト」→「フォント」検索で「Japanese」「日本語」と入力。</strong>無料でも結構な種類があります。Pro なら Adobe フォント連携も可能。</p>
+          </div>
+
+          <div class="card">
+            <h3>Q. テンプレを使うと「他の人と被る」のが心配</h3>
+            <p><strong>A. 文字・色・写真を変えれば全く別物に。</strong>テンプレはあくまで土台。3 か所くらい変えれば被ることはまずありません。</p>
+          </div>
+
+          <div class="card">
+            <h3>Q. AI 画像で「ヘンな顔」「ヘンな手」になる</h3>
+            <p><strong>A. プロンプトに「リアル」「写真品質」を追加。</strong>または「正面の顔」「全身」など構図を指定。それでも厳しいなら 3-4 回再生成して当たりを引く。</p>
+          </div>
+        </div>
+      </details>
+
+      <!-- Video tutorials -->
+      <details class="step-card">
+        <summary class="step-summary">
+          <span class="step-badge step-badge-icon">🎬</span>
+          <span class="step-name">動画で学ぶ(おすすめ YouTube)</span>
+          <span class="chevron">›</span>
+        </summary>
+        <div class="step-body">
+          <h2>動画で <strong>もっと深く</strong>学ぶ</h2>
+          <p class="desc">公式コンテンツと、日本語で評価の高い学習動画をピックアップ。</p>
+
+          <div class="video-grid">
+            <a href="https://www.youtube.com/@CanvaJapan" target="_blank" rel="noopener" class="video-card">
+              <div class="video-card-title">🇯🇵 Canva Japan(公式)</div>
+              <div class="video-card-desc">最新機能・テンプレ紹介・使い方の公式チャンネル。日本語で安心。</div>
+            </a>
+
+            <a href="https://www.youtube.com/@canva" target="_blank" rel="noopener" class="video-card">
+              <div class="video-card-title">🌍 Canva(英語公式)</div>
+              <div class="video-card-desc">最新の AI 機能(Magic Studio)はまず英語版で公開されることが多い。</div>
+            </a>
+
+            <a href="https://www.canva.com/learn/" target="_blank" rel="noopener" class="video-card">
+              <div class="video-card-title">🎓 Canva Design School</div>
+              <div class="video-card-desc">公式の体系的な無料コース。デザインの基礎理論から学べる。</div>
+            </a>
+
+            <a href="https://www.youtube.com/results?search_query=Canva+使い方+初心者" target="_blank" rel="noopener" class="video-card">
+              <div class="video-card-title">🔍 「Canva 使い方 初心者」で検索</div>
+              <div class="video-card-desc">日本人クリエイターによる解説動画が多数。再生回数の多いものから見るのがおすすめ。</div>
+            </a>
+
+            <a href="https://www.youtube.com/results?search_query=Canva+Magic+Studio+使い方" target="_blank" rel="noopener" class="video-card">
+              <div class="video-card-title">✨ 「Canva Magic Studio 使い方」</div>
+              <div class="video-card-desc">AI 機能の活用法。最新機能の使い方が見られる。</div>
+            </a>
+
+            <a href="https://www.youtube.com/results?search_query=Canva+Instagram+投稿+作り方" target="_blank" rel="noopener" class="video-card">
+              <div class="video-card-title">📸 「Canva Instagram 投稿 作り方」</div>
+              <div class="video-card-desc">SNS 運用者向け。実用的なテクニックが学べる。</div>
+            </a>
+          </div>
+        </div>
+      </details>
+
+      <!-- Resources -->
+      <details class="step-card">
+        <summary class="step-summary">
+          <span class="step-badge step-badge-icon">🔗</span>
+          <span class="step-name">リソース・公式リンク</span>
+          <span class="chevron">›</span>
+        </summary>
+        <div class="step-body">
+          <h2><strong>公式リンク</strong>集</h2>
+          <p class="desc">困ったときの一次情報。</p>
+
+          <div class="resources">
+            <a href="https://www.canva.com/ja_jp/" target="_blank" rel="noopener" class="res-card">
+              <div class="res-title">Canva 公式 <span class="arrow">↗</span></div>
+              <div class="res-desc">登録・ホーム画面</div>
+            </a>
+            <a href="https://www.canva.com/help/" target="_blank" rel="noopener" class="res-card">
+              <div class="res-title">ヘルプセンター <span class="arrow">↗</span></div>
+              <div class="res-desc">日本語の使い方ドキュメント</div>
+            </a>
+            <a href="https://www.canva.com/learn/" target="_blank" rel="noopener" class="res-card">
+              <div class="res-title">Canva Design School <span class="arrow">↗</span></div>
+              <div class="res-desc">公式の無料学習コンテンツ</div>
+            </a>
+            <a href="https://www.canva.com/ja_jp/pricing/" target="_blank" rel="noopener" class="res-card">
+              <div class="res-title">料金プラン <span class="arrow">↗</span></div>
+              <div class="res-desc">Free / Pro / Teams 比較</div>
+            </a>
+            <a href="https://www.canva.com/help/community/" target="_blank" rel="noopener" class="res-card">
+              <div class="res-title">コミュニティ <span class="arrow">↗</span></div>
+              <div class="res-desc">他のユーザーに質問</div>
+            </a>
+            <a href="https://www.youtube.com/@CanvaJapan" target="_blank" rel="noopener" class="res-card">
+              <div class="res-title">公式 YouTube <span class="arrow">↗</span></div>
+              <div class="res-desc">日本語の動画チュートリアル</div>
+            </a>
+            <a href="https://www.canva.com/ja_jp/print/" target="_blank" rel="noopener" class="res-card">
+              <div class="res-title">Canva プリント <span class="arrow">↗</span></div>
+              <div class="res-desc">作ったデザインの印刷発注</div>
+            </a>
+            <a href="https://www.canva.com/magic-studio/" target="_blank" rel="noopener" class="res-card">
+              <div class="res-title">Magic Studio <span class="arrow">↗</span></div>
+              <div class="res-desc">AI 機能の最新ラインナップ</div>
+            </a>
+          </div>
+        </div>
+      </details>
+
+    </div>
+  </details>
+
+  </div>
+  <!-- ===== Other Guides Section ===== -->
+  <section class="other-guides-section">
+    <div class="other-guides-header">
+      <h2>🗺️ 他のガイドも <strong>見てみる</strong></h2>
+      <p>このシリーズには 3 つの初心者ガイドがあります。次に学ぶならどっち?</p>
+    </div>
+    <div class="other-guides-grid">
+    <a href="claude-code-guide.html" class="guide-card">
+      <span class="guide-icon"><svg class="brand-icon-large brand-claude" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 1.5c0 5.795 4.705 10.5 10.5 10.5C16.705 12 12 16.705 12 22.5 12 16.705 7.295 12 1.5 12 7.295 12 12 7.295 12 1.5z"/></svg></span>
+      <span class="guide-card-eyebrow">AI · CLAUDE CODE</span>
+      <h3 class="guide-title">Claude Code はじめてガイド</h3>
+      <p class="guide-desc">AI とペアプロでコードを書く時代へ。インストールから最初のゲーム制作まで。</p>
+      <span class="guide-cta">ガイドを見る <span class="arrow">→</span></span>
+    </a>
+    <a href="github-guide.html" class="guide-card">
+      <span class="guide-icon"><svg class="brand-icon-large brand-github" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></svg></span>
+      <span class="guide-card-eyebrow">STORAGE · GITHUB</span>
+      <h3 class="guide-title">GitHub はじめてガイド</h3>
+      <p class="guide-desc">作ったゲームを保管・公開。GitHub Pages で URL シェアできる魔法。</p>
+      <span class="guide-cta">ガイドを見る <span class="arrow">→</span></span>
+    </a>
+    </div>
+  </section>
+
+  <!-- ===== Share Section ===== -->
+  <section class="share-section">
+    <div class="share-header">
+      <h2>📤 このガイドを <strong>シェアする</strong></h2>
+      <p>デザインを始めたい友達やチームに送ってあげてください。Canva で表現の幅を広げる人が一人でも増えますように。</p>
+    </div>
+
+    <!-- Local file warning (shown when file://) -->
+    <div class="share-local-notice" id="shareLocalNotice" style="display:none;">
+      <strong>📝 まずはホスティングが必要です</strong>
+      <p>今このページを <strong>ローカル(自分のパソコン)</strong> で開いているようです。シェアするには、<strong>GitHub Pages</strong> や <strong>Netlify</strong> でこのファイルを公開してください。公開すると下のシェア機能が自動で使えるようになります。</p>
+    </div>
+
+    <!-- Share UI (shown when hosted) -->
+    <div class="share-content" id="shareContent" style="display:none;">
+      <div class="share-grid">
+        <div class="share-url-card">
+          <span class="share-card-label">📎 このページの URL</span>
+          <div class="url-display" id="pageUrl">―</div>
+          <button class="share-btn-copy" id="copyUrlBtn">
+            <span class="copy-text">📋 URL をコピー</span>
+          </button>
+        </div>
+
+        <div class="share-qr-card">
+          <span class="share-card-label">📱 QR コード</span>
+          <div class="qr-wrapper">
+            <img id="qrImage" src="" alt="QR Code" loading="lazy">
+          </div>
+          <p class="qr-note">スマホで読み取り</p>
+        </div>
+      </div>
+
+      <div class="share-social">
+        <a href="#" id="shareLine" target="_blank" rel="noopener" class="social-btn social-line">
+          💬 LINE で送る
+        </a>
+        <a href="#" id="shareX" target="_blank" rel="noopener" class="social-btn social-x">
+          𝕏 X で投稿
+        </a>
+        <button id="shareNative" class="social-btn social-native">
+          ↗ その他で共有
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <p>Made with care for first-time users.</p>
+    <p style="margin-top:6px;opacity:0.6;">情報は2026年5月時点のものです。最新情報は公式ドキュメントをご確認ください。</p>
+  </footer>
+
+</div>
+
+<script>
+// Tab switching - groups tabs by their parent container so multiple tab groups work
+document.querySelectorAll('.tabs').forEach(group => {
+  const buttons = group.querySelectorAll('.tab-btn');
+  buttons.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const target = btn.dataset.tab;
+      // siblings in this tab group
+      buttons.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      // Find the tab-content elements adjacent to this group
+      let next = group.nextElementSibling;
+      const contents = [];
+      while (next && next.classList && next.classList.contains('tab-content')) {
+        contents.push(next);
+        next = next.nextElementSibling;
+      }
+      contents.forEach(c => c.classList.remove('active'));
+      const targetEl = document.getElementById(target);
+      if (targetEl) targetEl.classList.add('active');
+    });
+  });
+});
+
+// Copy buttons
+document.querySelectorAll('.copy-btn').forEach(btn => {
+  btn.addEventListener('click', async (e) => {
+    e.stopPropagation();
+    const block = btn.parentElement;
+    // Get text content excluding the button
+    const text = Array.from(block.childNodes)
+      .filter(n => n.nodeType === Node.TEXT_NODE || (n.nodeType === Node.ELEMENT_NODE && !n.classList.contains('copy-btn')))
+      .map(n => n.textContent)
+      .join('')
+      .trim();
+    try {
+      await navigator.clipboard.writeText(text);
+      const original = btn.textContent;
+      btn.textContent = '✓ コピー済';
+      btn.classList.add('copied');
+      setTimeout(() => {
+        btn.textContent = original;
+        btn.classList.remove('copied');
+      }, 1500);
+    } catch (err) {
+      btn.textContent = 'コピー失敗';
+    }
+  });
+});
+</script>
+
+<!-- ===== Help Panel ===== -->
+<button class="chat-launcher" id="chatLauncher" aria-label="ヘルプを開く" title="Claude にきく">💬</button>
+
+<div class="chat-window" id="chatWindow" role="dialog" aria-label="ヘルプパネル" aria-hidden="true">
+  <div class="chat-header">
+    <div class="chat-header-info">
+      <div class="chat-avatar">💡</div>
+      <div>
+        <div class="chat-title">AI にきく</div>
+        <div class="chat-subtitle">CLAUDE / CHATGPT / GEMINI</div>
+      </div>
+    </div>
+    <button class="chat-close" id="chatClose" aria-label="閉じる">✕</button>
+  </div>
+
+  <div class="chat-intro">
+    <h4>わからないことは AI に直接きいてみよう</h4>
+    <p class="lead-text">
+      下の質問をクリックするとコピーされます。お好きな AI(<strong>Claude / ChatGPT / Gemini</strong>)を開いて、貼り付けて送るだけ。
+    </p>
+
+    <div class="chat-section-label">よくある質問</div>
+    <div class="chat-q-list" id="chatQList">
+      <button class="chat-q-card" data-q="Canva を初めて使います。アカウント登録から最初のデザイン作成まで、初心者向けに5分でわかる流れを教えてください。">
+        <span>Canva の使い始め方</span>
+        <span class="q-icon">COPY</span>
+      </button>
+      <button class="chat-q-card" data-q="Canva の無料プランと Pro プランの違いを、初心者向けにシンプルに教えてください。どんな人にどっちが向いていますか?">
+        <span>無料と Pro の違いは?</span>
+        <span class="q-icon">COPY</span>
+      </button>
+      <button class="chat-q-card" data-q="Canva に登録しました。初心者がまず作ってみると面白いデザインを3つ、おすすめのテンプレ名と一緒に教えてください。">
+        <span>最初に何を作ればいい?</span>
+        <span class="q-icon">COPY</span>
+      </button>
+      <button class="chat-q-card" data-q="Canva で作ったデザインを商用利用したいです。何が OK で何が NG ですか?初心者向けに具体例を交えて教えてください。">
+        <span>商用利用していい?</span>
+        <span class="q-icon">COPY</span>
+      </button>
+      <button class="chat-q-card" data-q="Canva で作ったチラシを印刷したらサイズや色味が違って残念な仕上がりに。印刷で失敗しないコツを初心者向けに教えてください。">
+        <span>印刷で失敗しないコツ</span>
+        <span class="q-icon">COPY</span>
+      </button>
+      <button class="chat-q-card" data-q="Canva の Magic Media(AI画像生成)で、思い通りのイメージを出すためのプロンプトのコツを初心者向けに教えてください。日本語の例も5つください。">
+        <span>AI画像をうまく作るコツ</span>
+        <span class="q-icon">COPY</span>
+      </button>
+    </div>
+  </div>
+
+  <div class="chat-cta-wrap">
+    <a href="https://claude.ai/new" target="_blank" rel="noopener" class="chat-cta chat-cta-primary">
+      <span class="ai-logo claude">C</span>
+      Claude を開く
+      <span class="recommend-badge">おすすめ</span>
+      <span class="arrow">↗</span>
+    </a>
+    <div class="chat-cta-row">
+      <a href="https://chatgpt.com" target="_blank" rel="noopener" class="chat-cta-secondary">
+        <span class="ai-logo gpt">G</span>
+        ChatGPT <span class="arrow">↗</span>
+      </a>
+      <a href="https://gemini.google.com/app" target="_blank" rel="noopener" class="chat-cta-secondary">
+        <span class="ai-logo gemini">✦</span>
+        Gemini <span class="arrow">↗</span>
+      </a>
+    </div>
+    <p class="chat-tiny">クリックで新しいタブで開きます</p>
+  </div>
+</div>
+
+<script>
+(() => {
+  const launcher = document.getElementById('chatLauncher');
+  const chatWindow = document.getElementById('chatWindow');
+  const chatClose = document.getElementById('chatClose');
+  const qList = document.getElementById('chatQList');
+
+  // Open / close
+  launcher.addEventListener('click', () => {
+    chatWindow.classList.add('open');
+    chatWindow.setAttribute('aria-hidden', 'false');
+    launcher.classList.add('hidden');
+  });
+  chatClose.addEventListener('click', () => {
+    chatWindow.classList.remove('open');
+    chatWindow.setAttribute('aria-hidden', 'true');
+    launcher.classList.remove('hidden');
+  });
+
+  // Copy question text on click
+  qList.querySelectorAll('.chat-q-card').forEach(btn => {
+    btn.addEventListener('click', async () => {
+      const text = btn.dataset.q;
+      const icon = btn.querySelector('.q-icon');
+      const originalIcon = icon.textContent;
+      try {
+        await navigator.clipboard.writeText(text);
+        btn.classList.add('copied');
+        icon.textContent = '✓ COPIED';
+        setTimeout(() => {
+          btn.classList.remove('copied');
+          icon.textContent = originalIcon;
+        }, 1600);
+      } catch (err) {
+        icon.textContent = 'FAILED';
+        setTimeout(() => { icon.textContent = originalIcon; }, 1600);
+      }
+    });
+  });
+
+  // ESC to close
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && chatWindow.classList.contains('open')) {
+      chatClose.click();
+    }
+  });
+})();
+</script>
+
+<script>
+/* ===== Share Section ===== */
+(() => {
+  const url = window.location.href;
+  const isLocal = window.location.protocol === 'file:';
+
+  const localNotice = document.getElementById('shareLocalNotice');
+  const content = document.getElementById('shareContent');
+
+  if (isLocal) {
+    if (localNotice) localNotice.style.display = 'block';
+    if (content) content.style.display = 'none';
+    return;
+  }
+
+  // Show share UI
+  if (localNotice) localNotice.style.display = 'none';
+  if (content) content.style.display = 'block';
+
+  // Display URL
+  const urlDisplay = document.getElementById('pageUrl');
+  if (urlDisplay) urlDisplay.textContent = url;
+
+  // QR code via api.qrserver.com
+  const qrImg = document.getElementById('qrImage');
+  if (qrImg) {
+    qrImg.src = `https://api.qrserver.com/v1/create-qr-code/?size=240x240&data=${encodeURIComponent(url)}&margin=0`;
+  }
+
+  // URL copy button
+  const copyBtn = document.getElementById('copyUrlBtn');
+  if (copyBtn) {
+    copyBtn.addEventListener('click', async () => {
+      const textEl = copyBtn.querySelector('.copy-text');
+      const original = textEl.textContent;
+      try {
+        await navigator.clipboard.writeText(url);
+        copyBtn.classList.add('copied');
+        textEl.textContent = '✓ コピーしました!';
+        setTimeout(() => {
+          copyBtn.classList.remove('copied');
+          textEl.textContent = original;
+        }, 2000);
+      } catch (e) {
+        textEl.textContent = '✗ 失敗(手動でコピーしてください)';
+        setTimeout(() => { textEl.textContent = original; }, 2500);
+      }
+    });
+  }
+
+  const shareTitle = 'Canva はじめてガイド';
+
+  // LINE share
+  const lineBtn = document.getElementById('shareLine');
+  if (lineBtn) {
+    lineBtn.href = `https://social-plugins.line.me/lineit/share?url=${encodeURIComponent(url)}`;
+  }
+
+  // X (Twitter) share
+  const xBtn = document.getElementById('shareX');
+  if (xBtn) {
+    xBtn.href = `https://twitter.com/intent/tweet?text=${encodeURIComponent(shareTitle)}&url=${encodeURIComponent(url)}`;
+  }
+
+  // Native share (Web Share API - mobile mostly)
+  const nativeBtn = document.getElementById('shareNative');
+  if (nativeBtn) {
+    if (navigator.share) {
+      nativeBtn.addEventListener('click', async () => {
+        try {
+          await navigator.share({
+            title: shareTitle,
+            text: 'Canva の使い方をまとめた日本語ガイド',
+            url: url
+          });
+        } catch (e) {
+          // User cancelled - no action needed
+        }
+      });
+    } else {
+      // Web Share API not supported, hide the button
+      nativeBtn.style.display = 'none';
+    }
+  }
+})();
+</script>
+
+</body>
+</html>

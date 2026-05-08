@@ -1,0 +1,3915 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GitHub はじめてガイド | ゲーム保管・公開のための完全ガイド</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,600;9..144,800&family=Zen+Kaku+Gothic+New:wght@400;500;700;900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #F7F2EA;
+  --bg-card: #FFFCF6;
+  --ink: #1C1A17;
+  --ink-soft: #4A4540;
+  --ink-mute: #8A847C;
+  --line: #E5DDD0;
+  --accent: #D97757;
+  --accent-deep: #B85A3F;
+  --accent-soft: #FBE9DF;
+  --navy: #1F2A44;
+  --code-bg: #14110E;
+  --code-border: #2A2520;
+  --code-text: #F0E9DD;
+  --code-mute: #8A847C;
+  --code-accent: #FFB088;
+  --green: #7FA877;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'Zen Kaku Gothic New', -apple-system, sans-serif;
+  background: var(--bg);
+  color: var(--ink);
+  line-height: 1.75;
+  font-size: 16px;
+  font-weight: 400;
+  -webkit-font-smoothing: antialiased;
+  background-image:
+    radial-gradient(ellipse at top left, rgba(217,119,87,0.08), transparent 50%),
+    radial-gradient(ellipse at bottom right, rgba(31,42,68,0.05), transparent 50%);
+  background-attachment: fixed;
+}
+
+.container {
+  max-width: 880px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+/* ---------- Hero ---------- */
+.hero {
+  padding: 80px 0 60px;
+  text-align: center;
+  position: relative;
+}
+
+.eyebrow {
+  display: inline-block;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--accent-deep);
+  background: var(--accent-soft);
+  padding: 6px 14px;
+  border-radius: 100px;
+  margin-bottom: 24px;
+  font-weight: 500;
+}
+
+.hero h1 {
+  font-family: 'Fraunces', serif;
+  font-weight: 400;
+  font-size: clamp(40px, 7vw, 68px);
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+  margin-bottom: 20px;
+  color: var(--ink);
+}
+
+.hero h1 em {
+  font-style: italic;
+  font-weight: 300;
+  color: var(--accent-deep);
+}
+
+.hero .lead {
+  font-size: 17px;
+  color: var(--ink-soft);
+  max-width: 540px;
+  margin: 0 auto 36px;
+  line-height: 1.8;
+}
+
+.hero-buttons {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 13px 22px;
+  border-radius: 10px;
+  font-size: 14px;
+  font-weight: 700;
+  font-family: inherit;
+  text-decoration: none;
+  border: 1.5px solid transparent;
+  transition: all 0.2s ease;
+  cursor: pointer;
+}
+
+.btn-primary {
+  background: var(--ink);
+  color: var(--bg);
+}
+.btn-primary:hover {
+  background: var(--accent-deep);
+  transform: translateY(-1px);
+  box-shadow: 0 8px 20px rgba(184,90,63,0.3);
+}
+
+.btn-secondary {
+  background: transparent;
+  color: var(--ink);
+  border-color: var(--ink);
+}
+.btn-secondary:hover {
+  background: var(--ink);
+  color: var(--bg);
+}
+
+.btn .arrow {
+  font-size: 16px;
+  transition: transform 0.2s;
+}
+.btn:hover .arrow { transform: translate(2px, -2px); }
+
+/* ---------- Section ---------- */
+section.step {
+  padding: 56px 0;
+  border-top: 1px solid var(--line);
+}
+
+.step-number {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--accent-deep);
+  letter-spacing: 0.15em;
+  margin-bottom: 12px;
+}
+
+.step h2 {
+  font-family: 'Fraunces', serif;
+  font-weight: 400;
+  font-size: clamp(28px, 4vw, 40px);
+  line-height: 1.15;
+  letter-spacing: -0.015em;
+  margin-bottom: 16px;
+}
+
+.step h2 strong {
+  font-weight: 600;
+}
+
+.step .desc {
+  font-size: 16px;
+  color: var(--ink-soft);
+  margin-bottom: 32px;
+  max-width: 640px;
+}
+
+/* ---------- Cards ---------- */
+.card {
+  background: var(--bg-card);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  padding: 28px 30px;
+  margin-bottom: 16px;
+}
+
+.card h3 {
+  font-family: 'Fraunces', serif;
+  font-size: 22px;
+  font-weight: 600;
+  margin-bottom: 12px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.card h3 .badge {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  font-weight: 500;
+  background: var(--accent-soft);
+  color: var(--accent-deep);
+  padding: 3px 10px;
+  border-radius: 100px;
+  letter-spacing: 0.05em;
+}
+
+.card p {
+  color: var(--ink-soft);
+  font-size: 15px;
+  margin-bottom: 14px;
+}
+
+.card ul {
+  list-style: none;
+  padding: 0;
+}
+
+.card ul li {
+  padding-left: 24px;
+  position: relative;
+  margin-bottom: 8px;
+  font-size: 15px;
+  color: var(--ink-soft);
+}
+
+.card ul li::before {
+  content: '→';
+  position: absolute;
+  left: 0;
+  color: var(--accent-deep);
+  font-weight: 700;
+}
+
+/* ---------- OS Tabs ---------- */
+.tabs {
+  display: flex;
+  gap: 4px;
+  margin-bottom: 0;
+  background: var(--bg-card);
+  padding: 6px;
+  border-radius: 12px 12px 0 0;
+  border: 1px solid var(--line);
+  border-bottom: none;
+}
+
+.tab-btn {
+  flex: 1;
+  padding: 10px 16px;
+  border: none;
+  background: transparent;
+  color: var(--ink-mute);
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 700;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.tab-btn:hover {
+  color: var(--ink);
+}
+
+.tab-btn.active {
+  background: var(--ink);
+  color: var(--bg);
+}
+
+.tab-content {
+  display: none;
+  background: var(--bg-card);
+  border: 1px solid var(--line);
+  border-radius: 0 0 12px 12px;
+  padding: 28px 30px;
+}
+
+.tab-content.active {
+  display: block;
+  animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(4px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.tab-content h4 {
+  font-size: 15px;
+  font-weight: 700;
+  margin-bottom: 8px;
+  color: var(--ink);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.tab-content h4::before {
+  content: '';
+  width: 6px;
+  height: 6px;
+  background: var(--accent);
+  border-radius: 50%;
+  display: inline-block;
+}
+
+.tab-content p {
+  color: var(--ink-soft);
+  font-size: 15px;
+  margin-bottom: 16px;
+}
+
+.tab-content p + h4 {
+  margin-top: 28px;
+}
+
+/* ---------- Code Block ---------- */
+.code-block {
+  position: relative;
+  background: var(--code-bg);
+  border: 1px solid var(--code-border);
+  border-radius: 10px;
+  padding: 16px 56px 16px 20px;
+  margin: 12px 0 18px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 13.5px;
+  color: var(--code-text);
+  line-height: 1.7;
+  overflow-x: auto;
+  white-space: pre;
+}
+
+.code-block::before {
+  content: '$';
+  color: var(--code-accent);
+  margin-right: 8px;
+  font-weight: 600;
+  user-select: none;
+}
+
+.code-block.no-prompt::before { display: none; }
+
+.copy-btn {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: var(--code-border);
+  color: var(--code-text);
+  border: none;
+  padding: 5px 10px;
+  border-radius: 6px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  cursor: pointer;
+  transition: all 0.15s;
+  font-weight: 500;
+}
+
+.copy-btn:hover {
+  background: var(--accent-deep);
+  color: white;
+}
+
+.copy-btn.copied {
+  background: var(--green);
+  color: white;
+}
+
+/* ---------- Tip Box ---------- */
+.tip {
+  background: var(--accent-soft);
+  border-left: 3px solid var(--accent);
+  border-radius: 0 8px 8px 0;
+  padding: 14px 18px;
+  margin: 18px 0;
+  font-size: 14px;
+  color: var(--ink-soft);
+}
+
+.tip strong {
+  color: var(--accent-deep);
+  display: block;
+  margin-bottom: 4px;
+  font-size: 13px;
+  letter-spacing: 0.05em;
+}
+
+.warning {
+  background: #FFF4D6;
+  border-left: 3px solid #C9A227;
+  color: #6B5410;
+  border-radius: 0 8px 8px 0;
+  padding: 14px 18px;
+  margin: 18px 0;
+  font-size: 14px;
+}
+
+.warning strong {
+  display: block;
+  margin-bottom: 4px;
+  color: #7E641A;
+}
+
+/* ---------- Command Table ---------- */
+.cmd-list {
+  display: grid;
+  gap: 10px;
+}
+
+.cmd-item {
+  display: grid;
+  grid-template-columns: minmax(180px, 220px) 1fr;
+  gap: 20px;
+  align-items: baseline;
+  padding: 14px 0;
+  border-bottom: 1px dashed var(--line);
+}
+
+.cmd-item:last-child { border-bottom: none; }
+
+.cmd-item code {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 13px;
+  background: var(--ink);
+  color: var(--bg);
+  padding: 4px 10px;
+  border-radius: 5px;
+  font-weight: 500;
+  display: inline-block;
+  width: fit-content;
+}
+
+.cmd-item .desc-text {
+  color: var(--ink-soft);
+  font-size: 14.5px;
+}
+
+@media (max-width: 600px) {
+  .cmd-item {
+    grid-template-columns: 1fr;
+    gap: 6px;
+  }
+}
+
+/* ---------- Prompt Examples ---------- */
+.prompt-card {
+  background: var(--bg-card);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 22px 24px;
+  margin-bottom: 14px;
+  position: relative;
+}
+
+.prompt-card .label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  color: var(--accent-deep);
+  font-weight: 700;
+  margin-bottom: 8px;
+  display: block;
+}
+
+.prompt-card .prompt-text {
+  font-size: 15.5px;
+  color: var(--ink);
+  line-height: 1.65;
+  font-weight: 500;
+  font-family: 'Fraunces', serif;
+  font-style: italic;
+}
+
+.prompt-card .prompt-text::before { content: '“'; color: var(--accent); font-size: 22px; margin-right: 4px; }
+.prompt-card .prompt-text::after { content: '”'; color: var(--accent); font-size: 22px; margin-left: 4px; }
+
+.prompt-card .note {
+  font-size: 13px;
+  color: var(--ink-mute);
+  margin-top: 10px;
+  padding-top: 10px;
+  border-top: 1px dashed var(--line);
+}
+
+/* ---------- Resources ---------- */
+.resources {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 14px;
+}
+
+.res-card {
+  background: var(--bg-card);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 22px;
+  text-decoration: none;
+  color: inherit;
+  transition: all 0.2s ease;
+  display: block;
+}
+
+.res-card:hover {
+  border-color: var(--accent);
+  transform: translateY(-2px);
+  box-shadow: 0 12px 24px rgba(28,26,23,0.06);
+}
+
+.res-card .res-title {
+  font-weight: 700;
+  font-size: 15px;
+  margin-bottom: 6px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.res-card .res-title .arrow {
+  color: var(--accent-deep);
+  transition: transform 0.2s;
+}
+
+.res-card:hover .arrow { transform: translate(2px, -2px); }
+
+.res-card .res-desc {
+  font-size: 13px;
+  color: var(--ink-mute);
+  line-height: 1.6;
+}
+
+/* ---------- Footer ---------- */
+footer {
+  padding: 60px 0 40px;
+  text-align: center;
+  border-top: 1px solid var(--line);
+  margin-top: 60px;
+}
+
+footer p {
+  font-size: 13px;
+  color: var(--ink-mute);
+  font-family: 'JetBrains Mono', monospace;
+}
+
+footer p + p { margin-top: 6px; }
+
+/* ---------- Responsive ---------- */
+@media (max-width: 600px) {
+  .hero { padding: 60px 0 40px; }
+  section.step { padding: 40px 0; }
+  .card, .tab-content { padding: 22px 20px; }
+  .code-block { font-size: 12.5px; }
+  .tabs { flex-wrap: wrap; }
+}
+
+/* ===================================
+   Chat Widget
+   =================================== */
+.chat-launcher {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background: var(--accent-deep);
+  color: white;
+  border: none;
+  box-shadow: 0 8px 24px rgba(184,90,63,0.4);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 26px;
+  z-index: 1000;
+  transition: all 0.2s ease;
+  font-family: inherit;
+}
+.chat-launcher:hover {
+  transform: scale(1.06);
+  box-shadow: 0 12px 30px rgba(184,90,63,0.5);
+}
+.chat-launcher.hidden {
+  transform: scale(0);
+  opacity: 0;
+  pointer-events: none;
+}
+
+.chat-launcher::after {
+  content: '?';
+  position: absolute;
+  top: -4px;
+  right: -4px;
+  background: var(--ink);
+  color: var(--bg);
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  font-size: 11px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'JetBrains Mono', monospace;
+}
+
+.chat-window {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  width: 380px;
+  max-width: calc(100vw - 32px);
+  height: 580px;
+  max-height: calc(100vh - 48px);
+  background: var(--bg-card);
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  box-shadow: 0 20px 60px rgba(28,26,23,0.18);
+  display: flex;
+  flex-direction: column;
+  z-index: 1001;
+  overflow: hidden;
+  transform: scale(0.92) translateY(20px);
+  opacity: 0;
+  pointer-events: none;
+  transform-origin: bottom right;
+  transition: transform 0.25s ease, opacity 0.25s ease;
+}
+.chat-window.open {
+  transform: scale(1) translateY(0);
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.chat-header {
+  background: var(--ink);
+  color: var(--bg);
+  padding: 16px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.chat-header-info {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.chat-avatar {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: var(--accent);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 17px;
+  flex-shrink: 0;
+}
+
+.chat-title {
+  font-family: 'Fraunces', serif;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 1.2;
+}
+
+.chat-subtitle {
+  font-size: 10px;
+  color: rgba(247,242,234,0.55);
+  font-family: 'JetBrains Mono', monospace;
+  letter-spacing: 0.1em;
+  margin-top: 2px;
+}
+
+.chat-close {
+  background: transparent;
+  border: none;
+  color: var(--bg);
+  font-size: 22px;
+  line-height: 1;
+  cursor: pointer;
+  opacity: 0.55;
+  transition: all 0.15s;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 6px;
+  font-family: inherit;
+}
+.chat-close:hover {
+  opacity: 1;
+  background: rgba(255,255,255,0.1);
+}
+
+.chat-messages {
+  flex: 1;
+  padding: 20px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  background: var(--bg);
+  scroll-behavior: smooth;
+}
+
+.chat-messages::-webkit-scrollbar { width: 6px; }
+.chat-messages::-webkit-scrollbar-thumb {
+  background: var(--line);
+  border-radius: 3px;
+}
+
+.chat-msg {
+  max-width: 85%;
+  padding: 10px 14px;
+  border-radius: 14px;
+  font-size: 14px;
+  line-height: 1.65;
+  word-wrap: break-word;
+  white-space: pre-wrap;
+  animation: msgIn 0.2s ease;
+}
+@keyframes msgIn {
+  from { opacity: 0; transform: translateY(4px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.chat-msg.bot {
+  background: var(--bg-card);
+  border: 1px solid var(--line);
+  align-self: flex-start;
+  border-bottom-left-radius: 4px;
+  color: var(--ink);
+}
+
+.chat-msg.user {
+  background: var(--accent-deep);
+  color: white;
+  align-self: flex-end;
+  border-bottom-right-radius: 4px;
+}
+
+.chat-msg code {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12.5px;
+  background: rgba(0,0,0,0.08);
+  padding: 1px 6px;
+  border-radius: 4px;
+  display: inline-block;
+}
+.chat-msg.user code {
+  background: rgba(255,255,255,0.22);
+}
+
+.chat-msg strong { font-weight: 700; }
+
+.chat-typing {
+  display: flex;
+  gap: 5px;
+  padding: 14px 16px;
+  background: var(--bg-card);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  border-bottom-left-radius: 4px;
+  align-self: flex-start;
+  width: fit-content;
+}
+.chat-typing span {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--ink-mute);
+  animation: dotBounce 1.2s infinite;
+}
+.chat-typing span:nth-child(2) { animation-delay: 0.15s; }
+.chat-typing span:nth-child(3) { animation-delay: 0.3s; }
+@keyframes dotBounce {
+  0%, 60%, 100% { transform: translateY(0); opacity: 0.4; }
+  30% { transform: translateY(-5px); opacity: 1; }
+}
+
+.chat-suggestions {
+  padding: 0 16px 12px;
+  background: var(--bg);
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  flex-shrink: 0;
+}
+
+.chat-suggestion {
+  font-size: 12px;
+  background: var(--bg-card);
+  border: 1px solid var(--line);
+  padding: 6px 12px;
+  border-radius: 100px;
+  cursor: pointer;
+  color: var(--ink-soft);
+  font-family: inherit;
+  transition: all 0.15s;
+}
+.chat-suggestion:hover {
+  background: var(--accent-soft);
+  border-color: var(--accent);
+  color: var(--accent-deep);
+}
+
+.chat-input-wrap {
+  padding: 12px 14px;
+  background: var(--bg-card);
+  border-top: 1px solid var(--line);
+  display: flex;
+  gap: 8px;
+  align-items: flex-end;
+  flex-shrink: 0;
+}
+
+.chat-input {
+  flex: 1;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  padding: 10px 12px;
+  font-family: inherit;
+  font-size: 14px;
+  resize: none;
+  background: var(--bg);
+  color: var(--ink);
+  max-height: 120px;
+  line-height: 1.5;
+  transition: border-color 0.15s;
+}
+.chat-input:focus {
+  outline: none;
+  border-color: var(--accent);
+}
+
+.chat-send {
+  background: var(--ink);
+  color: var(--bg);
+  border: none;
+  border-radius: 10px;
+  padding: 10px 16px;
+  cursor: pointer;
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 700;
+  transition: all 0.15s;
+  white-space: nowrap;
+  height: 40px;
+}
+.chat-send:hover:not(:disabled) {
+  background: var(--accent-deep);
+}
+.chat-send:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+}
+
+.chat-disclaimer {
+  font-size: 10px;
+  color: var(--ink-mute);
+  text-align: center;
+  padding: 6px 16px 8px;
+  background: var(--bg-card);
+  font-family: 'JetBrains Mono', monospace;
+  letter-spacing: 0.03em;
+  flex-shrink: 0;
+}
+
+@media (max-width: 480px) {
+  .chat-window {
+    bottom: 16px;
+    right: 16px;
+    left: 16px;
+    width: auto;
+    height: calc(100vh - 100px);
+  }
+  .chat-launcher {
+    bottom: 16px;
+    right: 16px;
+  }
+}
+
+/* Help Panel content (replaces chat conversation) */
+.chat-intro {
+  padding: 22px 20px 18px;
+  background: var(--bg);
+  flex: 1;
+  overflow-y: auto;
+}
+.chat-intro::-webkit-scrollbar { width: 6px; }
+.chat-intro::-webkit-scrollbar-thumb { background: var(--line); border-radius: 3px; }
+
+.chat-intro h4 {
+  font-family: 'Fraunces', serif;
+  font-size: 18px;
+  font-weight: 600;
+  margin-bottom: 8px;
+  color: var(--ink);
+  line-height: 1.3;
+}
+
+.chat-intro .lead-text {
+  font-size: 13.5px;
+  color: var(--ink-soft);
+  line-height: 1.7;
+  margin-bottom: 20px;
+}
+
+.chat-section-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  color: var(--ink-mute);
+  text-transform: uppercase;
+  margin: 4px 0 10px;
+}
+
+.chat-q-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.chat-q-card {
+  background: var(--bg-card);
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  padding: 11px 14px;
+  font-size: 13.5px;
+  text-align: left;
+  font-family: inherit;
+  color: var(--ink);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  transition: all 0.15s ease;
+  line-height: 1.45;
+  font-weight: 500;
+}
+.chat-q-card:hover {
+  border-color: var(--accent);
+  background: var(--accent-soft);
+  color: var(--accent-deep);
+}
+.chat-q-card .q-icon {
+  font-size: 10px;
+  color: var(--ink-mute);
+  font-family: 'JetBrains Mono', monospace;
+  letter-spacing: 0.1em;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+.chat-q-card:hover .q-icon {
+  color: var(--accent-deep);
+}
+.chat-q-card.copied {
+  background: var(--green);
+  color: white;
+  border-color: var(--green);
+}
+.chat-q-card.copied .q-icon {
+  color: white;
+}
+
+.chat-cta-wrap {
+  padding: 14px 16px 12px;
+  background: var(--bg-card);
+  border-top: 1px solid var(--line);
+  flex-shrink: 0;
+}
+
+.chat-cta {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  width: 100%;
+  background: var(--ink);
+  color: var(--bg);
+  border: none;
+  border-radius: 10px;
+  padding: 12px 16px;
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  text-decoration: none;
+  transition: all 0.2s ease;
+}
+.chat-cta:hover {
+  background: var(--accent-deep);
+  transform: translateY(-1px);
+  box-shadow: 0 8px 16px rgba(184,90,63,0.25);
+}
+.chat-cta .arrow {
+  transition: transform 0.2s;
+}
+.chat-cta:hover .arrow {
+  transform: translate(2px, -2px);
+}
+
+.chat-tiny {
+  font-size: 10px;
+  color: var(--ink-mute);
+  text-align: center;
+  margin-top: 8px;
+  font-family: 'JetBrains Mono', monospace;
+  letter-spacing: 0.05em;
+}
+
+/* Multi-AI button styles */
+.chat-cta-primary {
+  position: relative;
+}
+
+.recommend-badge {
+  position: absolute;
+  top: -7px;
+  right: 14px;
+  background: var(--accent);
+  color: white;
+  font-size: 9px;
+  letter-spacing: 0.08em;
+  padding: 2px 8px;
+  border-radius: 100px;
+  font-family: 'JetBrains Mono', monospace;
+  font-weight: 700;
+}
+
+.chat-cta-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+  margin-top: 8px;
+}
+
+.chat-cta-secondary {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  background: var(--bg);
+  color: var(--ink);
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  padding: 10px 12px;
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+  text-decoration: none;
+  transition: all 0.2s ease;
+}
+.chat-cta-secondary:hover {
+  border-color: var(--accent);
+  background: var(--accent-soft);
+  color: var(--accent-deep);
+  transform: translateY(-1px);
+}
+
+.ai-logo {
+  width: 16px;
+  height: 16px;
+  border-radius: 4px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 9px;
+  font-weight: 700;
+  flex-shrink: 0;
+  color: white;
+}
+.ai-logo.claude { background: #D97757; }
+.ai-logo.gpt { background: #10A37F; }
+.ai-logo.gemini { background: linear-gradient(135deg, #4285F4, #9B72CB); }
+
+/* =========================
+   Accordion: Phase & Step Cards
+   ========================= */
+.phase-list {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  padding: 36px 0 60px;
+}
+
+.phase-card {
+  background: var(--bg-card);
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  overflow: hidden;
+  transition: border-color 0.25s ease, box-shadow 0.25s ease;
+}
+.phase-card[open] {
+  border-color: var(--accent);
+  box-shadow: 0 10px 28px rgba(184,90,63,0.08);
+}
+
+.phase-summary,
+.step-summary {
+  list-style: none;
+  cursor: pointer;
+  user-select: none;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+.phase-summary::-webkit-details-marker,
+.step-summary::-webkit-details-marker {
+  display: none;
+}
+.phase-summary:focus-visible,
+.step-summary:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: -2px;
+}
+
+.phase-summary {
+  padding: 22px 26px;
+  min-height: 64px;
+  transition: background 0.15s ease;
+}
+.phase-summary:hover {
+  background: linear-gradient(90deg, rgba(217,119,87,0.07), transparent 70%);
+}
+
+.phase-icon {
+  font-size: 26px;
+  flex-shrink: 0;
+  width: 32px;
+  text-align: center;
+}
+
+.phase-text {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  min-width: 0;
+}
+
+.phase-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.18em;
+  color: var(--accent-deep);
+  font-weight: 700;
+}
+
+.phase-name {
+  font-family: 'Fraunces', serif;
+  font-size: 22px;
+  font-weight: 600;
+  color: var(--ink);
+  letter-spacing: -0.01em;
+  line-height: 1.2;
+}
+
+.phase-count {
+  font-size: 11px;
+  font-family: 'JetBrains Mono', monospace;
+  color: var(--ink-soft);
+  letter-spacing: 0.08em;
+  font-weight: 500;
+  background: var(--bg);
+  padding: 4px 11px;
+  border-radius: 100px;
+  flex-shrink: 0;
+  border: 1px solid var(--line);
+}
+
+.chevron {
+  font-size: 26px;
+  color: var(--ink-mute);
+  font-family: 'Fraunces', serif;
+  transition: transform 0.3s cubic-bezier(.4,.0,.2,1);
+  flex-shrink: 0;
+  width: 18px;
+  text-align: center;
+  font-weight: 300;
+  line-height: 1;
+}
+
+[open] > .phase-summary > .chevron,
+[open] > .step-summary > .chevron {
+  transform: rotate(90deg);
+  color: var(--accent-deep);
+}
+
+.phase-body {
+  border-top: 1px solid var(--line);
+  padding: 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  background: var(--bg);
+}
+
+/* Step cards inside a phase */
+.step-card {
+  background: var(--bg-card);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  overflow: hidden;
+  transition: border-color 0.2s ease;
+}
+.step-card[open] {
+  border-color: var(--accent);
+}
+
+.step-summary {
+  padding: 14px 18px;
+  min-height: 56px;
+  transition: background 0.15s ease;
+}
+.step-summary:hover {
+  background: var(--accent-soft);
+}
+.step-card[open] > .step-summary {
+  background: var(--accent-soft);
+  border-bottom: 1px solid var(--line);
+}
+
+.step-badge {
+  width: 34px;
+  height: 34px;
+  border-radius: 8px;
+  background: var(--ink);
+  color: var(--bg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 13px;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+.step-badge-icon {
+  background: var(--accent-soft);
+  color: var(--accent-deep);
+  font-size: 18px;
+  border: 1px solid var(--accent);
+}
+
+
+
+/* ===== Brand Icons ===== */
+.brand-icon {
+  width: 14px;
+  height: 14px;
+  display: inline-block;
+  vertical-align: -2px;
+  margin-right: 5px;
+  flex-shrink: 0;
+}
+.brand-icon-large {
+  width: 38px;
+  height: 38px;
+  display: block;
+  flex-shrink: 0;
+}
+/* Brand colors for large icons */
+.brand-claude { color: #D97757; }
+.brand-github { color: #1C1A17; }
+.brand-canva { color: #00C4CC; }
+
+/* In nav, all icons inherit the link color (currentColor) */
+/* In active state, they pick up the accent-deep color naturally */
+
+/* ===== Top Navigation ===== */
+.top-nav {
+  background: rgba(247, 242, 234, 0.88);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border-bottom: 1px solid rgba(28, 26, 23, 0.08);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  padding: 12px 0;
+}
+.top-nav-inner {
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 0 32px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+.nav-brand {
+  font-family: 'Fraunces', serif;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--ink);
+  letter-spacing: -0.01em;
+  white-space: nowrap;
+}
+.nav-brand .nav-brand-mark {
+  color: var(--accent-deep);
+  margin-right: 6px;
+}
+.nav-brand-link {
+  font-family: 'Fraunces', serif;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--ink);
+  letter-spacing: -0.01em;
+  white-space: nowrap;
+  text-decoration: none;
+  transition: color 0.18s;
+}
+.nav-brand-link:hover { color: var(--accent-deep); }
+
+.nav-links {
+  display: flex;
+  gap: 4px;
+  flex-wrap: wrap;
+}
+.nav-link {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11.5px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  color: var(--ink-mute);
+  text-decoration: none;
+  padding: 7px 13px;
+  border-radius: 7px;
+  transition: all 0.18s cubic-bezier(0.2, 0.7, 0.3, 1);
+  border: 1px solid transparent;
+  white-space: nowrap;
+}
+.nav-link:hover {
+  color: var(--ink);
+  background: rgba(217, 119, 87, 0.07);
+}
+.nav-link.active {
+  color: var(--accent-deep);
+  background: var(--accent-soft);
+  border-color: rgba(217, 119, 87, 0.2);
+}
+@media (max-width: 600px) {
+  .top-nav-inner { padding: 0 16px; gap: 8px; }
+  .nav-brand { font-size: 13px; }
+  .nav-link { font-size: 11px; padding: 6px 10px; }
+}
+
+/* ===== Other Guides Section ===== */
+.other-guides-section {
+  margin: 60px 0 30px;
+  padding: 40px 32px;
+  background: var(--bg-card);
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  position: relative;
+  overflow: hidden;
+}
+.other-guides-section::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--accent), transparent);
+  opacity: 0.5;
+}
+.other-guides-header {
+  text-align: center;
+  margin-bottom: 32px;
+  position: relative;
+}
+.other-guides-header h2 {
+  font-family: 'Fraunces', serif;
+  font-weight: 400;
+  font-size: clamp(24px, 4vw, 32px);
+  line-height: 1.2;
+  color: var(--ink);
+  margin-bottom: 10px;
+  letter-spacing: -0.015em;
+}
+.other-guides-header h2 strong {
+  font-weight: 600;
+  color: var(--accent-deep);
+}
+.other-guides-header p {
+  color: var(--ink-soft);
+  font-size: 14.5px;
+  line-height: 1.7;
+  max-width: 480px;
+  margin: 0 auto;
+}
+.other-guides-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 18px;
+  max-width: 720px;
+  margin: 0 auto;
+}
+@media (max-width: 600px) {
+  .other-guides-grid { grid-template-columns: 1fr; }
+  .other-guides-section { padding: 32px 20px; }
+}
+.guide-card {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 28px 24px;
+  background: var(--bg);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  text-decoration: none;
+  transition: all 0.22s cubic-bezier(0.2, 0.7, 0.3, 1);
+  position: relative;
+  overflow: hidden;
+}
+.guide-card::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, transparent 60%, var(--accent-soft));
+  opacity: 0;
+  transition: opacity 0.22s;
+  pointer-events: none;
+}
+.guide-card:hover {
+  transform: translateY(-3px);
+  border-color: var(--accent);
+  box-shadow: 0 12px 28px rgba(28, 26, 23, 0.08);
+}
+.guide-card:hover::after {
+  opacity: 1;
+}
+.guide-icon {
+  font-size: 36px;
+  line-height: 1;
+  position: relative;
+  z-index: 1;
+}
+.guide-card-eyebrow {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.18em;
+  font-weight: 700;
+  color: var(--ink-mute);
+  text-transform: uppercase;
+  position: relative;
+  z-index: 1;
+}
+.guide-title {
+  font-family: 'Fraunces', serif;
+  font-weight: 600;
+  font-size: 21px;
+  line-height: 1.25;
+  color: var(--ink);
+  margin: 0;
+  letter-spacing: -0.015em;
+  position: relative;
+  z-index: 1;
+}
+.guide-desc {
+  color: var(--ink-soft);
+  font-size: 14px;
+  line-height: 1.6;
+  margin: 0;
+  position: relative;
+  z-index: 1;
+}
+.guide-cta {
+  margin-top: 6px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  color: var(--accent-deep);
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  position: relative;
+  z-index: 1;
+}
+.guide-cta .arrow {
+  transition: transform 0.18s;
+}
+.guide-card:hover .guide-cta .arrow {
+  transform: translateX(4px);
+}
+
+/* ===== Share Section ===== */
+.share-section {
+  background: linear-gradient(135deg, var(--bg-card) 0%, var(--accent-soft) 100%);
+  border: 1px solid var(--accent);
+  border-radius: 18px;
+  padding: 36px 32px;
+  margin: 50px 0 30px;
+  position: relative;
+  overflow: hidden;
+}
+.share-section::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  right: -20%;
+  width: 60%;
+  height: 200%;
+  background: radial-gradient(ellipse, rgba(217,119,87,0.1), transparent 70%);
+  pointer-events: none;
+}
+
+.share-header {
+  position: relative;
+  margin-bottom: 28px;
+  text-align: center;
+}
+.share-header h2 {
+  font-family: 'Fraunces', serif;
+  font-weight: 400;
+  font-size: clamp(24px, 4vw, 32px);
+  line-height: 1.2;
+  color: var(--ink);
+  margin-bottom: 10px;
+  letter-spacing: -0.015em;
+}
+.share-header h2 strong {
+  font-weight: 600;
+  color: var(--accent-deep);
+}
+.share-header p {
+  color: var(--ink-soft);
+  font-size: 14.5px;
+  line-height: 1.7;
+  max-width: 480px;
+  margin: 0 auto;
+}
+
+.share-local-notice {
+  background: var(--bg-card);
+  border: 2px dashed var(--accent);
+  border-radius: 12px;
+  padding: 22px 24px;
+  position: relative;
+}
+.share-local-notice strong {
+  display: block;
+  color: var(--accent-deep);
+  font-size: 15px;
+  margin-bottom: 8px;
+}
+.share-local-notice p {
+  color: var(--ink-soft);
+  font-size: 13.5px;
+  line-height: 1.7;
+  margin: 0;
+}
+
+.share-grid {
+  display: grid;
+  grid-template-columns: 1fr 220px;
+  gap: 14px;
+  margin-bottom: 14px;
+  position: relative;
+}
+@media (max-width: 600px) {
+  .share-grid { grid-template-columns: 1fr; }
+}
+
+.share-url-card,
+.share-qr-card {
+  background: var(--bg-card);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  padding: 18px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.share-card-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.18em;
+  font-weight: 700;
+  color: var(--ink-mute);
+  text-transform: uppercase;
+}
+
+.url-display {
+  background: var(--bg);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 10px 14px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12.5px;
+  color: var(--ink);
+  word-break: break-all;
+  line-height: 1.55;
+  min-height: 38px;
+  display: flex;
+  align-items: center;
+}
+
+.share-btn-copy {
+  background: var(--ink);
+  color: var(--bg);
+  border: none;
+  border-radius: 8px;
+  padding: 11px 16px;
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+.share-btn-copy:hover {
+  background: var(--accent-deep);
+  transform: translateY(-1px);
+}
+.share-btn-copy.copied {
+  background: var(--green);
+  color: white;
+}
+
+.share-qr-card {
+  align-items: center;
+  text-align: center;
+  justify-content: center;
+}
+.qr-wrapper {
+  background: white;
+  padding: 10px;
+  border-radius: 10px;
+  border: 1px solid var(--line);
+  line-height: 0;
+}
+.qr-wrapper img {
+  display: block;
+  width: 140px;
+  height: 140px;
+}
+.qr-note {
+  font-size: 11px;
+  color: var(--ink-mute);
+  font-family: 'JetBrains Mono', monospace;
+  letter-spacing: 0.05em;
+  margin: 0;
+}
+
+.share-social {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 8px;
+  position: relative;
+}
+
+.social-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 12px 14px;
+  border-radius: 10px;
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 700;
+  text-decoration: none;
+  border: none;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  white-space: nowrap;
+}
+
+.social-line {
+  background: #06C755;
+  color: white;
+}
+.social-line:hover {
+  background: #05A849;
+  transform: translateY(-1px);
+  box-shadow: 0 6px 14px rgba(6,199,85,0.3);
+}
+
+.social-x {
+  background: #000;
+  color: white;
+}
+.social-x:hover {
+  background: #1a1a1a;
+  transform: translateY(-1px);
+  box-shadow: 0 6px 14px rgba(0,0,0,0.25);
+}
+
+.social-native {
+  background: var(--bg-card);
+  color: var(--ink);
+  border: 1px solid var(--line);
+}
+.social-native:hover {
+  background: var(--bg);
+  border-color: var(--accent);
+  color: var(--accent-deep);
+}
+
+/* ===== Pre-flight Checklist & Success Box ===== */
+.checklist-card {
+  background: linear-gradient(135deg, #FFFCF6 0%, #FBE9DF 100%);
+  border: 2px solid var(--accent);
+  border-radius: 14px;
+  padding: 28px 26px 24px;
+  margin-bottom: 20px;
+  position: relative;
+}
+
+.checklist-card::before {
+  content: '✓';
+  position: absolute;
+  top: -18px;
+  left: 24px;
+  background: var(--accent-deep);
+  color: white;
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  font-weight: 700;
+  border: 3px solid var(--bg);
+  box-shadow: 0 4px 10px rgba(184,90,63,0.25);
+}
+
+.checklist-card h3 {
+  font-family: 'Fraunces', serif;
+  font-size: 19px;
+  font-weight: 600;
+  margin-top: 6px;
+  margin-bottom: 6px;
+  color: var(--ink);
+}
+
+.checklist-card .checklist-intro {
+  font-size: 13px;
+  color: var(--ink-soft);
+  margin-bottom: 16px;
+  line-height: 1.6;
+}
+
+.checklist {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.checklist li {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 11px 14px;
+  background: var(--bg-card);
+  border-radius: 10px;
+  font-size: 14px;
+  color: var(--ink);
+  border: 1px solid var(--line);
+  line-height: 1.55;
+}
+
+.checklist li::before {
+  content: '';
+  width: 18px;
+  height: 18px;
+  border: 2px solid var(--accent);
+  border-radius: 5px;
+  flex-shrink: 0;
+  margin-top: 1px;
+  background: var(--bg);
+}
+
+.checklist li strong {
+  color: var(--accent-deep);
+}
+
+.checklist li small {
+  display: block;
+  font-size: 12px;
+  color: var(--ink-mute);
+  margin-top: 3px;
+  line-height: 1.5;
+}
+
+/* Success indicator box */
+.success-box {
+  background: linear-gradient(135deg, #F0F7EC, #E5F0E1);
+  border-left: 3px solid var(--green);
+  border-radius: 0 10px 10px 0;
+  padding: 14px 18px;
+  margin: 18px 0;
+  font-size: 14px;
+  color: #2A4A28;
+  line-height: 1.7;
+}
+
+.success-box strong:first-child {
+  display: block;
+  margin-bottom: 6px;
+  color: #1F3D1D;
+  font-size: 12px;
+  letter-spacing: 0.08em;
+  font-family: 'JetBrains Mono', monospace;
+  font-weight: 700;
+}
+
+.success-box code {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12.5px;
+  background: rgba(127, 168, 119, 0.18);
+  padding: 1px 6px;
+  border-radius: 4px;
+  color: #1F3D1D;
+  font-weight: 500;
+}
+
+/* Strong warning */
+.warning-strong {
+  background: #FFF1E5;
+  border: 2px solid var(--accent);
+  border-radius: 10px;
+  padding: 14px 18px;
+  margin: 14px 0;
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+}
+
+.warning-strong .icon {
+  font-size: 22px;
+  flex-shrink: 0;
+  line-height: 1;
+}
+
+.warning-strong .text {
+  flex: 1;
+  font-size: 14px;
+  color: var(--ink);
+  line-height: 1.65;
+}
+
+.warning-strong .text strong {
+  display: block;
+  color: var(--accent-deep);
+  margin-bottom: 4px;
+  font-size: 14px;
+}
+
+/* ===== Idea Cards (project ideas) ===== */
+.idea-level {
+  font-family: 'Fraunces', serif;
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--ink);
+  margin: 28px 0 14px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+.idea-level:first-of-type { margin-top: 8px; }
+
+.idea-level .stars {
+  color: var(--accent);
+  font-size: 17px;
+  letter-spacing: 0.05em;
+}
+
+.idea-level .time {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  color: var(--ink-soft);
+  margin-left: auto;
+  letter-spacing: 0.05em;
+  background: var(--bg);
+  padding: 4px 11px;
+  border-radius: 100px;
+  border: 1px solid var(--line);
+  font-weight: 500;
+}
+
+.idea-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 12px;
+  margin-bottom: 8px;
+}
+
+.idea-card {
+  background: var(--bg-card);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 18px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  transition: all 0.2s ease;
+}
+.idea-card:hover {
+  border-color: var(--accent);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 18px rgba(28,26,23,0.05);
+}
+
+.idea-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.idea-icon {
+  font-size: 26px;
+  flex-shrink: 0;
+  line-height: 1;
+}
+
+.idea-title {
+  font-family: 'Fraunces', serif;
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--ink);
+  line-height: 1.3;
+  margin: 0;
+}
+
+.idea-desc {
+  font-size: 13px;
+  color: var(--ink-soft);
+  line-height: 1.6;
+  margin: 0;
+}
+
+.idea-card .code-block {
+  font-size: 11.5px;
+  padding: 10px 60px 10px 14px;
+  margin: 0;
+  border-radius: 8px;
+  line-height: 1.55;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+.idea-card .code-block::before {
+  content: '📝';
+  margin-right: 6px;
+  font-size: 12px;
+}
+.idea-card .copy-btn {
+  font-size: 10px;
+  padding: 4px 8px;
+  top: 8px;
+  right: 8px;
+}
+
+@media (max-width: 600px) {
+  .idea-grid { grid-template-columns: 1fr; }
+}
+
+/* ===== Video Cards (YouTube) ===== */
+.video-list {
+  display: grid;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.video-card {
+  display: flex;
+  gap: 14px;
+  padding: 12px;
+  background: var(--bg-card);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  text-decoration: none;
+  color: inherit;
+  transition: all 0.2s ease;
+  align-items: center;
+}
+.video-card:hover {
+  border-color: var(--accent);
+  transform: translateY(-1px);
+  box-shadow: 0 8px 18px rgba(28,26,23,0.06);
+}
+
+.video-thumb {
+  width: 140px;
+  aspect-ratio: 16/9;
+  flex-shrink: 0;
+  border-radius: 8px;
+  overflow: hidden;
+  background: linear-gradient(135deg, #2A1A1A, #14110E);
+  position: relative;
+}
+.video-thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.video-thumb::after {
+  content: '▶';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 36px;
+  height: 36px;
+  background: rgba(255, 0, 0, 0.92);
+  color: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 13px;
+  padding-left: 3px;
+  pointer-events: none;
+}
+
+.video-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.video-title {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--ink);
+  line-height: 1.45;
+  margin-bottom: 6px;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.video-meta {
+  font-size: 11px;
+  color: var(--ink-mute);
+  font-family: 'JetBrains Mono', monospace;
+  letter-spacing: 0.05em;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.video-meta .yt-tag {
+  background: #FF0000;
+  color: white;
+  padding: 1px 6px;
+  border-radius: 3px;
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+}
+
+.video-duration {
+  margin-left: auto;
+  background: var(--ink);
+  color: var(--bg);
+  padding: 1px 6px;
+  border-radius: 3px;
+  font-size: 10px;
+}
+
+@media (max-width: 600px) {
+  .video-thumb { width: 100px; }
+  .video-card { padding: 10px; gap: 10px; }
+  .video-title { font-size: 13px; }
+}
+
+.step-text {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  min-width: 0;
+}
+
+.step-eyebrow {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 9px;
+  color: var(--ink-mute);
+  letter-spacing: 0.2em;
+  font-weight: 700;
+}
+
+.step-name {
+  font-family: 'Fraunces', serif;
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--ink);
+  line-height: 1.3;
+}
+
+.step-body {
+  padding: 26px 26px 30px;
+  background: var(--bg-card);
+}
+
+/* H2 inside step-body */
+.step-body > h2 {
+  font-family: 'Fraunces', serif;
+  font-weight: 400;
+  font-size: clamp(22px, 3vw, 28px);
+  line-height: 1.2;
+  margin-bottom: 14px;
+  letter-spacing: -0.015em;
+}
+.step-body > h2 strong { font-weight: 600; }
+.step-body > .desc {
+  font-size: 15px;
+  color: var(--ink-soft);
+  margin-bottom: 28px;
+  max-width: 640px;
+}
+
+/* Mobile */
+@media (max-width: 600px) {
+  .phase-summary { padding: 18px 18px; gap: 12px; }
+  .phase-name { font-size: 18px; }
+  .phase-icon { font-size: 22px; width: 26px; }
+  .phase-count { display: none; }
+  .phase-body { padding: 10px; }
+  .step-summary { padding: 12px 14px; gap: 12px; }
+  .step-badge { width: 30px; height: 30px; font-size: 12px; }
+  .step-name { font-size: 15px; }
+  .step-body { padding: 22px 18px 26px; }
+}
+
+/* ===== Error / Troubleshoot Cards ===== */
+.error-card {
+  background: var(--bg-card);
+  border: 1px solid var(--line);
+  border-left: 3px solid #C84B4B;
+  border-radius: 10px;
+  padding: 22px 24px;
+  margin-bottom: 14px;
+}
+
+.error-card h3 {
+  font-family: 'Fraunces', serif;
+  font-size: 19px;
+  font-weight: 600;
+  margin-bottom: 14px;
+  color: var(--ink);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  line-height: 1.3;
+}
+
+.error-symptom {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12.5px;
+  background: #2A1A1A;
+  color: #FFB4B4;
+  padding: 10px 14px;
+  border-radius: 6px;
+  margin-bottom: 14px;
+  border: 1px solid #4A2828;
+  word-break: break-word;
+  white-space: pre-wrap;
+  line-height: 1.6;
+  position: relative;
+  padding-left: 36px;
+}
+.error-symptom::before {
+  content: '⚠';
+  position: absolute;
+  left: 12px;
+  top: 10px;
+  color: #FF8888;
+  font-weight: 700;
+  font-size: 14px;
+}
+
+.error-card .label {
+  font-size: 10px;
+  font-family: 'JetBrains Mono', monospace;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  color: var(--accent-deep);
+  text-transform: uppercase;
+  margin: 16px 0 6px;
+}
+.error-card .label:first-of-type {
+  margin-top: 0;
+}
+
+.error-card p {
+  color: var(--ink-soft);
+  font-size: 14.5px;
+  margin-bottom: 8px;
+  line-height: 1.7;
+}
+
+.error-card ol,
+.error-card ul {
+  padding-left: 22px;
+  color: var(--ink-soft);
+  font-size: 14.5px;
+  line-height: 1.85;
+}
+.error-card ol li,
+.error-card ul li {
+  margin-bottom: 6px;
+}
+
+.error-card code {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 13px;
+  background: var(--ink);
+  color: var(--bg);
+  padding: 2px 7px;
+  border-radius: 4px;
+}
+</style>
+</head>
+<body>
+
+<nav class="top-nav">
+  <div class="top-nav-inner">
+    <a href="index.html" class="nav-brand-link"><span class="nav-brand-mark">◆</span>Beginner Guides Series</a>
+    <div class="nav-links">
+      <a href="claude-code-guide.html" class="nav-link"><svg class="brand-icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 1.5c0 5.795 4.705 10.5 10.5 10.5C16.705 12 12 16.705 12 22.5 12 16.705 7.295 12 1.5 12 7.295 12 12 7.295 12 1.5z"/></svg>Claude Code</a>
+      <a href="canva-guide.html" class="nav-link"><svg class="brand-icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10c3.16 0 5.99-1.47 7.83-3.76l-2.9-2.01A6.49 6.49 0 0 1 12 18.5c-3.59 0-6.5-2.91-6.5-6.5S8.41 5.5 12 5.5c2 0 3.78.9 4.97 2.31l2.97-1.94A9.97 9.97 0 0 0 12 2z"/></svg>Canva</a>
+      <a href="github-guide.html" class="nav-link active"><svg class="brand-icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></svg>GitHub</a>
+    </div>
+  </div>
+</nav>
+
+
+<div class="container">
+
+  <!-- ===== HERO ===== -->
+  <header class="hero">
+    <span class="eyebrow">FOR GAME CREATORS · 2026</span>
+    <h1>GitHub で <em>保管 &amp; 公開</em><br>あなたが作ったゲーム</h1>
+    <p class="lead">
+      Claude Code で作ったゲームを <strong>無料で永久に</strong> 保管。<br>
+      しかも、URL を友達にシェアするだけでブラウザでプレイしてもらえる魔法のサービス、それが GitHub です。
+    </p>
+    <div class="hero-buttons">
+      <a href="https://github.com/" target="_blank" rel="noopener" class="btn btn-primary">
+        GitHub 公式サイト <span class="arrow">↗</span>
+      </a>
+      <a href="https://docs.github.com/ja" target="_blank" rel="noopener" class="btn btn-secondary">
+        GitHub Docs(日本語) <span class="arrow">↗</span>
+      </a>
+    </div>
+    <p style="margin-top:28px; font-size:13px; color:var(--ink-mute); font-family:'JetBrains Mono', monospace; letter-spacing:0.05em;">
+      💡 わからないときは右下のボタンから AI(Claude / ChatGPT / Gemini)にきけます
+    </p>
+  </header>
+
+  <div class="phase-list">
+
+  <!-- ============================================ -->
+  <!-- ===== PHASE 1: GitHub を知る ===== -->
+  <!-- ============================================ -->
+  <details class="phase-card" open>
+    <summary class="phase-summary">
+      <span class="phase-icon">🎮</span>
+      <div class="phase-text">
+        <span class="phase-label">PHASE 1</span>
+        <span class="phase-name">GitHub を知る</span>
+      </div>
+      <span class="phase-count">3 ステップ</span>
+      <span class="chevron">›</span>
+    </summary>
+    <div class="phase-body">
+
+      <!-- Step 01 -->
+      <details class="step-card">
+        <summary class="step-summary">
+          <span class="step-badge">01</span>
+          <div class="step-text">
+            <span class="step-eyebrow">STEP 01</span>
+            <span class="step-name">GitHub って何?なぜゲーム保管に最適?</span>
+          </div>
+          <span class="chevron">›</span>
+        </summary>
+        <div class="step-body">
+          <h2>GitHub は <strong>世界最大</strong>のコード倉庫</h2>
+          <p class="desc">
+            一言で言うと:<strong>あなたが作ったコード(ゲーム)をクラウドに無料で保管できるサービス</strong>。世界中の開発者・1.5 億人以上が使う、業界の標準ツールです。
+          </p>
+
+          <div class="card">
+            <h3>🎯 ゲーム保管に GitHub を選ぶ 5 つの理由</h3>
+            <ol style="padding-left:22px; color:var(--ink-soft); font-size:15px; line-height:2;">
+              <li><strong>無料で使える</strong> - Public(公開)リポジトリは無料・容量制限ほぼなし</li>
+              <li><strong>パソコンが壊れても安心</strong> - クラウドに保管されるのでデータ消失なし</li>
+              <li><strong>変更履歴が全部残る</strong> - 「あの時のバージョンに戻したい」が一発でできる</li>
+              <li><strong>GitHub Pages で即公開</strong> - URL を友達に送るだけでブラウザでプレイしてもらえる</li>
+              <li><strong>Claude Code との相性◎</strong> - Claude Code から直接アップロード可能</li>
+            </ol>
+          </div>
+
+          <div class="card" style="background:var(--accent-soft); border-color:var(--accent);">
+            <h3>🆚 Git と GitHub の違い(混乱しがち)</h3>
+            <ul>
+              <li><strong>Git</strong>(ぎっと):変更履歴を管理するソフト。<strong>自分のパソコン上</strong>で動く</li>
+              <li><strong>GitHub</strong>(ぎっとはぶ):Git で管理されたファイルを <strong>クラウドに置く</strong> サービス</li>
+            </ul>
+            <p style="margin-top:10px; color:var(--ink-soft); font-size:14px;">
+              💡 例えるなら:Git は「セーブ機能」、GitHub は「クラウドストレージ」。最初は GitHub だけ使えれば OK です。
+            </p>
+          </div>
+
+          <div class="tip">
+            <strong>💡 こんな場面で活躍します</strong>
+            「PCが壊れた!」→ 大丈夫、GitHub にある / 「友達にゲームを遊ばせたい」→ URL 送るだけ / 「3 日前の状態に戻したい」→ コミット履歴から復元 / 「友達と一緒に作りたい」→ コラボ機能で共同開発
+          </div>
+        </div>
+      </details>
+
+      <!-- Step 02 -->
+      <details class="step-card">
+        <summary class="step-summary">
+          <span class="step-badge">02</span>
+          <div class="step-text">
+            <span class="step-eyebrow">STEP 02</span>
+            <span class="step-name">アカウント作成(無料・3 分)</span>
+          </div>
+          <span class="chevron">›</span>
+        </summary>
+        <div class="step-body">
+          <h2>無料で <strong>すぐ始められます</strong></h2>
+          <p class="desc">クレジットカード不要、メールアドレス 1 つで登録完了。</p>
+
+          <div class="card">
+            <h3>① 公式サイトへアクセス</h3>
+            <p><a href="https://github.com/signup" target="_blank" rel="noopener" style="color:var(--accent-deep); font-weight:700;">github.com/signup</a> を開きます。</p>
+          </div>
+
+          <div class="card">
+            <h3>② メールアドレス・パスワード・ユーザー名</h3>
+            <ul>
+              <li><strong>メールアドレス</strong>:普段使うもの(後で確認メールが届きます)</li>
+              <li><strong>パスワード</strong>:15 文字以上 or 8 文字以上(数字・小文字を含む)</li>
+              <li><strong>ユーザー名</strong>:あなたの GitHub URL の一部になります</li>
+            </ul>
+            <div class="warning" style="margin-top:14px;">
+              <strong>⚠️ ユーザー名は重要</strong>
+              あなたの GitHub URL は <code>github.com/<strong>ユーザー名</strong></code> になり、ゲーム公開時の URL も <code>ユーザー名.github.io/repo名</code> という形式に。短く・覚えやすく・本名 or プロ名で決めるのがおすすめ。<strong>後で変更可能ですが、URL が変わるので最初によく考えて</strong>。
+            </div>
+          </div>
+
+          <div class="card">
+            <h3>③ 認証コードを入力</h3>
+            <p>パズル認証 → メールに届いた 8 桁のコードを入力 → ログイン完了。</p>
+          </div>
+
+          <div class="card">
+            <h3>④ プランを選ぶ</h3>
+            <p>「<strong>Free</strong>」プランを選択。これで全機能の 95% が使えます。</p>
+          </div>
+
+          <div class="success-box">
+            <strong>✅ こうなれば成功</strong>
+            ログイン後、<strong>右上にあなたのアイコン</strong>が表示され、ダッシュボード画面が見えれば登録完了。さっそくゲーム保管を始められます。
+          </div>
+
+          <div class="tip">
+            <strong>🔐 2FA(2 段階認証)を強く推奨</strong>
+            設定 → Password and authentication → Two-factor authentication で有効化。スマホアプリ(Google Authenticator など)を使えば、不正ログインを防げます。<strong>2024 年から GitHub では 2FA が必須化されているため、いずれ設定が必要になります</strong>。
+          </div>
+        </div>
+      </details>
+
+      <!-- Step 03 -->
+      <details class="step-card">
+        <summary class="step-summary">
+          <span class="step-badge">03</span>
+          <div class="step-text">
+            <span class="step-eyebrow">STEP 03</span>
+            <span class="step-name">専門用語をやさしく(コミット・プッシュ・etc)</span>
+          </div>
+          <span class="chevron">›</span>
+        </summary>
+        <div class="step-body">
+          <h2>用語を <strong>身近なもの</strong>で例えます</h2>
+          <p class="desc">これだけ覚えれば 90% は理解できます。</p>
+
+          <div class="card">
+            <h3>📁 リポジトリ(Repository / Repo)</h3>
+            <p><strong>= ゲームを入れるフォルダ</strong>。1 つのゲームに 1 つのリポジトリを作るのが基本。</p>
+            <p style="margin-top:8px; color:var(--ink-soft); font-size:14px;">
+              例:「テトリス」「シューティング」「パズルゲーム」と 3 つのゲームがあるなら、リポジトリも 3 つ。
+            </p>
+          </div>
+
+          <div class="card">
+            <h3>📸 コミット(Commit)</h3>
+            <p><strong>= 「ここまで保存!」のスナップショット</strong>。ゲームでいうセーブポイントのようなもの。</p>
+            <p style="margin-top:8px; color:var(--ink-soft); font-size:14px;">
+              例:「キャラ追加完了」「敵の動きを修正」のように小さく区切ってコミットすると、後で履歴を辿りやすい。
+            </p>
+          </div>
+
+          <div class="card">
+            <h3>⬆️ プッシュ(Push)</h3>
+            <p><strong>= 自分のパソコンから GitHub に送信</strong>。「アップロード」と思っておけば OK。</p>
+          </div>
+
+          <div class="card">
+            <h3>⬇️ プル(Pull)</h3>
+            <p><strong>= GitHub から自分のパソコンに取得</strong>。「ダウンロード」と思っておけば OK。</p>
+            <p style="margin-top:8px; color:var(--ink-soft); font-size:14px;">
+              💡 別の PC で続きを作るとき、または友達と共同作業するときに使います。
+            </p>
+          </div>
+
+          <div class="card">
+            <h3>🌳 ブランチ(Branch)</h3>
+            <p><strong>= 並行作業の枝</strong>。最初は気にしなくて OK。1 人でゲームを作る間は <code>main</code> ブランチだけ使えば十分です。</p>
+            <p style="margin-top:8px; color:var(--ink-soft); font-size:14px;">
+              💡 慣れてきたら「実験的な機能を試す用のブランチ」を切ると、本体を壊さず冒険できます。
+            </p>
+          </div>
+
+          <div class="card">
+            <h3>📄 README(リードミー)</h3>
+            <p><strong>= リポジトリの表紙ページ</strong>。ゲームの説明文を <code>README.md</code> という名前のファイルで書きます。Markdown 形式で書け、リポジトリのトップに自動表示されます。</p>
+          </div>
+
+          <div class="tip">
+            <strong>💡 全部覚えなくていい</strong>
+            最初は「リポジトリ = フォルダ」「コミット = 保存」「プッシュ = アップロード」だけ覚えて始めてOK。残りは使いながら自然に身につきます。
+          </div>
+        </div>
+      </details>
+
+    </div>
+  </details>
+
+  <!-- ============================================ -->
+  <!-- ===== PHASE 2: ゲームを置いて公開する ===== -->
+  <!-- ============================================ -->
+  <details class="phase-card">
+    <summary class="phase-summary">
+      <span class="phase-icon">🚀</span>
+      <div class="phase-text">
+        <span class="phase-label">PHASE 2</span>
+        <span class="phase-name">ゲームを置いて公開する(GUI で簡単)</span>
+      </div>
+      <span class="phase-count">3 ステップ</span>
+      <span class="chevron">›</span>
+    </summary>
+    <div class="phase-body">
+
+      <!-- Step 04 -->
+      <details class="step-card">
+        <summary class="step-summary">
+          <span class="step-badge">04</span>
+          <div class="step-text">
+            <span class="step-eyebrow">STEP 04</span>
+            <span class="step-name">最初のリポジトリを作る</span>
+          </div>
+          <span class="chevron">›</span>
+        </summary>
+        <div class="step-body">
+          <h2>ゲーム用の <strong>箱</strong>を作る</h2>
+          <p class="desc">1 つのゲームに 1 つのリポジトリ。所要時間 1 分。</p>
+
+          <div class="card">
+            <h3>① 「+」ボタン → New repository</h3>
+            <p>GitHub 画面右上の <strong>「+」</strong> アイコンをクリック → <strong>「New repository」</strong> を選択。</p>
+          </div>
+
+          <div class="card">
+            <h3>② リポジトリ名を入力</h3>
+            <ul>
+              <li>英数字・ハイフン(<code>-</code>)・アンダースコア(<code>_</code>)が使える</li>
+              <li>日本語・スペースは NG</li>
+              <li>例:<code>tetris-game</code> / <code>my-shooter</code> / <code>memory-puzzle</code></li>
+            </ul>
+            <p style="margin-top:8px; color:var(--ink-soft); font-size:14px;">
+              💡 <strong>後で公開するときの URL の一部になります</strong>。短くてわかりやすい名前を。
+            </p>
+          </div>
+
+          <div class="card">
+            <h3>③ Description(説明・任意)</h3>
+            <p>「2 分で遊べるシューティングゲーム」のように一言で書く。空欄でも OK。</p>
+          </div>
+
+          <div class="card">
+            <h3>④ Public か Private を選ぶ</h3>
+            <ul>
+              <li>🌍 <strong>Public(公開)</strong>:誰でも見られる。<strong>GitHub Pages で公開するなら必須</strong></li>
+              <li>🔒 <strong>Private(非公開)</strong>:自分だけ見られる(チームメンバーは招待で追加可能)</li>
+            </ul>
+            <div class="tip" style="margin-top:14px;">
+              <strong>💡 ゲーム保管+公開なら Public 一択</strong>
+              「コードを読まれるのが嫌」なら Private にできますが、その場合 GitHub Pages 公開には Pro プラン($4/月)が必要。最初は Public で問題なし。コードがマネされる心配は実質ありません。
+            </div>
+          </div>
+
+          <div class="card">
+            <h3>⑤ 「Add a README file」にチェック</h3>
+            <p>これにチェックを入れると、リポジトリ作成時に <code>README.md</code> が自動生成されます。あとで編集できるので必ずチェック ON で。</p>
+          </div>
+
+          <div class="card">
+            <h3>⑥ 「Create repository」をクリック</h3>
+            <p>これでリポジトリ完成!ゲームを置く準備ができました。</p>
+          </div>
+
+          <div class="success-box">
+            <strong>✅ こうなれば成功</strong>
+            <code>github.com/ユーザー名/リポジトリ名</code> というページが表示され、<code>README.md</code> ファイルが 1 つだけ置いてあれば OK。
+          </div>
+        </div>
+      </details>
+
+      <!-- Step 05 -->
+      <details class="step-card">
+        <summary class="step-summary">
+          <span class="step-badge">05</span>
+          <div class="step-text">
+            <span class="step-eyebrow">STEP 05</span>
+            <span class="step-name">ゲームファイルをアップロード</span>
+          </div>
+          <span class="chevron">›</span>
+        </summary>
+        <div class="step-body">
+          <h2>ブラウザから <strong>ドラッグ&amp;ドロップ</strong></h2>
+          <p class="desc">コマンド不要・GUI だけで完了する一番ラクな方法。</p>
+
+          <div class="card">
+            <h3>① 「Add file」→「Upload files」</h3>
+            <p>リポジトリ画面で、緑の「<strong>Add file</strong>」ボタン → 「<strong>Upload files</strong>」をクリック。</p>
+          </div>
+
+          <div class="card">
+            <h3>② ファイルをドラッグ&ドロップ</h3>
+            <p>Claude Code で作ったゲームのファイル(<code>index.html</code>、<code>style.css</code>、<code>script.js</code>、画像フォルダなど)をまるごと枠内にドロップ。</p>
+            <p style="margin-top:10px; color:var(--ink-soft); font-size:14px;">
+              💡 フォルダごとアップロード可。ただし<strong>1 ファイル 25MB 以下</strong>、<strong>合計 100MB 以下</strong>が目安。
+            </p>
+          </div>
+
+          <div class="card">
+            <h3>③ コミットメッセージを入力</h3>
+            <p>下のフォームに「<strong>初めてのアップロード</strong>」など好きなメッセージを記入。空欄だと自動で「Add files via upload」になります。</p>
+          </div>
+
+          <div class="card">
+            <h3>④ 「Commit changes」で確定</h3>
+            <p>緑のボタンをクリック → 数秒待つ → ファイルがリポジトリに反映されます。</p>
+          </div>
+
+          <div class="success-box">
+            <strong>✅ こうなれば成功</strong>
+            リポジトリ画面で <code>index.html</code>、<code>style.css</code>、<code>script.js</code> などのファイルが一覧表示されていれば成功。<strong>これでゲームが永久保管されました 🎉</strong>
+          </div>
+
+          <div class="card" style="background:var(--accent-soft); border-color:var(--accent);">
+            <h3>📁 ゲームの推奨フォルダ構造</h3>
+            <pre style="background:rgba(0,0,0,0.08); padding:14px; border-radius:6px; font-family:'JetBrains Mono',monospace; font-size:13px; overflow-x:auto; line-height:1.7; color:var(--ink);">my-game/
+├─ index.html      ← ★ 必須(GitHub Pages のトップページ)
+├─ style.css       ← デザイン
+├─ script.js       ← ゲームロジック
+├─ assets/         ← 画像・音声フォルダ
+│  ├─ player.png
+│  └─ bgm.mp3
+└─ README.md       ← ゲームの説明書</pre>
+            <p style="margin-top:10px; color:var(--ink-soft); font-size:14px;">
+              💡 <code>index.html</code> という名前のファイルが <strong>ルート(一番上)に必ず必要</strong>。これが GitHub Pages の入り口になります。
+            </p>
+          </div>
+
+          <div class="warning">
+            <strong>⚠️ 機密情報を含めない</strong>
+            API キー・パスワード・メアドなどを含むファイルを Public リポジトリにアップロードすると <strong>世界中に公開されます</strong>。<code>.env</code> などの設定ファイルは絶対にアップしない。間違えてアップしたら、<strong>パスワードや API キーは即座にローテーション(再発行)</strong>を。
+          </div>
+        </div>
+      </details>
+
+      <!-- Step 06 -->
+      <details class="step-card">
+        <summary class="step-summary">
+          <span class="step-badge">06</span>
+          <div class="step-text">
+            <span class="step-eyebrow">STEP 06</span>
+            <span class="step-name">GitHub Pages で公開する 🎉</span>
+          </div>
+          <span class="chevron">›</span>
+        </summary>
+        <div class="step-body">
+          <h2><strong>友達にゲームを送れる</strong>魔法のスイッチ</h2>
+          <p class="desc">このステップが GitHub の<strong>最大の魅力</strong>。3 分で全世界からあなたのゲームにアクセスできるようになります。</p>
+
+          <div class="card">
+            <h3>① リポジトリの「Settings」へ</h3>
+            <p>リポジトリ画面の上メニュー、一番右にある <strong>歯車アイコンの「Settings」</strong> をクリック。</p>
+          </div>
+
+          <div class="card">
+            <h3>② 左メニューから「Pages」</h3>
+            <p>左サイドバーの中ほどに「<strong>Pages</strong>」項目があるのでクリック。</p>
+          </div>
+
+          <div class="card">
+            <h3>③ Source の設定</h3>
+            <ul>
+              <li>「Source」を <strong>「Deploy from a branch」</strong>に</li>
+              <li>「Branch」を <strong>「main」</strong>、フォルダを <strong>「/(root)」</strong>に</li>
+              <li>「<strong>Save</strong>」をクリック</li>
+            </ul>
+          </div>
+
+          <div class="card">
+            <h3>④ 数分待つ</h3>
+            <p>Save した後、<strong>1〜10 分</strong>でデプロイ(公開)が完了します。ページを再読み込みすると、上部に <strong>緑色の枠で URL</strong> が表示されます。</p>
+            <p style="margin-top:10px; color:var(--ink-soft); font-size:14px;">
+              ⏰ 初回は反映に時間がかかることが多いので、慌てず待ちましょう。
+            </p>
+          </div>
+
+          <div class="card">
+            <h3>⑤ URL でアクセス!</h3>
+            <p>表示された URL は次のような形式です:</p>
+            <pre style="background:rgba(0,0,0,0.08); padding:14px; border-radius:6px; font-family:'JetBrains Mono',monospace; font-size:13px; color:var(--ink);">https://<strong>ユーザー名</strong>.github.io/<strong>リポジトリ名</strong>/</pre>
+            <p style="margin-top:10px;">クリックして、あなたのゲームがブラウザで動けば <strong>大成功</strong> 🎉</p>
+          </div>
+
+          <div class="success-box">
+            <strong>✅ ここまで来たらあなたは「インディーゲーム公開者」</strong>
+            この URL を友達・SNS・履歴書・ブログにそのまま貼れます。受け取った人はクリックするだけでブラウザで遊べます。<strong>もう「ゲーム送ろうとしたらファイルでかすぎ問題」とは無縁</strong>です。
+          </div>
+
+          <div class="tip">
+            <strong>💡 更新の方法</strong>
+            ゲームを修正したら、新しい <code>index.html</code> を上書きアップロード(Step 05 の手順)するだけで、同じ URL のまま自動で内容が更新されます。<strong>反映には 1〜数分かかります</strong>。
+          </div>
+
+          <div class="warning">
+            <strong>⚠️ 公開できないケース</strong>
+            ・<code>index.html</code> が無い → Pages は何も表示できません<br>
+            ・リポジトリが Private → Pro プランでないと公開不可<br>
+            ・404 エラーが出る場合は、URL に <code>/index.html</code> を付けて試してみてください
+          </div>
+        </div>
+      </details>
+
+    </div>
+  </details>
+
+  <!-- ============================================ -->
+  <!-- ===== PHASE 3: Git で本格管理 ===== -->
+  <!-- ============================================ -->
+  <details class="phase-card">
+    <summary class="phase-summary">
+      <span class="phase-icon">⚙️</span>
+      <div class="phase-text">
+        <span class="phase-label">PHASE 3</span>
+        <span class="phase-name">Git で本格管理(コマンドライン)</span>
+      </div>
+      <span class="phase-count">3 ステップ</span>
+      <span class="chevron">›</span>
+    </summary>
+    <div class="phase-body">
+
+      <!-- Step 07 -->
+      <details class="step-card">
+        <summary class="step-summary">
+          <span class="step-badge">07</span>
+          <div class="step-text">
+            <span class="step-eyebrow">STEP 07</span>
+            <span class="step-name">Git のインストールと初期設定</span>
+          </div>
+          <span class="chevron">›</span>
+        </summary>
+        <div class="step-body">
+          <h2>コマンドラインで <strong>もっと速く</strong></h2>
+          <p class="desc">GUI でも基本は OK ですが、Claude Code と組み合わせるなら Git を入れておくと飛躍的に速くなります。</p>
+
+          <div class="card">
+            <h3>🍎 Mac の場合</h3>
+            <p>多くの場合、<strong>すでに入っています</strong>。確認してみましょう。ターミナルを開いて:</p>
+            <div class="code-block">git --version</div>
+            <p style="margin-top:10px;">バージョン番号(例:<code>git version 2.39.3</code>)が出れば OK。出ない場合は次の手順で。</p>
+            <p style="margin-top:10px; color:var(--ink-soft); font-size:14px;">
+              <strong>未インストールなら:</strong>
+            </p>
+            <div class="code-block">xcode-select --install</div>
+            <p style="margin-top:8px; color:var(--ink-soft); font-size:13px;">
+              ↑ ポップアップが出るので「インストール」をクリック。10 分ほどで完了。
+            </p>
+          </div>
+
+          <div class="card">
+            <h3>🪟 Windows の場合</h3>
+            <ol style="padding-left:22px; color:var(--ink-soft); font-size:15px; line-height:2;">
+              <li><a href="https://git-scm.com/download/win" target="_blank" rel="noopener" style="color:var(--accent-deep); font-weight:700;">git-scm.com/download/win</a> にアクセス</li>
+              <li>自動ダウンロードされる .exe をダブルクリックして実行</li>
+              <li>インストーラーは <strong>「Next」連打で OK</strong>(デフォルト設定で問題なし)</li>
+              <li>完了後、PowerShell または Git Bash を開いて <code>git --version</code> で確認</li>
+            </ol>
+          </div>
+
+          <div class="card">
+            <h3>👤 初期設定(必須・1 回だけ)</h3>
+            <p>Git に「あなたが誰か」を教えます。これをやらないとコミットできません。</p>
+            <div class="code-block">git config --global user.name "あなたの名前"</div>
+            <div class="code-block">git config --global user.email "your-email@example.com"</div>
+            <p style="margin-top:10px; color:var(--ink-soft); font-size:14px;">
+              💡 メアドは GitHub に登録したものと<strong>同じもの</strong>を使ってください(コミットがあなたのものとして認識されます)。
+            </p>
+          </div>
+
+          <div class="card">
+            <h3>🔑 認証の設定(初回プッシュ時)</h3>
+            <p>2021 年からパスワード認証は廃止されました。<strong>Personal Access Token(PAT)</strong>を使います。</p>
+            <ol style="padding-left:22px; color:var(--ink-soft); font-size:15px; line-height:2;">
+              <li>GitHub にログイン → 右上アイコン → Settings</li>
+              <li>左メニュー一番下「Developer settings」</li>
+              <li>Personal access tokens → Tokens (classic) → Generate new token</li>
+              <li>Note(用途メモ)を入力、Expiration(有効期限)を 90 日 などに設定</li>
+              <li>「<strong>repo</strong>」にチェックを入れて Generate</li>
+              <li>表示されたトークンを <strong>必ずコピー</strong>(再表示されません!)</li>
+            </ol>
+            <p style="margin-top:10px; color:var(--ink-soft); font-size:14px;">
+              💡 初回プッシュ時にユーザー名とパスワードを聞かれたら、<strong>パスワード欄にこのトークンを貼り付けます</strong>。
+            </p>
+          </div>
+
+          <div class="success-box">
+            <strong>✅ ここまで完了したら</strong>
+            Git の準備は全部終わり。次のステップで実際にコマンドを使ってみましょう。
+          </div>
+        </div>
+      </details>
+
+      <!-- Step 08 -->
+      <details class="step-card">
+        <summary class="step-summary">
+          <span class="step-badge">08</span>
+          <div class="step-text">
+            <span class="step-eyebrow">STEP 08</span>
+            <span class="step-name">基本コマンド 7 個でほぼ全部できる</span>
+          </div>
+          <span class="chevron">›</span>
+        </summary>
+        <div class="step-body">
+          <h2>毎日使う <strong>必須コマンド</strong></h2>
+          <p class="desc">これだけ覚えれば、95% の作業はできます。</p>
+
+          <div class="card">
+            <h3>1️⃣ git clone(リポジトリをローカルに持ってくる)</h3>
+            <div class="code-block">git clone https://github.com/ユーザー名/リポジトリ名.git</div>
+            <p style="margin-top:10px;">GitHub 上のリポジトリをパソコンにダウンロード。リポジトリの「<strong>Code</strong>」緑ボタン → URL コピーで取得できます。</p>
+          </div>
+
+          <div class="card">
+            <h3>2️⃣ git status(何が変わったか見る)</h3>
+            <div class="code-block">git status</div>
+            <p style="margin-top:10px;"><strong>困ったらまず status</strong>。今どんな状態か(未追跡ファイル・変更されたファイル)を表示してくれます。</p>
+          </div>
+
+          <div class="card">
+            <h3>3️⃣ git add(変更を「次のコミット候補」に追加)</h3>
+            <div class="code-block">git add .</div>
+            <p style="margin-top:10px;"><code>.</code>(ドット)は「全部」の意味。特定ファイルだけなら <code>git add index.html</code> のように指定できます。</p>
+          </div>
+
+          <div class="card">
+            <h3>4️⃣ git commit(スナップショット作成)</h3>
+            <div class="code-block">git commit -m "敵キャラを追加"</div>
+            <p style="margin-top:10px;"><code>-m</code> の後にメッセージ。<strong>何を変更したか</strong>を一言で書きます(英語でも日本語でも OK)。</p>
+          </div>
+
+          <div class="card">
+            <h3>5️⃣ git push(GitHub に送信)</h3>
+            <div class="code-block">git push</div>
+            <p style="margin-top:10px;">これで GitHub のリポジトリに反映されます。<strong>初回は <code>git push -u origin main</code></strong> と書きます。</p>
+          </div>
+
+          <div class="card">
+            <h3>6️⃣ git pull(GitHub から最新を取得)</h3>
+            <div class="code-block">git pull</div>
+            <p style="margin-top:10px;">別の PC で続きを書く時や、共同作業相手の更新を取り込む時に使います。</p>
+          </div>
+
+          <div class="card">
+            <h3>7️⃣ git log(履歴を見る)</h3>
+            <div class="code-block">git log --oneline</div>
+            <p style="margin-top:10px;">過去のコミット履歴を一覧表示。「あの時の状態に戻したい」時のための一覧表。<code>q</code> で抜けます。</p>
+          </div>
+
+          <div class="card" style="background:var(--accent-soft); border-color:var(--accent);">
+            <h3>📝 典型的な日常ワークフロー</h3>
+            <pre style="background:rgba(0,0,0,0.08); padding:14px; border-radius:6px; font-family:'JetBrains Mono',monospace; font-size:13px; line-height:1.8; color:var(--ink); overflow-x:auto;"># 1. 何が変わったか確認
+git status
+
+# 2. 全変更をステージに上げる
+git add .
+
+# 3. メッセージ付きでコミット
+git commit -m "ジャンプ機能を追加"
+
+# 4. GitHub に送信
+git push</pre>
+            <p style="margin-top:10px; color:var(--ink-soft); font-size:14px;">
+              💡 この 4 行をひと続きに覚えれば、開発のサイクルが回ります。
+            </p>
+          </div>
+
+          <div class="warning">
+            <strong>⚠️ よくあるトラブル</strong>
+            ・<code>fatal: not a git repository</code> → 別のフォルダに <code>cd</code> で移動するか、<code>git init</code> でリポジトリ初期化<br>
+            ・<code>Permission denied</code> → 認証設定が間違っている。Personal Access Token を再確認<br>
+            ・<code>rejected — non-fast-forward</code> → 先に <code>git pull</code> してから push し直す
+          </div>
+        </div>
+      </details>
+
+      <!-- Step 09 -->
+      <details class="step-card">
+        <summary class="step-summary">
+          <span class="step-badge">09</span>
+          <div class="step-text">
+            <span class="step-eyebrow">STEP 09</span>
+            <span class="step-name">Claude Code と連携する</span>
+          </div>
+          <span class="chevron">›</span>
+        </summary>
+        <div class="step-body">
+          <h2>Claude Code から <strong>直接 GitHub へ</strong></h2>
+          <p class="desc">Claude Code は git コマンドを直接実行できるので、自然言語で頼むだけで全部やってくれます。</p>
+
+          <div class="card">
+            <h3>🤝 Claude にお願いするだけ</h3>
+            <p>Claude Code を起動した状態で、こう言うだけ:</p>
+            <div class="code-block no-prompt">「このゲームを GitHub にプッシュして。コミットメッセージは『ジャンプ機能を追加』で」<button class="copy-btn">コピー</button></div>
+            <p style="margin-top:10px;">Claude が <code>git status</code> → <code>git add</code> → <code>git commit</code> → <code>git push</code> を順番に実行してくれます。</p>
+          </div>
+
+          <div class="card">
+            <h3>🆕 新規プロジェクトを GitHub に上げる流れ</h3>
+            <p>ローカルで作り始めたプロジェクトを GitHub にも保管したい時:</p>
+            <ol style="padding-left:22px; color:var(--ink-soft); font-size:15px; line-height:2;">
+              <li>GitHub の Web 画面で <strong>空のリポジトリ</strong>を作る(README にチェックは <strong>入れない</strong>)</li>
+              <li>表示される指示の <strong>「…or push an existing repository from the command line」</strong>のコマンドをコピー</li>
+              <li>そのままターミナルに貼って実行</li>
+            </ol>
+            <p style="margin-top:10px; color:var(--ink-soft); font-size:14px;">
+              💡 Claude に「<strong>このプロジェクトを GitHub の新しいリポジトリにアップロードしたい。手順を教えて</strong>」と聞けば、現在のディレクトリ構成に合わせた手順を教えてくれます。
+            </p>
+          </div>
+
+          <div class="card">
+            <h3>🔧 GitHub CLI(gh)を使うとさらに便利</h3>
+            <p><a href="https://cli.github.com/" target="_blank" rel="noopener" style="color:var(--accent-deep); font-weight:700;">cli.github.com</a> から GitHub CLI(<code>gh</code> コマンド)をインストールすると、<strong>ターミナルからリポジトリ作成や Pages 有効化</strong>まで全部できるようになります。</p>
+            <div class="code-block">gh repo create my-game --public --source=. --push</div>
+            <p style="margin-top:10px; color:var(--ink-soft); font-size:14px;">
+              ↑ このコマンド 1 つで、リポジトリ作成 + アップロード + push まで完了!
+            </p>
+          </div>
+
+          <div class="card">
+            <h3>🚫 .gitignore で不要なファイルを除外</h3>
+            <p>node_modules や .env など、GitHub に上げたくないファイルを <code>.gitignore</code> に書いておきます。</p>
+            <pre style="background:rgba(0,0,0,0.08); padding:14px; border-radius:6px; font-family:'JetBrains Mono',monospace; font-size:13px; line-height:1.7; color:var(--ink); overflow-x:auto;"># .gitignore の例
+node_modules/
+.env
+.DS_Store
+*.log
+dist/
+build/</pre>
+            <p style="margin-top:10px; color:var(--ink-soft); font-size:14px;">
+              💡 Claude に「<strong>HTML/JS ゲーム用の .gitignore を作って</strong>」と頼めば、適切なものを生成してくれます。
+            </p>
+          </div>
+
+          <div class="success-box">
+            <strong>✅ ここまでマスターすれば</strong>
+            Claude Code でゲームを作る → GitHub に push → GitHub Pages で公開 → URL を友達に共有、というサイクルが完成。<strong>これは現代のインディー開発者の標準フローです</strong>。
+          </div>
+        </div>
+      </details>
+
+    </div>
+  </details>
+
+  <!-- ============================================ -->
+  <!-- ===== OTHERS ===== -->
+  <!-- ============================================ -->
+  <details class="phase-card">
+    <summary class="phase-summary">
+      <span class="phase-icon">📚</span>
+      <div class="phase-text">
+        <span class="phase-label">OTHERS</span>
+        <span class="phase-name">その他(アイデア・プロンプト集・リソース)</span>
+      </div>
+      <span class="phase-count">6 項目</span>
+      <span class="chevron">›</span>
+    </summary>
+    <div class="phase-body">
+
+      <!-- Ideas: What can you publish on GitHub Pages -->
+      <details class="step-card">
+        <summary class="step-summary">
+          <span class="step-badge step-badge-icon">💎</span>
+          <span class="step-name">GitHub Pages で公開できるもの 12 選</span>
+          <span class="chevron">›</span>
+        </summary>
+        <div class="step-body">
+          <h2>ゲーム以外も <strong>無料公開</strong>できます</h2>
+          <p class="desc">GitHub Pages は HTML/CSS/JS で動くものなら何でも公開できます。Claude Code で作って、ここに置きましょう。</p>
+
+          <div class="idea-grid">
+
+            <div class="idea-card">
+              <h4 class="idea-title">🎮 HTML/JS ゲーム</h4>
+              <p class="idea-desc">本命用途。テトリス・パズル・シューティング・RPG なんでも。Canvas や Phaser.js も動きます。</p>
+              <div class="code-block no-prompt">canvas で動くテトリスゲームを作って。タッチ操作対応、スコア表示、音効果つき。<button class="copy-btn">コピー</button></div>
+            </div>
+
+            <div class="idea-card">
+              <h4 class="idea-title">🌐 ポートフォリオサイト</h4>
+              <p class="idea-desc">あなたの実績・プロフィール紹介。就活や案件獲得に有利。</p>
+              <div class="code-block no-prompt">クリエイター向けポートフォリオサイトを作って。トップ・実績・プロフィール・連絡先の4ページ、ダーク&シックな雰囲気。<button class="copy-btn">コピー</button></div>
+            </div>
+
+            <div class="idea-card">
+              <h4 class="idea-title">📝 ブログ</h4>
+              <p class="idea-desc">Markdown で書ける Jekyll や Hugo を使えば、シンプルなブログが作れます。</p>
+              <div class="code-block no-prompt">静的サイト生成で動く軽量なブログサイトのテンプレを作って。記事一覧・個別記事・タグ機能つき。<button class="copy-btn">コピー</button></div>
+            </div>
+
+            <div class="idea-card">
+              <h4 class="idea-title">📊 スライド(プレゼン)</h4>
+              <p class="idea-desc">reveal.js を使うと PowerPoint いらず。URL を共有して画面共有不要に。</p>
+              <div class="code-block no-prompt">reveal.js を使った10枚のプレゼン資料を作って。テーマは『AI時代のゲーム開発』。<button class="copy-btn">コピー</button></div>
+            </div>
+
+            <div class="idea-card">
+              <h4 class="idea-title">📄 履歴書・職務経歴書</h4>
+              <p class="idea-desc">HTML 履歴書はエンジニア界隈で人気。URL を 1 行貼るだけで送れる。</p>
+              <div class="code-block no-prompt">HTMLで作る職務経歴書を作って。シンプルで印刷もしやすいレイアウト、印刷時はPDFになる。<button class="copy-btn">コピー</button></div>
+            </div>
+
+            <div class="idea-card">
+              <h4 class="idea-title">📚 ドキュメント・技術メモ</h4>
+              <p class="idea-desc">学んだことをまとめた個人ノート。第二の脳として使えます。</p>
+              <div class="code-block no-prompt">技術メモ用のサイトを作って。サイドバー目次つき、ダークモード対応、検索機能付き。<button class="copy-btn">コピー</button></div>
+            </div>
+
+            <div class="idea-card">
+              <h4 class="idea-title">🎉 イベント告知ページ</h4>
+              <p class="idea-desc">勉強会・ライブ・結婚式など。ランディングページ風に作ると効果絶大。</p>
+              <div class="code-block no-prompt">結婚式の招待ページを作って。日時・場所・地図・出欠フォーム・写真ギャラリー付き、上品な雰囲気。<button class="copy-btn">コピー</button></div>
+            </div>
+
+            <div class="idea-card">
+              <h4 class="idea-title">📅 カレンダー・スケジューラ</h4>
+              <p class="idea-desc">個人タスク管理ツール。シンプルなものを自分用に。</p>
+              <div class="code-block no-prompt">個人用のカレンダーアプリを作って。月表示、予定の追加・削除、ローカルストレージ保存。<button class="copy-btn">コピー</button></div>
+            </div>
+
+            <div class="idea-card">
+              <h4 class="idea-title">🧮 計算ツール</h4>
+              <p class="idea-desc">家計簿・BMI・住宅ローン・税金計算など。「自分が困っているもの」を作るのが最強。</p>
+              <div class="code-block no-prompt">フリーランス用の手取り計算ツールを作って。年収・経費・控除を入力すると手取り月収が出る。<button class="copy-btn">コピー</button></div>
+            </div>
+
+            <div class="idea-card">
+              <h4 class="idea-title">🎨 ジェネレーター</h4>
+              <p class="idea-desc">QR コード・ランダム名前・グラデーション色生成など、人気のミニツール。</p>
+              <div class="code-block no-prompt">CSSグラデーションジェネレータを作って。色とアングルを指定するとプレビューと CSS コードがコピーできる。<button class="copy-btn">コピー</button></div>
+            </div>
+
+            <div class="idea-card">
+              <h4 class="idea-title">📈 データダッシュボード</h4>
+              <p class="idea-desc">趣味のデータ可視化。読書記録・運動ログ・株価チャートなど。</p>
+              <div class="code-block no-prompt">読書記録ダッシュボードを作って。冊数推移、ジャンル別グラフ、お気に入り表示。Chart.js を使って。<button class="copy-btn">コピー</button></div>
+            </div>
+
+            <div class="idea-card">
+              <h4 class="idea-title">🎵 音楽・楽器系ツール</h4>
+              <p class="idea-desc">メトロノーム・チューナー・コード進行表など。Web Audio API でブラウザで完結。</p>
+              <div class="code-block no-prompt">Web Audio APIを使ったオンラインメトロノームを作って。テンポ、拍子、音色変更、視覚的なビート表示。<button class="copy-btn">コピー</button></div>
+            </div>
+
+          </div>
+
+          <div class="tip" style="margin-top:24px;">
+            <strong>💡 公開できないもの</strong>
+            <ul style="margin-top:8px;">
+              <li>Node.js などサーバーが必要なアプリ(代わりに Vercel / Netlify を使う)</li>
+              <li>データベースを使うアプリ(Firebase などを併用すれば可)</li>
+              <li>1 ファイル 25MB 超のファイル(動画・音声などは外部に置く)</li>
+            </ul>
+          </div>
+        </div>
+      </details>
+
+      <!-- Claude Code Prompts -->
+      <details class="step-card">
+        <summary class="step-summary">
+          <span class="step-badge step-badge-icon">📋</span>
+          <span class="step-name">Claude Code 用プロンプト集(コピペで使える)</span>
+          <span class="chevron">›</span>
+        </summary>
+        <div class="step-body">
+          <h2>Claude Code に <strong>そのまま貼るだけ</strong></h2>
+          <p class="desc">
+            Git の知識ゼロでも大丈夫。下のプロンプトをコピーして Claude Code に貼り付ければ、AI が状況を判断して必要なコマンドを実行・解説してくれます。
+            <strong>[___]</strong> の部分はあなたの状況に書き換えてください。
+          </p>
+
+          <div class="tip" style="margin-bottom:24px;">
+            <strong>💡 使い方の心得</strong>
+            Claude Code はあなたのフォルダ内を自分で確認できるので、<strong>「このフォルダを GitHub に上げて」</strong>だけでも基本は動きます。下記は丁寧に書いた版なので、より確実に意図通りに動きます。
+          </div>
+
+          <!-- ===== 1. はじめての準備 ===== -->
+          <h3 style="font-family:'Fraunces',serif; font-size:22px; color:var(--accent-deep); margin:32px 0 16px; font-weight:600;">🏁 1. はじめての準備</h3>
+
+          <div class="idea-grid">
+
+            <div class="idea-card">
+              <h4 class="idea-title">Git のインストールと初期設定</h4>
+              <p class="idea-desc">PCに Git がまだ入っていない人向け。OS を確認して必要なコマンドを実行してくれます。</p>
+              <div class="code-block no-prompt">初めて GitHub を使います。私の OS は [Mac / Windows] です。Git のインストール状況を確認し、未インストールなら最も簡単な方法でインストールを進めてください。完了したら git config で名前とメールアドレス(私の GitHub アカウント:[___@example.com])を設定し、最後に正しく設定できているか git config --list で確認してください。<button class="copy-btn">コピー</button></div>
+            </div>
+
+            <div class="idea-card">
+              <h4 class="idea-title">Personal Access Token の発行手順</h4>
+              <p class="idea-desc">GitHub の認証で必要なトークン。発行手順を画面の場所まで詳しく教えてくれます。</p>
+              <div class="code-block no-prompt">GitHub の Personal Access Token (PAT) を発行する手順を、初心者向けに教えてください。Settings ページのどこにあるか、必要な権限スコープ(repo だけで十分か等)、有効期限の選び方、発行後の保管方法まで、画面の場所を文字で詳しく説明してください。<button class="copy-btn">コピー</button></div>
+            </div>
+
+            <div class="idea-card">
+              <h4 class="idea-title">git 設定の健康診断</h4>
+              <p class="idea-desc">「うまく動かないけど何が悪いか分からない」時の最初の一手。</p>
+              <div class="code-block no-prompt">git config --list で現在の設定を確認して、user.name と user.email が私の GitHub アカウントと一致しているかチェックしてください。一致していない場合は修正コマンドを提案・実行してください。<button class="copy-btn">コピー</button></div>
+            </div>
+
+          </div>
+
+          <!-- ===== 2. 最初のアップロード ===== -->
+          <h3 style="font-family:'Fraunces',serif; font-size:22px; color:var(--accent-deep); margin:32px 0 16px; font-weight:600;">🚀 2. 最初のアップロード</h3>
+
+          <div class="idea-grid">
+
+            <div class="idea-card">
+              <h4 class="idea-title">フルセットで GitHub に初公開</h4>
+              <p class="idea-desc">.gitignore・README・初回コミットまで、Claude が全部準備してくれる王道プロンプト。</p>
+              <div class="code-block no-prompt">このフォルダのゲームを GitHub に初めて公開したいです。次の順番で進めてください:(1) 現在のディレクトリ構造を確認、(2) HTML/JS ゲーム用の .gitignore を作成、(3) このゲームに合った README.md を生成(タイトル、概要、操作方法、技術スタック、スクリーンショット用プレースホルダーを含む)、(4) git init と初回コミット、(5) GitHub Web 画面で作るべきリポジトリ設定を提示、(6) 私がリポジトリを作ったら git remote add と初回 push を実行。リポジトリ名の候補も 3 つ提案してください。<button class="copy-btn">コピー</button></div>
+            </div>
+
+            <div class="idea-card">
+              <h4 class="idea-title">既に作った空リポジトリと紐付け</h4>
+              <p class="idea-desc">GitHub Web で先にリポジトリを作った場合の続き作業。</p>
+              <div class="code-block no-prompt">私は既に GitHub で空のリポジトリを作りました。URL は https://github.com/[ユーザー名]/[リポジトリ名] です。このローカルプロジェクトを、そのリポジトリに紐付けて初回 push してください。必要なら .gitignore と README.md も作成してから進めてください。<button class="copy-btn">コピー</button></div>
+            </div>
+
+            <div class="idea-card">
+              <h4 class="idea-title">機密情報チェック(push 前の安全確認)</h4>
+              <p class="idea-desc">公開前に必ず実行してほしい安全プロンプト。事故を未然に防ぎます。</p>
+              <div class="code-block no-prompt">このゲームを GitHub に push する前に、機密情報(API キー、パスワード、個人情報、内部 URL、トークン等)が含まれていないかコード全体・設定ファイル・コメントを徹底的にチェックしてください。見つけたら「ファイル名 + 行数 + 内容」を明示し、.gitignore で除外するか、コードから削除する具体的な対応案を提示してください。<button class="copy-btn">コピー</button></div>
+            </div>
+
+            <div class="idea-card">
+              <h4 class="idea-title">GitHub CLI で全部一気に</h4>
+              <p class="idea-desc">gh コマンドを使って、リポジトリ作成 → push まで自動化したい人向け。</p>
+              <div class="code-block no-prompt">GitHub CLI (gh) がインストール済みかを確認してください。なければ私の OS に合わせたインストール手順を提示してください。次に gh repo create でこのプロジェクトの新しい Public リポジトリを作成し、初回 push まで一気に実行してください。リポジトリ名は「[my-game-name]」、Description は「[ゲームの一言説明]」でお願いします。<button class="copy-btn">コピー</button></div>
+            </div>
+
+          </div>
+
+          <!-- ===== 3. GitHub Pages で公開 ===== -->
+          <h3 style="font-family:'Fraunces',serif; font-size:22px; color:var(--accent-deep); margin:32px 0 16px; font-weight:600;">🌐 3. GitHub Pages で公開する</h3>
+
+          <div class="idea-grid">
+
+            <div class="idea-card">
+              <h4 class="idea-title">Pages 公開の事前チェック</h4>
+              <p class="idea-desc">「公開ボタン」を押す前に、ちゃんと動く構成になっているか確認。</p>
+              <div class="code-block no-prompt">このリポジトリを GitHub Pages で公開する準備をしてください。(1) ルートに index.html があるか確認、(2) HTML 内のすべての相対パス(CSS・JS・画像・音声)が GitHub Pages 上でも正しく解決されるか確認、(3) 必要ならファイル配置を整える、(4) 最後に GitHub の Settings → Pages で有効化する手順を画面の場所付きで教えてください。<button class="copy-btn">コピー</button></div>
+            </div>
+
+            <div class="idea-card">
+              <h4 class="idea-title">404 エラーのデバッグ</h4>
+              <p class="idea-desc">URL にアクセスしても表示されない時の原因究明。</p>
+              <div class="code-block no-prompt">GitHub Pages で公開した URL「https://[ユーザー名].github.io/[リポジトリ名]/」にアクセスしたら 404 エラーが出ます。原因として考えられるものを順番に確認・解決してください:(1) index.html がルートにあるか、(2) Settings の Pages で有効化されているか、(3) ブランチ設定は main か、(4) 反映待ち時間は十分か(初回は最大 10 分)、(5) ファイル名の大文字小文字。<button class="copy-btn">コピー</button></div>
+            </div>
+
+            <div class="idea-card">
+              <h4 class="idea-title">README に Play バッジを追加</h4>
+              <p class="idea-desc">公開 URL を README の一番上に目立つ形で配置してくれます。</p>
+              <div class="code-block no-prompt">GitHub Pages で公開した URL「https://[ユーザー名].github.io/[リポジトリ名]/」を、README.md の一番上に「▶ Play Now」というバッジ風リンクで追加してください。Shields.io のバッジを使ってください。コミットして push までやってください。<button class="copy-btn">コピー</button></div>
+            </div>
+
+          </div>
+
+          <!-- ===== 4. 日常の開発 ===== -->
+          <h3 style="font-family:'Fraunces',serif; font-size:22px; color:var(--accent-deep); margin:32px 0 16px; font-weight:600;">🔄 4. 日常の開発(毎回使う)</h3>
+
+          <div class="idea-grid">
+
+            <div class="idea-card">
+              <h4 class="idea-title">変更を確認してから push</h4>
+              <p class="idea-desc">最頻出のフロー。Claude が変更内容を要約してメッセージを提案。</p>
+              <div class="code-block no-prompt">変更を GitHub に push してください。手順:(1) git status と git diff で何が変わったか確認、(2) 変更内容を日本語で要約、(3) 適切なコミットメッセージを 3 案提示、(4) 私が選んだメッセージで git add → commit → push を実行。<button class="copy-btn">コピー</button></div>
+            </div>
+
+            <div class="idea-card">
+              <h4 class="idea-title">機能追加と push をワンセットで</h4>
+              <p class="idea-desc">機能名を伝えるだけで、Claude が実装 + コミット + push まで完走。</p>
+              <div class="code-block no-prompt">「[機能名:例 ジャンプ機能 / 効果音 / スコア表示]」を追加してください。実装が完了したら、変更を git にコミットしてください。コミットメッセージは「Add: [機能名]」のように英語で短くお願いします。最後に GitHub に push してください。<button class="copy-btn">コピー</button></div>
+            </div>
+
+            <div class="idea-card">
+              <h4 class="idea-title">最近の進捗を振り返る</h4>
+              <p class="idea-desc">「今週何してた?」をログから自動で振り返り。次のアクションも提案。</p>
+              <div class="code-block no-prompt">直近 1 週間のコミット履歴を git log --oneline --since="1 week ago" で確認して、何を作ってきたか日本語で振り返ってください。実装した機能のリスト、改善したこと、次にやるべきことの提案も追加してください。<button class="copy-btn">コピー</button></div>
+            </div>
+
+            <div class="idea-card">
+              <h4 class="idea-title">README の自動アップデート</h4>
+              <p class="idea-desc">ゲーム本体の進化に合わせて README も最新化。</p>
+              <div class="code-block no-prompt">README.md を更新したいです。現在のゲームのコードを読んで、次の項目を最新の状態に更新してください:(1) ゲーム概要、(2) 操作方法、(3) 実装済み機能のリスト、(4) 技術スタック、(5) スクリーンショット用プレースホルダー、(6) 開発状況の進捗表示。最後にコミットして push までやってください。<button class="copy-btn">コピー</button></div>
+            </div>
+
+            <div class="idea-card">
+              <h4 class="idea-title">変更を一時退避(stash)</h4>
+              <p class="idea-desc">「途中だけど別の作業に切り替えたい」時の退避テク。</p>
+              <div class="code-block no-prompt">今やっている変更をコミットせずに一時退避(stash)したいです。git stash で退避する手順を実行してください。後で戻したい時のために、stash の名前を「[作業内容の短い説明]」で付けてください。一覧確認・復元コマンドも教えてください。<button class="copy-btn">コピー</button></div>
+            </div>
+
+            <div class="idea-card">
+              <h4 class="idea-title">.gitignore を最適化</h4>
+              <p class="idea-desc">不要ファイルが git に追跡されないように整える。</p>
+              <div class="code-block no-prompt">現在の .gitignore を確認して、HTML/JS ゲーム開発に最適な内容に更新してください。OS 依存ファイル(.DS_Store、Thumbs.db)、エディタ設定(.vscode、.idea)、ログ、ビルド成果物、機密情報用ファイルを網羅してください。すでに git に追跡されているけど除外したいファイルがあれば、git rm --cached での除外も実行してください。<button class="copy-btn">コピー</button></div>
+            </div>
+
+          </div>
+
+          <!-- ===== 5. トラブル対処 ===== -->
+          <h3 style="font-family:'Fraunces',serif; font-size:22px; color:var(--accent-deep); margin:32px 0 16px; font-weight:600;">🆘 5. トラブル対処(困った時の救命プロンプト)</h3>
+
+          <div class="idea-grid">
+
+            <div class="idea-card">
+              <h4 class="idea-title">non-fast-forward エラーの解決</h4>
+              <p class="idea-desc">push が rejected された時の安全な対処。</p>
+              <div class="code-block no-prompt">git push したら「rejected — non-fast-forward」エラーが出ました。データを失わないことを最優先で、安全に解決してください。手順:(1) リモートの最新を git fetch、(2) 状況を分析、(3) 私のローカル変更とリモート変更の競合を確認、(4) 安全な統合方法(merge / rebase)を提案、(5) 実行。途中で私の確認が必要な箇所では止まってください。<button class="copy-btn">コピー</button></div>
+            </div>
+
+            <div class="idea-card">
+              <h4 class="idea-title">🚨 機密情報を誤って push してしまった</h4>
+              <p class="idea-desc">緊急対応プロンプト。優先順位付きで一気に対処。</p>
+              <div class="code-block no-prompt">緊急事態:間違えて [API キー / パスワード / 機密ファイル名] を含むファイルを GitHub に push してしまいました!優先順位順に対応してください:(1) 該当キーを「即座に無効化・再発行する手順」をまず最初に教える(これが最重要)、(2) 該当ファイルを .gitignore に追加、(3) 最新コミットからファイル削除、(4) 必要なら git filter-repo で履歴からも完全削除、(5) 今後の再発防止策。各ステップで私の確認を待ってください。<button class="copy-btn">コピー</button></div>
+            </div>
+
+            <div class="idea-card">
+              <h4 class="idea-title">直前のコミットを修正</h4>
+              <p class="idea-desc">メッセージミスやファイル追加忘れの救済。</p>
+              <div class="code-block no-prompt">直前のコミットを修正したいです。まずは git log と git status で状況を確認してください。次の 2 ケースのどちらかを判断・実行してください:(A) まだ push していない場合 → git commit --amend で安全に修正、(B) すでに push してしまった場合 → 履歴を書き換える影響と、安全な代替案を教えてから実行。修正したい内容は「[メッセージを変更したい / ファイルを追加忘れた / etc]」です。<button class="copy-btn">コピー</button></div>
+            </div>
+
+            <div class="idea-card">
+              <h4 class="idea-title">認証エラーの診断</h4>
+              <p class="idea-desc">git push で認証拒否された時の原因究明。</p>
+              <div class="code-block no-prompt">git push で認証エラー(Authentication failed / Permission denied など)が出ます。原因を診断してください:(1) リモート URL が HTTPS か SSH かを確認、(2) HTTPS なら Personal Access Token の設定状況をチェック、(3) Token が期限切れの可能性をチェック、(4) git credential の保存状況を確認。それぞれの場合の解決策を提示・実行してください。<button class="copy-btn">コピー</button></div>
+            </div>
+
+            <div class="idea-card">
+              <h4 class="idea-title">「あの時のバージョン」に戻す</h4>
+              <p class="idea-desc">機能追加で壊した時に、特定のコミットまで巻き戻す。</p>
+              <div class="code-block no-prompt">最近の変更で何かが壊れたので、特定のコミット時点に戻したいです。git log --oneline で履歴を表示してください。私が指定するコミットハッシュまで戻す方法として、安全な順に提案してください:(1) git revert で戻すコミットを打ち消す(履歴は残る)、(2) 特定ファイルだけ git checkout で戻す、(3) git reset で履歴ごと巻き戻す(危険)。それぞれの違いと推奨度を教えてから実行してください。<button class="copy-btn">コピー</button></div>
+            </div>
+
+          </div>
+
+          <!-- ===== 6. 高度な使い方 ===== -->
+          <h3 style="font-family:'Fraunces',serif; font-size:22px; color:var(--accent-deep); margin:32px 0 16px; font-weight:600;">⚡ 6. 高度な使い方(慣れてきたら)</h3>
+
+          <div class="idea-grid">
+
+            <div class="idea-card">
+              <h4 class="idea-title">GitHub Actions で自動デプロイ</h4>
+              <p class="idea-desc">push するたびに自動で Pages が更新される仕組み。</p>
+              <div class="code-block no-prompt">このゲームに GitHub Actions を設定して、main ブランチに push するたびに自動で GitHub Pages へデプロイされるワークフローを作ってください。.github/workflows/deploy.yml を生成して、必要なら Pages の設定を「GitHub Actions」ソースに切り替える手順も教えてください。シンプルで初心者にも理解しやすい構成でお願いします。<button class="copy-btn">コピー</button></div>
+            </div>
+
+            <div class="idea-card">
+              <h4 class="idea-title">複数リポジトリの一覧を整理</h4>
+              <p class="idea-desc">「自分の作品集」を一望したい時に。</p>
+              <div class="code-block no-prompt">gh repo list を使って、私の公開リポジトリを最終更新日順に並べて表示してください。各リポジトリの説明・URL・最終更新日・スター数も付けてください。これを README に貼れる Markdown 形式の表として出力してください。<button class="copy-btn">コピー</button></div>
+            </div>
+
+            <div class="idea-card">
+              <h4 class="idea-title">友達を共同編集者に招待</h4>
+              <p class="idea-desc">一緒にゲーム開発したい時の招待手順。</p>
+              <div class="code-block no-prompt">友達(GitHub username: [___])をこのリポジトリの共同編集者として招待したいです。手順:(1) Settings → Collaborators で招待する画面の場所を教える、(2) 招待後、相手側がやる操作も説明、(3) 共同作業時にやってはいけないこと(同時編集の競合等)の注意点もまとめてください。<button class="copy-btn">コピー</button></div>
+            </div>
+
+            <div class="idea-card">
+              <h4 class="idea-title">他人のリポジトリへの貢献(Pull Request)</h4>
+              <p class="idea-desc">OSS 活動の第一歩。fork → 修正 → PR の流れ。</p>
+              <div class="code-block no-prompt">他の人のリポジトリ「https://github.com/[user]/[repo]」に Pull Request を送りたいです。初心者向けに次の流れを順番にガイドしてください:(1) fork、(2) 自分のアカウントに clone、(3) ブランチ作成、(4) 修正、(5) push、(6) Pull Request 作成。各ステップで実際にコマンドを実行できる部分は実行してください。<button class="copy-btn">コピー</button></div>
+            </div>
+
+            <div class="idea-card">
+              <h4 class="idea-title">古い fork を最新に同期</h4>
+              <p class="idea-desc">fork したリポジトリと、本家の差分を取り込む。</p>
+              <div class="code-block no-prompt">私が fork したリポジトリを、最新の本家(upstream)と同期したいです。git remote -v で現在の状態を確認した後、本家を upstream として追加し、最新を取り込む手順を実行してください。本家 URL は「https://github.com/[original-user]/[repo]」です。<button class="copy-btn">コピー</button></div>
+            </div>
+
+            <div class="idea-card">
+              <h4 class="idea-title">プロジェクトのバックアップ実行</h4>
+              <p class="idea-desc">普段のリポジトリとは別に、定期スナップショット保管。</p>
+              <div class="code-block no-prompt">このプロジェクトのバックアップを取りたいです。次の作業を実行してください:(1) 現在の状態でタグ付き(例:v1.0-backup-2026-01-15)のコミットを作成して push、(2) GitHub Releases を gh release create で作成、(3) ZIP アーカイブも生成。「いつでもこの状態に戻せる」状態を確実に作ってください。<button class="copy-btn">コピー</button></div>
+            </div>
+
+          </div>
+
+          <div class="tip" style="margin-top:32px;">
+            <strong>💡 プロンプトを使い倒すコツ</strong>
+            完全文を覚える必要はありません。<strong>「これに近いことしたい」と思ったらコピー → 状況に合わせて [___] を書き換える</strong>だけ。慣れてきたら自分の言葉で「いつものやつやって」「コミットして push」程度の短いプロンプトでも Claude Code は十分動きます。
+          </div>
+
+          <div class="warning">
+            <strong>⚠️ 実行前に確認するクセを</strong>
+            Claude Code は強力ですが、<strong>git の履歴書き換えやファイル削除を含むコマンドは元に戻せない</strong>場合があります。「実行前に必ず内容を表示して、私の OK を待ってください」と一言加えると、より安全に使えます。
+          </div>
+
+        </div>
+      </details>
+
+      <!-- Git Cheat Sheet -->
+      <details class="step-card">
+        <summary class="step-summary">
+          <span class="step-badge step-badge-icon">⌨️</span>
+          <span class="step-name">Git コマンドチートシート</span>
+          <span class="chevron">›</span>
+        </summary>
+        <div class="step-body">
+          <h2>困ったときの <strong>コマンド一覧</strong></h2>
+
+          <div class="card">
+            <h3>🚀 初期セットアップ</h3>
+            <div class="cmd-list">
+              <div class="cmd-item">
+                <code>git config --global user.name "名前"</code>
+                <div class="desc-text">ユーザー名を設定(初回 1 回だけ)</div>
+              </div>
+              <div class="cmd-item">
+                <code>git config --global user.email "メアド"</code>
+                <div class="desc-text">メールアドレスを設定(初回 1 回だけ)</div>
+              </div>
+              <div class="cmd-item">
+                <code>git init</code>
+                <div class="desc-text">現在のフォルダを Git リポジトリ化</div>
+              </div>
+              <div class="cmd-item">
+                <code>git clone &lt;URL&gt;</code>
+                <div class="desc-text">リモートのリポジトリをローカルにコピー</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="card">
+            <h3>📝 日常の作業</h3>
+            <div class="cmd-list">
+              <div class="cmd-item">
+                <code>git status</code>
+                <div class="desc-text">現在の状態を確認(<strong>困ったらコレ</strong>)</div>
+              </div>
+              <div class="cmd-item">
+                <code>git add .</code>
+                <div class="desc-text">全ファイルの変更をステージに追加</div>
+              </div>
+              <div class="cmd-item">
+                <code>git add ファイル名</code>
+                <div class="desc-text">特定ファイルだけステージに追加</div>
+              </div>
+              <div class="cmd-item">
+                <code>git commit -m "メッセージ"</code>
+                <div class="desc-text">スナップショットを作成</div>
+              </div>
+              <div class="cmd-item">
+                <code>git push</code>
+                <div class="desc-text">GitHub に送信</div>
+              </div>
+              <div class="cmd-item">
+                <code>git pull</code>
+                <div class="desc-text">GitHub から最新を取得</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="card">
+            <h3>🔍 履歴・確認</h3>
+            <div class="cmd-list">
+              <div class="cmd-item">
+                <code>git log --oneline</code>
+                <div class="desc-text">コミット履歴を 1 行ずつ表示</div>
+              </div>
+              <div class="cmd-item">
+                <code>git diff</code>
+                <div class="desc-text">変更内容を表示(コミット前の差分)</div>
+              </div>
+              <div class="cmd-item">
+                <code>git show &lt;ハッシュ&gt;</code>
+                <div class="desc-text">特定コミットの内容を表示</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="card">
+            <h3>🆘 困ったときの救命コマンド</h3>
+            <div class="cmd-list">
+              <div class="cmd-item">
+                <code>git restore ファイル名</code>
+                <div class="desc-text">変更を破棄して最新コミット状態に戻す</div>
+              </div>
+              <div class="cmd-item">
+                <code>git restore --staged ファイル名</code>
+                <div class="desc-text">add したものをステージから外す</div>
+              </div>
+              <div class="cmd-item">
+                <code>git commit --amend</code>
+                <div class="desc-text">直前のコミットメッセージを修正</div>
+              </div>
+              <div class="cmd-item">
+                <code>git reset --soft HEAD~1</code>
+                <div class="desc-text">直前のコミットを取り消す(変更は残す)</div>
+              </div>
+              <div class="cmd-item">
+                <code>git stash</code>
+                <div class="desc-text">変更を一時退避(後で <code>git stash pop</code> で戻す)</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="card">
+            <h3>🌳 ブランチ操作(慣れてから)</h3>
+            <div class="cmd-list">
+              <div class="cmd-item">
+                <code>git branch</code>
+                <div class="desc-text">ブランチ一覧</div>
+              </div>
+              <div class="cmd-item">
+                <code>git checkout -b 名前</code>
+                <div class="desc-text">新しいブランチを作って切り替え</div>
+              </div>
+              <div class="cmd-item">
+                <code>git switch ブランチ名</code>
+                <div class="desc-text">既存ブランチに切り替え(新しい構文)</div>
+              </div>
+              <div class="cmd-item">
+                <code>git merge ブランチ名</code>
+                <div class="desc-text">指定ブランチを現在のブランチに統合</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </details>
+
+      <!-- Q&A -->
+      <details class="step-card">
+        <summary class="step-summary">
+          <span class="step-badge step-badge-icon">💡</span>
+          <span class="step-name">こんな時どうする?(よくある質問)</span>
+          <span class="chevron">›</span>
+        </summary>
+        <div class="step-body">
+          <h2><strong>初心者あるある</strong>Q&amp;A</h2>
+
+          <div class="card">
+            <h3>Q. Public と Private、結局どっち?</h3>
+            <p><strong>A. ゲーム公開なら Public。</strong>GitHub Pages 無料公開には Public が必要。Private は社内コードや、まだ世に出したくないものに。<strong>「コードを真似される」心配は実質ゼロ</strong>です。</p>
+          </div>
+
+          <div class="card">
+            <h3>Q. 無料で何ができる?有料は必要?</h3>
+            <p><strong>A. 無料(Free プラン)でほぼ全部できます。</strong>Public 無制限 / Private 無制限 / GitHub Pages / Actions 月 2,000 分 / Codespaces 月 60 時間 など。個人開発者には十分すぎる量。</p>
+          </div>
+
+          <div class="card">
+            <h3>Q. 間違えてアップしたファイルを消したい</h3>
+            <p><strong>A. ファイル削除→commit→push で消せます。</strong>GUI なら、ファイルを開いて「ゴミ箱アイコン」→ Commit。CLI なら <code>git rm ファイル名</code> → <code>git commit</code> → <code>git push</code>。<strong>ただし履歴には残ります</strong>。完全消去には <code>git filter-repo</code> などが必要。</p>
+          </div>
+
+          <div class="card">
+            <h3>Q. 機密情報(API キー等)を間違えて push してしまった!</h3>
+            <p><strong>A. 即座に対処を:</strong></p>
+            <ol style="padding-left:22px; color:var(--ink-soft); font-size:15px; line-height:2;">
+              <li><strong>そのキーを即座に無効化・再発行</strong>(履歴から消しても、すでに見られている可能性があるため)</li>
+              <li><code>.gitignore</code> に該当ファイルを追加</li>
+              <li>必要なら git history から削除(<code>git filter-repo</code>)</li>
+            </ol>
+            <p style="margin-top:10px; color:var(--accent-deep); font-size:14px; font-weight:700;">
+              ⚠️ 順番が大事:まずキーを無効化、それから履歴削除。
+            </p>
+          </div>
+
+          <div class="card">
+            <h3>Q. GitHub Pages のページが 404 になる</h3>
+            <p><strong>A. 多くの場合、以下の理由:</strong></p>
+            <ul>
+              <li><code>index.html</code> がリポジトリの<strong>ルート</strong>に無い → 移動する</li>
+              <li>Settings → Pages がまだ有効化されていない → 設定を確認</li>
+              <li>デプロイ完了まで 1〜10 分待っていない → 待つ</li>
+              <li>URL の最後に <code>/</code> が抜けている → 付け足す</li>
+            </ul>
+          </div>
+
+          <div class="card">
+            <h3>Q. README.md って何書くの?</h3>
+            <p><strong>A. 5 つの基本要素:</strong></p>
+            <ol style="padding-left:22px; color:var(--ink-soft); font-size:15px; line-height:2;">
+              <li>ゲーム名 + 1 行で何のゲームか</li>
+              <li>遊べる URL(GitHub Pages のリンク)</li>
+              <li>スクリーンショットや GIF</li>
+              <li>操作方法</li>
+              <li>使った技術(HTML/CSS/JS など)</li>
+            </ol>
+            <p style="margin-top:10px; color:var(--ink-soft); font-size:14px;">
+              💡 Claude に「このゲーム用の README を書いて」と頼むと、リポジトリ内のコードを読んで適切なものを生成してくれます。
+            </p>
+          </div>
+
+          <div class="card">
+            <h3>Q. ユーザー名を変更したい</h3>
+            <p><strong>A. Settings → Account → Change username で可能。</strong>ただし URL も変わるため、外部リンクが切れます。<strong>慎重に</strong>。GitHub Pages の URL も <code>新ユーザー名.github.io/repo</code> に変わります。</p>
+          </div>
+
+          <div class="card">
+            <h3>Q. 友達と共同開発したい</h3>
+            <p><strong>A. リポジトリの Settings → Collaborators から招待。</strong>友達の GitHub ユーザー名を入力すれば一緒に編集可能に。OSS 公開なら誰でも Pull Request(変更提案)できます。</p>
+          </div>
+
+          <div class="card">
+            <h3>Q. パスワードを忘れた</h3>
+            <p><strong>A. ログイン画面の「Forgot password?」</strong>からメールで再設定。Personal Access Token を使っている場合は、それも再発行が必要です。</p>
+          </div>
+
+          <div class="card">
+            <h3>Q. GitHub と Claude Code はどう違う?</h3>
+            <p><strong>A. 別物です。</strong>Claude Code は<strong>コードを書くツール</strong>(AI アシスタント)、GitHub は<strong>コードを保管するサービス</strong>。役割分担は:</p>
+            <ul>
+              <li>Claude Code → ゲームを<strong>作る</strong></li>
+              <li>GitHub → 作ったゲームを<strong>保管・公開</strong></li>
+            </ul>
+            <p style="margin-top:10px; color:var(--ink-soft); font-size:14px;">
+              💡 両方を組み合わせると、AI 時代のゲーム開発フローが完成します。
+            </p>
+          </div>
+        </div>
+      </details>
+
+      <!-- Video tutorials -->
+      <details class="step-card">
+        <summary class="step-summary">
+          <span class="step-badge step-badge-icon">🎬</span>
+          <span class="step-name">動画で学ぶ(おすすめ YouTube)</span>
+          <span class="chevron">›</span>
+        </summary>
+        <div class="step-body">
+          <h2>動画で <strong>もっと深く</strong>学ぶ</h2>
+          <p class="desc">公式の体系コンテンツと、日本語で評価の高い学習動画。</p>
+
+          <div class="video-grid">
+            <a href="https://www.youtube.com/@GitHub" target="_blank" rel="noopener" class="video-card">
+              <div class="video-card-title"><svg class="brand-icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></svg>GitHub(英語公式)</div>
+              <div class="video-card-desc">最新機能・Copilot・Actions の解説。英語だが字幕付き。</div>
+            </a>
+
+            <a href="https://skills.github.com/" target="_blank" rel="noopener" class="video-card">
+              <div class="video-card-title">🎓 GitHub Skills</div>
+              <div class="video-card-desc">公式の対話型学習。Pull Request の作り方など、実際に手を動かしながら学べる。</div>
+            </a>
+
+            <a href="https://docs.github.com/ja/get-started" target="_blank" rel="noopener" class="video-card">
+              <div class="video-card-title">📘 GitHub Docs(日本語)</div>
+              <div class="video-card-desc">公式ドキュメントの「はじめに」セクション。動画ではないが体系的。</div>
+            </a>
+
+            <a href="https://www.youtube.com/results?search_query=GitHub+使い方+初心者" target="_blank" rel="noopener" class="video-card">
+              <div class="video-card-title">🔍 「GitHub 使い方 初心者」で検索</div>
+              <div class="video-card-desc">日本人エンジニアによる解説動画。再生数の多いものから見るのがおすすめ。</div>
+            </a>
+
+            <a href="https://www.youtube.com/results?search_query=GitHub+Pages+公開+方法" target="_blank" rel="noopener" class="video-card">
+              <div class="video-card-title">🌐 「GitHub Pages 公開 方法」</div>
+              <div class="video-card-desc">公開手順の動画。実際の画面を見ながら追えるので初心者向け。</div>
+            </a>
+
+            <a href="https://www.youtube.com/results?search_query=git+コマンド+わかりやすく" target="_blank" rel="noopener" class="video-card">
+              <div class="video-card-title">⌨️ 「git コマンド わかりやすく」</div>
+              <div class="video-card-desc">ターミナル操作の動画。コマンドの意味を視覚的に理解できる。</div>
+            </a>
+          </div>
+        </div>
+      </details>
+
+      <!-- Resources -->
+      <details class="step-card">
+        <summary class="step-summary">
+          <span class="step-badge step-badge-icon">🔗</span>
+          <span class="step-name">リソース・公式リンク</span>
+          <span class="chevron">›</span>
+        </summary>
+        <div class="step-body">
+          <h2><strong>公式リンク</strong>集</h2>
+          <p class="desc">困ったときの一次情報。</p>
+
+          <div class="resources">
+            <a href="https://github.com/" target="_blank" rel="noopener" class="res-card">
+              <div class="res-title">GitHub 公式 <span class="arrow">↗</span></div>
+              <div class="res-desc">登録・ダッシュボード</div>
+            </a>
+            <a href="https://docs.github.com/ja" target="_blank" rel="noopener" class="res-card">
+              <div class="res-title">GitHub Docs(日本語) <span class="arrow">↗</span></div>
+              <div class="res-desc">公式ドキュメント・API リファレンス</div>
+            </a>
+            <a href="https://pages.github.com/" target="_blank" rel="noopener" class="res-card">
+              <div class="res-title">GitHub Pages <span class="arrow">↗</span></div>
+              <div class="res-desc">無料公開サービスの公式案内</div>
+            </a>
+            <a href="https://skills.github.com/" target="_blank" rel="noopener" class="res-card">
+              <div class="res-title">GitHub Skills <span class="arrow">↗</span></div>
+              <div class="res-desc">公式の対話型学習(無料)</div>
+            </a>
+            <a href="https://git-scm.com/book/ja/v2" target="_blank" rel="noopener" class="res-card">
+              <div class="res-title">Pro Git(日本語) <span class="arrow">↗</span></div>
+              <div class="res-desc">Git の決定版書籍。Web で全文無料公開</div>
+            </a>
+            <a href="https://cli.github.com/" target="_blank" rel="noopener" class="res-card">
+              <div class="res-title">GitHub CLI <span class="arrow">↗</span></div>
+              <div class="res-desc">ターミナルから GitHub を操作するツール</div>
+            </a>
+            <a href="https://desktop.github.com/" target="_blank" rel="noopener" class="res-card">
+              <div class="res-title">GitHub Desktop <span class="arrow">↗</span></div>
+              <div class="res-desc">GUI でクリックだけで Git 操作できるアプリ</div>
+            </a>
+            <a href="https://github.com/pricing" target="_blank" rel="noopener" class="res-card">
+              <div class="res-title">料金プラン <span class="arrow">↗</span></div>
+              <div class="res-desc">Free / Pro / Team / Enterprise 比較</div>
+            </a>
+          </div>
+        </div>
+      </details>
+
+    </div>
+  </details>
+
+  </div>
+  <!-- ===== Other Guides Section ===== -->
+  <section class="other-guides-section">
+    <div class="other-guides-header">
+      <h2>🗺️ 他のガイドも <strong>見てみる</strong></h2>
+      <p>このシリーズには 3 つの初心者ガイドがあります。次に学ぶならどっち?</p>
+    </div>
+    <div class="other-guides-grid">
+    <a href="claude-code-guide.html" class="guide-card">
+      <span class="guide-icon"><svg class="brand-icon-large brand-claude" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 1.5c0 5.795 4.705 10.5 10.5 10.5C16.705 12 12 16.705 12 22.5 12 16.705 7.295 12 1.5 12 7.295 12 12 7.295 12 1.5z"/></svg></span>
+      <span class="guide-card-eyebrow">AI · CLAUDE CODE</span>
+      <h3 class="guide-title">Claude Code はじめてガイド</h3>
+      <p class="guide-desc">AI とペアプロでコードを書く時代へ。インストールから最初のゲーム制作まで。</p>
+      <span class="guide-cta">ガイドを見る <span class="arrow">→</span></span>
+    </a>
+    <a href="canva-guide.html" class="guide-card">
+      <span class="guide-icon"><svg class="brand-icon-large brand-canva" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10c3.16 0 5.99-1.47 7.83-3.76l-2.9-2.01A6.49 6.49 0 0 1 12 18.5c-3.59 0-6.5-2.91-6.5-6.5S8.41 5.5 12 5.5c2 0 3.78.9 4.97 2.31l2.97-1.94A9.97 9.97 0 0 0 12 2z"/></svg></span>
+      <span class="guide-card-eyebrow">DESIGN · CANVA</span>
+      <h3 class="guide-title">Canva はじめてガイド</h3>
+      <p class="guide-desc">テンプレを選ぶだけでプロ級デザイン。SNS・チラシ・プレゼン・動画まで。</p>
+      <span class="guide-cta">ガイドを見る <span class="arrow">→</span></span>
+    </a>
+    </div>
+  </section>
+
+  <!-- ===== Share Section ===== -->
+  <section class="share-section">
+    <div class="share-header">
+      <h2>📤 このガイドを <strong>シェアする</strong></h2>
+      <p>ゲームを GitHub で保管したい友達やチームに送ってあげてください。作ったものを世界中に公開できる仕組みを、もっと多くの人へ。</p>
+    </div>
+
+    <!-- Local file warning (shown when file://) -->
+    <div class="share-local-notice" id="shareLocalNotice" style="display:none;">
+      <strong>📝 まずはホスティングが必要です</strong>
+      <p>今このページを <strong>ローカル(自分のパソコン)</strong> で開いているようです。シェアするには、<strong>GitHub Pages</strong> や <strong>Netlify</strong> でこのファイルを公開してください。公開すると下のシェア機能が自動で使えるようになります。</p>
+    </div>
+
+    <!-- Share UI (shown when hosted) -->
+    <div class="share-content" id="shareContent" style="display:none;">
+      <div class="share-grid">
+        <div class="share-url-card">
+          <span class="share-card-label">📎 このページの URL</span>
+          <div class="url-display" id="pageUrl">―</div>
+          <button class="share-btn-copy" id="copyUrlBtn">
+            <span class="copy-text">📋 URL をコピー</span>
+          </button>
+        </div>
+
+        <div class="share-qr-card">
+          <span class="share-card-label">📱 QR コード</span>
+          <div class="qr-wrapper">
+            <img id="qrImage" src="" alt="QR Code" loading="lazy">
+          </div>
+          <p class="qr-note">スマホで読み取り</p>
+        </div>
+      </div>
+
+      <div class="share-social">
+        <a href="#" id="shareLine" target="_blank" rel="noopener" class="social-btn social-line">
+          💬 LINE で送る
+        </a>
+        <a href="#" id="shareX" target="_blank" rel="noopener" class="social-btn social-x">
+          𝕏 X で投稿
+        </a>
+        <button id="shareNative" class="social-btn social-native">
+          ↗ その他で共有
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <p>Made with care for first-time users.</p>
+    <p style="margin-top:6px;opacity:0.6;">情報は2026年5月時点のものです。最新情報は公式ドキュメントをご確認ください。</p>
+  </footer>
+
+</div>
+
+<script>
+// Tab switching - groups tabs by their parent container so multiple tab groups work
+document.querySelectorAll('.tabs').forEach(group => {
+  const buttons = group.querySelectorAll('.tab-btn');
+  buttons.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const target = btn.dataset.tab;
+      // siblings in this tab group
+      buttons.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      // Find the tab-content elements adjacent to this group
+      let next = group.nextElementSibling;
+      const contents = [];
+      while (next && next.classList && next.classList.contains('tab-content')) {
+        contents.push(next);
+        next = next.nextElementSibling;
+      }
+      contents.forEach(c => c.classList.remove('active'));
+      const targetEl = document.getElementById(target);
+      if (targetEl) targetEl.classList.add('active');
+    });
+  });
+});
+
+// Copy buttons
+document.querySelectorAll('.copy-btn').forEach(btn => {
+  btn.addEventListener('click', async (e) => {
+    e.stopPropagation();
+    const block = btn.parentElement;
+    // Get text content excluding the button
+    const text = Array.from(block.childNodes)
+      .filter(n => n.nodeType === Node.TEXT_NODE || (n.nodeType === Node.ELEMENT_NODE && !n.classList.contains('copy-btn')))
+      .map(n => n.textContent)
+      .join('')
+      .trim();
+    try {
+      await navigator.clipboard.writeText(text);
+      const original = btn.textContent;
+      btn.textContent = '✓ コピー済';
+      btn.classList.add('copied');
+      setTimeout(() => {
+        btn.textContent = original;
+        btn.classList.remove('copied');
+      }, 1500);
+    } catch (err) {
+      btn.textContent = 'コピー失敗';
+    }
+  });
+});
+</script>
+
+<!-- ===== Help Panel ===== -->
+<button class="chat-launcher" id="chatLauncher" aria-label="ヘルプを開く" title="Claude にきく">💬</button>
+
+<div class="chat-window" id="chatWindow" role="dialog" aria-label="ヘルプパネル" aria-hidden="true">
+  <div class="chat-header">
+    <div class="chat-header-info">
+      <div class="chat-avatar">💡</div>
+      <div>
+        <div class="chat-title">AI にきく</div>
+        <div class="chat-subtitle">CLAUDE / CHATGPT / GEMINI</div>
+      </div>
+    </div>
+    <button class="chat-close" id="chatClose" aria-label="閉じる">✕</button>
+  </div>
+
+  <div class="chat-intro">
+    <h4>わからないことは AI に直接きいてみよう</h4>
+    <p class="lead-text">
+      下の質問をクリックするとコピーされます。お好きな AI(<strong>Claude / ChatGPT / Gemini</strong>)を開いて、貼り付けて送るだけ。
+    </p>
+
+    <div class="chat-section-label">よくある質問</div>
+    <div class="chat-q-list" id="chatQList">
+      <button class="chat-q-card" data-q="GitHub にゲーム(HTMLとJSのファイル)を初めてアップロードしたいです。GUI(ブラウザ画面)からの手順を、初心者向けに最初から最後まで教えてください。">
+        <span>初めてのアップロード手順</span>
+        <span class="q-icon">COPY</span>
+      </button>
+      <button class="chat-q-card" data-q="GitHub Pages でゲーム(index.html)を公開したのに、URL にアクセスしても 404 エラーになります。原因として考えられるものを初心者向けに教えてください。">
+        <span>GitHub Pages で 404 が出る</span>
+        <span class="q-icon">COPY</span>
+      </button>
+      <button class="chat-q-card" data-q="git のコマンドが多すぎて覚えられません。日常的に使う必須コマンドだけを5〜7個に絞って、初心者向けに教えてください。">
+        <span>必須の git コマンドだけ教えて</span>
+        <span class="q-icon">COPY</span>
+      </button>
+      <button class="chat-q-card" data-q="GitHub のリポジトリを Public(公開)にした場合と Private(非公開)にした場合のメリット・デメリットを、初心者向けに具体例を交えて教えてください。">
+        <span>Public と Private の違い</span>
+        <span class="q-icon">COPY</span>
+      </button>
+      <button class="chat-q-card" data-q="git push しようとしたら認証エラーが出ました。HTTPS / SSH / Personal Access Token の関係を、初心者向けにわかりやすく整理して教えてください。">
+        <span>git push の認証エラー</span>
+        <span class="q-icon">COPY</span>
+      </button>
+      <button class="chat-q-card" data-q="間違えて API キーやパスワードを GitHub にアップロードしてしまいました。今すぐやるべき対処法を、初心者向けに優先順位つきで教えてください。">
+        <span>機密情報を誤って上げた</span>
+        <span class="q-icon">COPY</span>
+      </button>
+    </div>
+  </div>
+
+  <div class="chat-cta-wrap">
+    <a href="https://claude.ai/new" target="_blank" rel="noopener" class="chat-cta chat-cta-primary">
+      <span class="ai-logo claude">C</span>
+      Claude を開く
+      <span class="recommend-badge">おすすめ</span>
+      <span class="arrow">↗</span>
+    </a>
+    <div class="chat-cta-row">
+      <a href="https://chatgpt.com" target="_blank" rel="noopener" class="chat-cta-secondary">
+        <span class="ai-logo gpt">G</span>
+        ChatGPT <span class="arrow">↗</span>
+      </a>
+      <a href="https://gemini.google.com/app" target="_blank" rel="noopener" class="chat-cta-secondary">
+        <span class="ai-logo gemini">✦</span>
+        Gemini <span class="arrow">↗</span>
+      </a>
+    </div>
+    <p class="chat-tiny">クリックで新しいタブで開きます</p>
+  </div>
+</div>
+
+<script>
+(() => {
+  const launcher = document.getElementById('chatLauncher');
+  const chatWindow = document.getElementById('chatWindow');
+  const chatClose = document.getElementById('chatClose');
+  const qList = document.getElementById('chatQList');
+
+  // Open / close
+  launcher.addEventListener('click', () => {
+    chatWindow.classList.add('open');
+    chatWindow.setAttribute('aria-hidden', 'false');
+    launcher.classList.add('hidden');
+  });
+  chatClose.addEventListener('click', () => {
+    chatWindow.classList.remove('open');
+    chatWindow.setAttribute('aria-hidden', 'true');
+    launcher.classList.remove('hidden');
+  });
+
+  // Copy question text on click
+  qList.querySelectorAll('.chat-q-card').forEach(btn => {
+    btn.addEventListener('click', async () => {
+      const text = btn.dataset.q;
+      const icon = btn.querySelector('.q-icon');
+      const originalIcon = icon.textContent;
+      try {
+        await navigator.clipboard.writeText(text);
+        btn.classList.add('copied');
+        icon.textContent = '✓ COPIED';
+        setTimeout(() => {
+          btn.classList.remove('copied');
+          icon.textContent = originalIcon;
+        }, 1600);
+      } catch (err) {
+        icon.textContent = 'FAILED';
+        setTimeout(() => { icon.textContent = originalIcon; }, 1600);
+      }
+    });
+  });
+
+  // ESC to close
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && chatWindow.classList.contains('open')) {
+      chatClose.click();
+    }
+  });
+})();
+</script>
+
+<script>
+/* ===== Share Section ===== */
+(() => {
+  const url = window.location.href;
+  const isLocal = window.location.protocol === 'file:';
+
+  const localNotice = document.getElementById('shareLocalNotice');
+  const content = document.getElementById('shareContent');
+
+  if (isLocal) {
+    if (localNotice) localNotice.style.display = 'block';
+    if (content) content.style.display = 'none';
+    return;
+  }
+
+  // Show share UI
+  if (localNotice) localNotice.style.display = 'none';
+  if (content) content.style.display = 'block';
+
+  // Display URL
+  const urlDisplay = document.getElementById('pageUrl');
+  if (urlDisplay) urlDisplay.textContent = url;
+
+  // QR code via api.qrserver.com
+  const qrImg = document.getElementById('qrImage');
+  if (qrImg) {
+    qrImg.src = `https://api.qrserver.com/v1/create-qr-code/?size=240x240&data=${encodeURIComponent(url)}&margin=0`;
+  }
+
+  // URL copy button
+  const copyBtn = document.getElementById('copyUrlBtn');
+  if (copyBtn) {
+    copyBtn.addEventListener('click', async () => {
+      const textEl = copyBtn.querySelector('.copy-text');
+      const original = textEl.textContent;
+      try {
+        await navigator.clipboard.writeText(url);
+        copyBtn.classList.add('copied');
+        textEl.textContent = '✓ コピーしました!';
+        setTimeout(() => {
+          copyBtn.classList.remove('copied');
+          textEl.textContent = original;
+        }, 2000);
+      } catch (e) {
+        textEl.textContent = '✗ 失敗(手動でコピーしてください)';
+        setTimeout(() => { textEl.textContent = original; }, 2500);
+      }
+    });
+  }
+
+  const shareTitle = 'GitHub はじめてガイド(ゲーム保管・公開)';
+
+  // LINE share
+  const lineBtn = document.getElementById('shareLine');
+  if (lineBtn) {
+    lineBtn.href = `https://social-plugins.line.me/lineit/share?url=${encodeURIComponent(url)}`;
+  }
+
+  // X (Twitter) share
+  const xBtn = document.getElementById('shareX');
+  if (xBtn) {
+    xBtn.href = `https://twitter.com/intent/tweet?text=${encodeURIComponent(shareTitle)}&url=${encodeURIComponent(url)}`;
+  }
+
+  // Native share (Web Share API - mobile mostly)
+  const nativeBtn = document.getElementById('shareNative');
+  if (nativeBtn) {
+    if (navigator.share) {
+      nativeBtn.addEventListener('click', async () => {
+        try {
+          await navigator.share({
+            title: shareTitle,
+            text: 'GitHub でゲームを保管・公開するための日本語ガイド',
+            url: url
+          });
+        } catch (e) {
+          // User cancelled - no action needed
+        }
+      });
+    } else {
+      // Web Share API not supported, hide the button
+      nativeBtn.style.display = 'none';
+    }
+  }
+})();
+</script>
+
+</body>
+</html>

@@ -1,0 +1,3997 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Claude & Claude Code はじめてガイド</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,600;9..144,800&family=Zen+Kaku+Gothic+New:wght@400;500;700;900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #F7F2EA;
+  --bg-card: #FFFCF6;
+  --ink: #1C1A17;
+  --ink-soft: #4A4540;
+  --ink-mute: #8A847C;
+  --line: #E5DDD0;
+  --accent: #D97757;
+  --accent-deep: #B85A3F;
+  --accent-soft: #FBE9DF;
+  --navy: #1F2A44;
+  --code-bg: #14110E;
+  --code-border: #2A2520;
+  --code-text: #F0E9DD;
+  --code-mute: #8A847C;
+  --code-accent: #FFB088;
+  --green: #7FA877;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'Zen Kaku Gothic New', -apple-system, sans-serif;
+  background: var(--bg);
+  color: var(--ink);
+  line-height: 1.75;
+  font-size: 16px;
+  font-weight: 400;
+  -webkit-font-smoothing: antialiased;
+  background-image:
+    radial-gradient(ellipse at top left, rgba(217,119,87,0.08), transparent 50%),
+    radial-gradient(ellipse at bottom right, rgba(31,42,68,0.05), transparent 50%);
+  background-attachment: fixed;
+}
+
+.container {
+  max-width: 880px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+/* ---------- Hero ---------- */
+.hero {
+  padding: 80px 0 60px;
+  text-align: center;
+  position: relative;
+}
+
+.eyebrow {
+  display: inline-block;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--accent-deep);
+  background: var(--accent-soft);
+  padding: 6px 14px;
+  border-radius: 100px;
+  margin-bottom: 24px;
+  font-weight: 500;
+}
+
+.hero h1 {
+  font-family: 'Fraunces', serif;
+  font-weight: 400;
+  font-size: clamp(40px, 7vw, 68px);
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+  margin-bottom: 20px;
+  color: var(--ink);
+}
+
+.hero h1 em {
+  font-style: italic;
+  font-weight: 300;
+  color: var(--accent-deep);
+}
+
+.hero .lead {
+  font-size: 17px;
+  color: var(--ink-soft);
+  max-width: 540px;
+  margin: 0 auto 36px;
+  line-height: 1.8;
+}
+
+.hero-buttons {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 13px 22px;
+  border-radius: 10px;
+  font-size: 14px;
+  font-weight: 700;
+  font-family: inherit;
+  text-decoration: none;
+  border: 1.5px solid transparent;
+  transition: all 0.2s ease;
+  cursor: pointer;
+}
+
+.btn-primary {
+  background: var(--ink);
+  color: var(--bg);
+}
+.btn-primary:hover {
+  background: var(--accent-deep);
+  transform: translateY(-1px);
+  box-shadow: 0 8px 20px rgba(184,90,63,0.3);
+}
+
+.btn-secondary {
+  background: transparent;
+  color: var(--ink);
+  border-color: var(--ink);
+}
+.btn-secondary:hover {
+  background: var(--ink);
+  color: var(--bg);
+}
+
+.btn .arrow {
+  font-size: 16px;
+  transition: transform 0.2s;
+}
+.btn:hover .arrow { transform: translate(2px, -2px); }
+
+/* ---------- Section ---------- */
+section.step {
+  padding: 56px 0;
+  border-top: 1px solid var(--line);
+}
+
+.step-number {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--accent-deep);
+  letter-spacing: 0.15em;
+  margin-bottom: 12px;
+}
+
+.step h2 {
+  font-family: 'Fraunces', serif;
+  font-weight: 400;
+  font-size: clamp(28px, 4vw, 40px);
+  line-height: 1.15;
+  letter-spacing: -0.015em;
+  margin-bottom: 16px;
+}
+
+.step h2 strong {
+  font-weight: 600;
+}
+
+.step .desc {
+  font-size: 16px;
+  color: var(--ink-soft);
+  margin-bottom: 32px;
+  max-width: 640px;
+}
+
+/* ---------- Cards ---------- */
+.card {
+  background: var(--bg-card);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  padding: 28px 30px;
+  margin-bottom: 16px;
+}
+
+.card h3 {
+  font-family: 'Fraunces', serif;
+  font-size: 22px;
+  font-weight: 600;
+  margin-bottom: 12px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.card h3 .badge {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  font-weight: 500;
+  background: var(--accent-soft);
+  color: var(--accent-deep);
+  padding: 3px 10px;
+  border-radius: 100px;
+  letter-spacing: 0.05em;
+}
+
+.card p {
+  color: var(--ink-soft);
+  font-size: 15px;
+  margin-bottom: 14px;
+}
+
+.card ul {
+  list-style: none;
+  padding: 0;
+}
+
+.card ul li {
+  padding-left: 24px;
+  position: relative;
+  margin-bottom: 8px;
+  font-size: 15px;
+  color: var(--ink-soft);
+}
+
+.card ul li::before {
+  content: '→';
+  position: absolute;
+  left: 0;
+  color: var(--accent-deep);
+  font-weight: 700;
+}
+
+/* ---------- OS Tabs ---------- */
+.tabs {
+  display: flex;
+  gap: 4px;
+  margin-bottom: 0;
+  background: var(--bg-card);
+  padding: 6px;
+  border-radius: 12px 12px 0 0;
+  border: 1px solid var(--line);
+  border-bottom: none;
+}
+
+.tab-btn {
+  flex: 1;
+  padding: 10px 16px;
+  border: none;
+  background: transparent;
+  color: var(--ink-mute);
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 700;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.tab-btn:hover {
+  color: var(--ink);
+}
+
+.tab-btn.active {
+  background: var(--ink);
+  color: var(--bg);
+}
+
+.tab-content {
+  display: none;
+  background: var(--bg-card);
+  border: 1px solid var(--line);
+  border-radius: 0 0 12px 12px;
+  padding: 28px 30px;
+}
+
+.tab-content.active {
+  display: block;
+  animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(4px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.tab-content h4 {
+  font-size: 15px;
+  font-weight: 700;
+  margin-bottom: 8px;
+  color: var(--ink);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.tab-content h4::before {
+  content: '';
+  width: 6px;
+  height: 6px;
+  background: var(--accent);
+  border-radius: 50%;
+  display: inline-block;
+}
+
+.tab-content p {
+  color: var(--ink-soft);
+  font-size: 15px;
+  margin-bottom: 16px;
+}
+
+.tab-content p + h4 {
+  margin-top: 28px;
+}
+
+/* ---------- Code Block ---------- */
+.code-block {
+  position: relative;
+  background: var(--code-bg);
+  border: 1px solid var(--code-border);
+  border-radius: 10px;
+  padding: 16px 56px 16px 20px;
+  margin: 12px 0 18px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 13.5px;
+  color: var(--code-text);
+  line-height: 1.7;
+  overflow-x: auto;
+  white-space: pre;
+}
+
+.code-block::before {
+  content: '$';
+  color: var(--code-accent);
+  margin-right: 8px;
+  font-weight: 600;
+  user-select: none;
+}
+
+.code-block.no-prompt::before { display: none; }
+
+.copy-btn {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: var(--code-border);
+  color: var(--code-text);
+  border: none;
+  padding: 5px 10px;
+  border-radius: 6px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  cursor: pointer;
+  transition: all 0.15s;
+  font-weight: 500;
+}
+
+.copy-btn:hover {
+  background: var(--accent-deep);
+  color: white;
+}
+
+.copy-btn.copied {
+  background: var(--green);
+  color: white;
+}
+
+/* ---------- Tip Box ---------- */
+.tip {
+  background: var(--accent-soft);
+  border-left: 3px solid var(--accent);
+  border-radius: 0 8px 8px 0;
+  padding: 14px 18px;
+  margin: 18px 0;
+  font-size: 14px;
+  color: var(--ink-soft);
+}
+
+.tip strong {
+  color: var(--accent-deep);
+  display: block;
+  margin-bottom: 4px;
+  font-size: 13px;
+  letter-spacing: 0.05em;
+}
+
+.warning {
+  background: #FFF4D6;
+  border-left: 3px solid #C9A227;
+  color: #6B5410;
+  border-radius: 0 8px 8px 0;
+  padding: 14px 18px;
+  margin: 18px 0;
+  font-size: 14px;
+}
+
+.warning strong {
+  display: block;
+  margin-bottom: 4px;
+  color: #7E641A;
+}
+
+/* ---------- Command Table ---------- */
+.cmd-list {
+  display: grid;
+  gap: 10px;
+}
+
+.cmd-item {
+  display: grid;
+  grid-template-columns: minmax(180px, 220px) 1fr;
+  gap: 20px;
+  align-items: baseline;
+  padding: 14px 0;
+  border-bottom: 1px dashed var(--line);
+}
+
+.cmd-item:last-child { border-bottom: none; }
+
+.cmd-item code {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 13px;
+  background: var(--ink);
+  color: var(--bg);
+  padding: 4px 10px;
+  border-radius: 5px;
+  font-weight: 500;
+  display: inline-block;
+  width: fit-content;
+}
+
+.cmd-item .desc-text {
+  color: var(--ink-soft);
+  font-size: 14.5px;
+}
+
+@media (max-width: 600px) {
+  .cmd-item {
+    grid-template-columns: 1fr;
+    gap: 6px;
+  }
+}
+
+/* ---------- Prompt Examples ---------- */
+.prompt-card {
+  background: var(--bg-card);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 22px 24px;
+  margin-bottom: 14px;
+  position: relative;
+}
+
+.prompt-card .label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  color: var(--accent-deep);
+  font-weight: 700;
+  margin-bottom: 8px;
+  display: block;
+}
+
+.prompt-card .prompt-text {
+  font-size: 15.5px;
+  color: var(--ink);
+  line-height: 1.65;
+  font-weight: 500;
+  font-family: 'Fraunces', serif;
+  font-style: italic;
+}
+
+.prompt-card .prompt-text::before { content: '“'; color: var(--accent); font-size: 22px; margin-right: 4px; }
+.prompt-card .prompt-text::after { content: '”'; color: var(--accent); font-size: 22px; margin-left: 4px; }
+
+.prompt-card .note {
+  font-size: 13px;
+  color: var(--ink-mute);
+  margin-top: 10px;
+  padding-top: 10px;
+  border-top: 1px dashed var(--line);
+}
+
+/* ---------- Resources ---------- */
+.resources {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 14px;
+}
+
+.res-card {
+  background: var(--bg-card);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 22px;
+  text-decoration: none;
+  color: inherit;
+  transition: all 0.2s ease;
+  display: block;
+}
+
+.res-card:hover {
+  border-color: var(--accent);
+  transform: translateY(-2px);
+  box-shadow: 0 12px 24px rgba(28,26,23,0.06);
+}
+
+.res-card .res-title {
+  font-weight: 700;
+  font-size: 15px;
+  margin-bottom: 6px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.res-card .res-title .arrow {
+  color: var(--accent-deep);
+  transition: transform 0.2s;
+}
+
+.res-card:hover .arrow { transform: translate(2px, -2px); }
+
+.res-card .res-desc {
+  font-size: 13px;
+  color: var(--ink-mute);
+  line-height: 1.6;
+}
+
+/* ---------- Footer ---------- */
+footer {
+  padding: 60px 0 40px;
+  text-align: center;
+  border-top: 1px solid var(--line);
+  margin-top: 60px;
+}
+
+footer p {
+  font-size: 13px;
+  color: var(--ink-mute);
+  font-family: 'JetBrains Mono', monospace;
+}
+
+footer p + p { margin-top: 6px; }
+
+/* ---------- Responsive ---------- */
+@media (max-width: 600px) {
+  .hero { padding: 60px 0 40px; }
+  section.step { padding: 40px 0; }
+  .card, .tab-content { padding: 22px 20px; }
+  .code-block { font-size: 12.5px; }
+  .tabs { flex-wrap: wrap; }
+}
+
+/* ===================================
+   Chat Widget
+   =================================== */
+.chat-launcher {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background: var(--accent-deep);
+  color: white;
+  border: none;
+  box-shadow: 0 8px 24px rgba(184,90,63,0.4);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 26px;
+  z-index: 1000;
+  transition: all 0.2s ease;
+  font-family: inherit;
+}
+.chat-launcher:hover {
+  transform: scale(1.06);
+  box-shadow: 0 12px 30px rgba(184,90,63,0.5);
+}
+.chat-launcher.hidden {
+  transform: scale(0);
+  opacity: 0;
+  pointer-events: none;
+}
+
+.chat-launcher::after {
+  content: '?';
+  position: absolute;
+  top: -4px;
+  right: -4px;
+  background: var(--ink);
+  color: var(--bg);
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  font-size: 11px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'JetBrains Mono', monospace;
+}
+
+.chat-window {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  width: 380px;
+  max-width: calc(100vw - 32px);
+  height: 580px;
+  max-height: calc(100vh - 48px);
+  background: var(--bg-card);
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  box-shadow: 0 20px 60px rgba(28,26,23,0.18);
+  display: flex;
+  flex-direction: column;
+  z-index: 1001;
+  overflow: hidden;
+  transform: scale(0.92) translateY(20px);
+  opacity: 0;
+  pointer-events: none;
+  transform-origin: bottom right;
+  transition: transform 0.25s ease, opacity 0.25s ease;
+}
+.chat-window.open {
+  transform: scale(1) translateY(0);
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.chat-header {
+  background: var(--ink);
+  color: var(--bg);
+  padding: 16px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.chat-header-info {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.chat-avatar {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: var(--accent);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 17px;
+  flex-shrink: 0;
+}
+
+.chat-title {
+  font-family: 'Fraunces', serif;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 1.2;
+}
+
+.chat-subtitle {
+  font-size: 10px;
+  color: rgba(247,242,234,0.55);
+  font-family: 'JetBrains Mono', monospace;
+  letter-spacing: 0.1em;
+  margin-top: 2px;
+}
+
+.chat-close {
+  background: transparent;
+  border: none;
+  color: var(--bg);
+  font-size: 22px;
+  line-height: 1;
+  cursor: pointer;
+  opacity: 0.55;
+  transition: all 0.15s;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 6px;
+  font-family: inherit;
+}
+.chat-close:hover {
+  opacity: 1;
+  background: rgba(255,255,255,0.1);
+}
+
+.chat-messages {
+  flex: 1;
+  padding: 20px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  background: var(--bg);
+  scroll-behavior: smooth;
+}
+
+.chat-messages::-webkit-scrollbar { width: 6px; }
+.chat-messages::-webkit-scrollbar-thumb {
+  background: var(--line);
+  border-radius: 3px;
+}
+
+.chat-msg {
+  max-width: 85%;
+  padding: 10px 14px;
+  border-radius: 14px;
+  font-size: 14px;
+  line-height: 1.65;
+  word-wrap: break-word;
+  white-space: pre-wrap;
+  animation: msgIn 0.2s ease;
+}
+@keyframes msgIn {
+  from { opacity: 0; transform: translateY(4px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.chat-msg.bot {
+  background: var(--bg-card);
+  border: 1px solid var(--line);
+  align-self: flex-start;
+  border-bottom-left-radius: 4px;
+  color: var(--ink);
+}
+
+.chat-msg.user {
+  background: var(--accent-deep);
+  color: white;
+  align-self: flex-end;
+  border-bottom-right-radius: 4px;
+}
+
+.chat-msg code {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12.5px;
+  background: rgba(0,0,0,0.08);
+  padding: 1px 6px;
+  border-radius: 4px;
+  display: inline-block;
+}
+.chat-msg.user code {
+  background: rgba(255,255,255,0.22);
+}
+
+.chat-msg strong { font-weight: 700; }
+
+.chat-typing {
+  display: flex;
+  gap: 5px;
+  padding: 14px 16px;
+  background: var(--bg-card);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  border-bottom-left-radius: 4px;
+  align-self: flex-start;
+  width: fit-content;
+}
+.chat-typing span {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--ink-mute);
+  animation: dotBounce 1.2s infinite;
+}
+.chat-typing span:nth-child(2) { animation-delay: 0.15s; }
+.chat-typing span:nth-child(3) { animation-delay: 0.3s; }
+@keyframes dotBounce {
+  0%, 60%, 100% { transform: translateY(0); opacity: 0.4; }
+  30% { transform: translateY(-5px); opacity: 1; }
+}
+
+.chat-suggestions {
+  padding: 0 16px 12px;
+  background: var(--bg);
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  flex-shrink: 0;
+}
+
+.chat-suggestion {
+  font-size: 12px;
+  background: var(--bg-card);
+  border: 1px solid var(--line);
+  padding: 6px 12px;
+  border-radius: 100px;
+  cursor: pointer;
+  color: var(--ink-soft);
+  font-family: inherit;
+  transition: all 0.15s;
+}
+.chat-suggestion:hover {
+  background: var(--accent-soft);
+  border-color: var(--accent);
+  color: var(--accent-deep);
+}
+
+.chat-input-wrap {
+  padding: 12px 14px;
+  background: var(--bg-card);
+  border-top: 1px solid var(--line);
+  display: flex;
+  gap: 8px;
+  align-items: flex-end;
+  flex-shrink: 0;
+}
+
+.chat-input {
+  flex: 1;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  padding: 10px 12px;
+  font-family: inherit;
+  font-size: 14px;
+  resize: none;
+  background: var(--bg);
+  color: var(--ink);
+  max-height: 120px;
+  line-height: 1.5;
+  transition: border-color 0.15s;
+}
+.chat-input:focus {
+  outline: none;
+  border-color: var(--accent);
+}
+
+.chat-send {
+  background: var(--ink);
+  color: var(--bg);
+  border: none;
+  border-radius: 10px;
+  padding: 10px 16px;
+  cursor: pointer;
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 700;
+  transition: all 0.15s;
+  white-space: nowrap;
+  height: 40px;
+}
+.chat-send:hover:not(:disabled) {
+  background: var(--accent-deep);
+}
+.chat-send:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+}
+
+.chat-disclaimer {
+  font-size: 10px;
+  color: var(--ink-mute);
+  text-align: center;
+  padding: 6px 16px 8px;
+  background: var(--bg-card);
+  font-family: 'JetBrains Mono', monospace;
+  letter-spacing: 0.03em;
+  flex-shrink: 0;
+}
+
+@media (max-width: 480px) {
+  .chat-window {
+    bottom: 16px;
+    right: 16px;
+    left: 16px;
+    width: auto;
+    height: calc(100vh - 100px);
+  }
+  .chat-launcher {
+    bottom: 16px;
+    right: 16px;
+  }
+}
+
+/* Help Panel content (replaces chat conversation) */
+.chat-intro {
+  padding: 22px 20px 18px;
+  background: var(--bg);
+  flex: 1;
+  overflow-y: auto;
+}
+.chat-intro::-webkit-scrollbar { width: 6px; }
+.chat-intro::-webkit-scrollbar-thumb { background: var(--line); border-radius: 3px; }
+
+.chat-intro h4 {
+  font-family: 'Fraunces', serif;
+  font-size: 18px;
+  font-weight: 600;
+  margin-bottom: 8px;
+  color: var(--ink);
+  line-height: 1.3;
+}
+
+.chat-intro .lead-text {
+  font-size: 13.5px;
+  color: var(--ink-soft);
+  line-height: 1.7;
+  margin-bottom: 20px;
+}
+
+.chat-section-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  color: var(--ink-mute);
+  text-transform: uppercase;
+  margin: 4px 0 10px;
+}
+
+.chat-q-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.chat-q-card {
+  background: var(--bg-card);
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  padding: 11px 14px;
+  font-size: 13.5px;
+  text-align: left;
+  font-family: inherit;
+  color: var(--ink);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  transition: all 0.15s ease;
+  line-height: 1.45;
+  font-weight: 500;
+}
+.chat-q-card:hover {
+  border-color: var(--accent);
+  background: var(--accent-soft);
+  color: var(--accent-deep);
+}
+.chat-q-card .q-icon {
+  font-size: 10px;
+  color: var(--ink-mute);
+  font-family: 'JetBrains Mono', monospace;
+  letter-spacing: 0.1em;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+.chat-q-card:hover .q-icon {
+  color: var(--accent-deep);
+}
+.chat-q-card.copied {
+  background: var(--green);
+  color: white;
+  border-color: var(--green);
+}
+.chat-q-card.copied .q-icon {
+  color: white;
+}
+
+.chat-cta-wrap {
+  padding: 14px 16px 12px;
+  background: var(--bg-card);
+  border-top: 1px solid var(--line);
+  flex-shrink: 0;
+}
+
+.chat-cta {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  width: 100%;
+  background: var(--ink);
+  color: var(--bg);
+  border: none;
+  border-radius: 10px;
+  padding: 12px 16px;
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  text-decoration: none;
+  transition: all 0.2s ease;
+}
+.chat-cta:hover {
+  background: var(--accent-deep);
+  transform: translateY(-1px);
+  box-shadow: 0 8px 16px rgba(184,90,63,0.25);
+}
+.chat-cta .arrow {
+  transition: transform 0.2s;
+}
+.chat-cta:hover .arrow {
+  transform: translate(2px, -2px);
+}
+
+.chat-tiny {
+  font-size: 10px;
+  color: var(--ink-mute);
+  text-align: center;
+  margin-top: 8px;
+  font-family: 'JetBrains Mono', monospace;
+  letter-spacing: 0.05em;
+}
+
+/* Multi-AI button styles */
+.chat-cta-primary {
+  position: relative;
+}
+
+.recommend-badge {
+  position: absolute;
+  top: -7px;
+  right: 14px;
+  background: var(--accent);
+  color: white;
+  font-size: 9px;
+  letter-spacing: 0.08em;
+  padding: 2px 8px;
+  border-radius: 100px;
+  font-family: 'JetBrains Mono', monospace;
+  font-weight: 700;
+}
+
+.chat-cta-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+  margin-top: 8px;
+}
+
+.chat-cta-secondary {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  background: var(--bg);
+  color: var(--ink);
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  padding: 10px 12px;
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+  text-decoration: none;
+  transition: all 0.2s ease;
+}
+.chat-cta-secondary:hover {
+  border-color: var(--accent);
+  background: var(--accent-soft);
+  color: var(--accent-deep);
+  transform: translateY(-1px);
+}
+
+.ai-logo {
+  width: 16px;
+  height: 16px;
+  border-radius: 4px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 9px;
+  font-weight: 700;
+  flex-shrink: 0;
+  color: white;
+}
+.ai-logo.claude { background: #D97757; }
+.ai-logo.gpt { background: #10A37F; }
+.ai-logo.gemini { background: linear-gradient(135deg, #4285F4, #9B72CB); }
+
+/* =========================
+   Accordion: Phase & Step Cards
+   ========================= */
+.phase-list {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  padding: 36px 0 60px;
+}
+
+.phase-card {
+  background: var(--bg-card);
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  overflow: hidden;
+  transition: border-color 0.25s ease, box-shadow 0.25s ease;
+}
+.phase-card[open] {
+  border-color: var(--accent);
+  box-shadow: 0 10px 28px rgba(184,90,63,0.08);
+}
+
+.phase-summary,
+.step-summary {
+  list-style: none;
+  cursor: pointer;
+  user-select: none;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+.phase-summary::-webkit-details-marker,
+.step-summary::-webkit-details-marker {
+  display: none;
+}
+.phase-summary:focus-visible,
+.step-summary:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: -2px;
+}
+
+.phase-summary {
+  padding: 22px 26px;
+  min-height: 64px;
+  transition: background 0.15s ease;
+}
+.phase-summary:hover {
+  background: linear-gradient(90deg, rgba(217,119,87,0.07), transparent 70%);
+}
+
+.phase-icon {
+  font-size: 26px;
+  flex-shrink: 0;
+  width: 32px;
+  text-align: center;
+}
+
+.phase-text {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  min-width: 0;
+}
+
+.phase-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.18em;
+  color: var(--accent-deep);
+  font-weight: 700;
+}
+
+.phase-name {
+  font-family: 'Fraunces', serif;
+  font-size: 22px;
+  font-weight: 600;
+  color: var(--ink);
+  letter-spacing: -0.01em;
+  line-height: 1.2;
+}
+
+.phase-count {
+  font-size: 11px;
+  font-family: 'JetBrains Mono', monospace;
+  color: var(--ink-soft);
+  letter-spacing: 0.08em;
+  font-weight: 500;
+  background: var(--bg);
+  padding: 4px 11px;
+  border-radius: 100px;
+  flex-shrink: 0;
+  border: 1px solid var(--line);
+}
+
+.chevron {
+  font-size: 26px;
+  color: var(--ink-mute);
+  font-family: 'Fraunces', serif;
+  transition: transform 0.3s cubic-bezier(.4,.0,.2,1);
+  flex-shrink: 0;
+  width: 18px;
+  text-align: center;
+  font-weight: 300;
+  line-height: 1;
+}
+
+[open] > .phase-summary > .chevron,
+[open] > .step-summary > .chevron {
+  transform: rotate(90deg);
+  color: var(--accent-deep);
+}
+
+.phase-body {
+  border-top: 1px solid var(--line);
+  padding: 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  background: var(--bg);
+}
+
+/* Step cards inside a phase */
+.step-card {
+  background: var(--bg-card);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  overflow: hidden;
+  transition: border-color 0.2s ease;
+}
+.step-card[open] {
+  border-color: var(--accent);
+}
+
+.step-summary {
+  padding: 14px 18px;
+  min-height: 56px;
+  transition: background 0.15s ease;
+}
+.step-summary:hover {
+  background: var(--accent-soft);
+}
+.step-card[open] > .step-summary {
+  background: var(--accent-soft);
+  border-bottom: 1px solid var(--line);
+}
+
+.step-badge {
+  width: 34px;
+  height: 34px;
+  border-radius: 8px;
+  background: var(--ink);
+  color: var(--bg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 13px;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+.step-badge-icon {
+  background: var(--accent-soft);
+  color: var(--accent-deep);
+  font-size: 18px;
+  border: 1px solid var(--accent);
+}
+
+
+
+/* ===== Brand Icons ===== */
+.brand-icon {
+  width: 14px;
+  height: 14px;
+  display: inline-block;
+  vertical-align: -2px;
+  margin-right: 5px;
+  flex-shrink: 0;
+}
+.brand-icon-large {
+  width: 38px;
+  height: 38px;
+  display: block;
+  flex-shrink: 0;
+}
+/* Brand colors for large icons */
+.brand-claude { color: #D97757; }
+.brand-github { color: #1C1A17; }
+.brand-canva { color: #00C4CC; }
+
+/* In nav, all icons inherit the link color (currentColor) */
+/* In active state, they pick up the accent-deep color naturally */
+
+/* ===== Top Navigation ===== */
+.top-nav {
+  background: rgba(247, 242, 234, 0.88);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border-bottom: 1px solid rgba(28, 26, 23, 0.08);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  padding: 12px 0;
+}
+.top-nav-inner {
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 0 32px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+.nav-brand {
+  font-family: 'Fraunces', serif;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--ink);
+  letter-spacing: -0.01em;
+  white-space: nowrap;
+}
+.nav-brand .nav-brand-mark {
+  color: var(--accent-deep);
+  margin-right: 6px;
+}
+.nav-brand-link {
+  font-family: 'Fraunces', serif;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--ink);
+  letter-spacing: -0.01em;
+  white-space: nowrap;
+  text-decoration: none;
+  transition: color 0.18s;
+}
+.nav-brand-link:hover { color: var(--accent-deep); }
+
+.nav-links {
+  display: flex;
+  gap: 4px;
+  flex-wrap: wrap;
+}
+.nav-link {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11.5px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  color: var(--ink-mute);
+  text-decoration: none;
+  padding: 7px 13px;
+  border-radius: 7px;
+  transition: all 0.18s cubic-bezier(0.2, 0.7, 0.3, 1);
+  border: 1px solid transparent;
+  white-space: nowrap;
+}
+.nav-link:hover {
+  color: var(--ink);
+  background: rgba(217, 119, 87, 0.07);
+}
+.nav-link.active {
+  color: var(--accent-deep);
+  background: var(--accent-soft);
+  border-color: rgba(217, 119, 87, 0.2);
+}
+@media (max-width: 600px) {
+  .top-nav-inner { padding: 0 16px; gap: 8px; }
+  .nav-brand { font-size: 13px; }
+  .nav-link { font-size: 11px; padding: 6px 10px; }
+}
+
+/* ===== Other Guides Section ===== */
+.other-guides-section {
+  margin: 60px 0 30px;
+  padding: 40px 32px;
+  background: var(--bg-card);
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  position: relative;
+  overflow: hidden;
+}
+.other-guides-section::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--accent), transparent);
+  opacity: 0.5;
+}
+.other-guides-header {
+  text-align: center;
+  margin-bottom: 32px;
+  position: relative;
+}
+.other-guides-header h2 {
+  font-family: 'Fraunces', serif;
+  font-weight: 400;
+  font-size: clamp(24px, 4vw, 32px);
+  line-height: 1.2;
+  color: var(--ink);
+  margin-bottom: 10px;
+  letter-spacing: -0.015em;
+}
+.other-guides-header h2 strong {
+  font-weight: 600;
+  color: var(--accent-deep);
+}
+.other-guides-header p {
+  color: var(--ink-soft);
+  font-size: 14.5px;
+  line-height: 1.7;
+  max-width: 480px;
+  margin: 0 auto;
+}
+.other-guides-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 18px;
+  max-width: 720px;
+  margin: 0 auto;
+}
+@media (max-width: 600px) {
+  .other-guides-grid { grid-template-columns: 1fr; }
+  .other-guides-section { padding: 32px 20px; }
+}
+.guide-card {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 28px 24px;
+  background: var(--bg);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  text-decoration: none;
+  transition: all 0.22s cubic-bezier(0.2, 0.7, 0.3, 1);
+  position: relative;
+  overflow: hidden;
+}
+.guide-card::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, transparent 60%, var(--accent-soft));
+  opacity: 0;
+  transition: opacity 0.22s;
+  pointer-events: none;
+}
+.guide-card:hover {
+  transform: translateY(-3px);
+  border-color: var(--accent);
+  box-shadow: 0 12px 28px rgba(28, 26, 23, 0.08);
+}
+.guide-card:hover::after {
+  opacity: 1;
+}
+.guide-icon {
+  font-size: 36px;
+  line-height: 1;
+  position: relative;
+  z-index: 1;
+}
+.guide-card-eyebrow {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.18em;
+  font-weight: 700;
+  color: var(--ink-mute);
+  text-transform: uppercase;
+  position: relative;
+  z-index: 1;
+}
+.guide-title {
+  font-family: 'Fraunces', serif;
+  font-weight: 600;
+  font-size: 21px;
+  line-height: 1.25;
+  color: var(--ink);
+  margin: 0;
+  letter-spacing: -0.015em;
+  position: relative;
+  z-index: 1;
+}
+.guide-desc {
+  color: var(--ink-soft);
+  font-size: 14px;
+  line-height: 1.6;
+  margin: 0;
+  position: relative;
+  z-index: 1;
+}
+.guide-cta {
+  margin-top: 6px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  color: var(--accent-deep);
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  position: relative;
+  z-index: 1;
+}
+.guide-cta .arrow {
+  transition: transform 0.18s;
+}
+.guide-card:hover .guide-cta .arrow {
+  transform: translateX(4px);
+}
+
+/* ===== Share Section ===== */
+.share-section {
+  background: linear-gradient(135deg, var(--bg-card) 0%, var(--accent-soft) 100%);
+  border: 1px solid var(--accent);
+  border-radius: 18px;
+  padding: 36px 32px;
+  margin: 50px 0 30px;
+  position: relative;
+  overflow: hidden;
+}
+.share-section::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  right: -20%;
+  width: 60%;
+  height: 200%;
+  background: radial-gradient(ellipse, rgba(217,119,87,0.1), transparent 70%);
+  pointer-events: none;
+}
+
+.share-header {
+  position: relative;
+  margin-bottom: 28px;
+  text-align: center;
+}
+.share-header h2 {
+  font-family: 'Fraunces', serif;
+  font-weight: 400;
+  font-size: clamp(24px, 4vw, 32px);
+  line-height: 1.2;
+  color: var(--ink);
+  margin-bottom: 10px;
+  letter-spacing: -0.015em;
+}
+.share-header h2 strong {
+  font-weight: 600;
+  color: var(--accent-deep);
+}
+.share-header p {
+  color: var(--ink-soft);
+  font-size: 14.5px;
+  line-height: 1.7;
+  max-width: 480px;
+  margin: 0 auto;
+}
+
+.share-local-notice {
+  background: var(--bg-card);
+  border: 2px dashed var(--accent);
+  border-radius: 12px;
+  padding: 22px 24px;
+  position: relative;
+}
+.share-local-notice strong {
+  display: block;
+  color: var(--accent-deep);
+  font-size: 15px;
+  margin-bottom: 8px;
+}
+.share-local-notice p {
+  color: var(--ink-soft);
+  font-size: 13.5px;
+  line-height: 1.7;
+  margin: 0;
+}
+
+.share-grid {
+  display: grid;
+  grid-template-columns: 1fr 220px;
+  gap: 14px;
+  margin-bottom: 14px;
+  position: relative;
+}
+@media (max-width: 600px) {
+  .share-grid { grid-template-columns: 1fr; }
+}
+
+.share-url-card,
+.share-qr-card {
+  background: var(--bg-card);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  padding: 18px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.share-card-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.18em;
+  font-weight: 700;
+  color: var(--ink-mute);
+  text-transform: uppercase;
+}
+
+.url-display {
+  background: var(--bg);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 10px 14px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12.5px;
+  color: var(--ink);
+  word-break: break-all;
+  line-height: 1.55;
+  min-height: 38px;
+  display: flex;
+  align-items: center;
+}
+
+.share-btn-copy {
+  background: var(--ink);
+  color: var(--bg);
+  border: none;
+  border-radius: 8px;
+  padding: 11px 16px;
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+.share-btn-copy:hover {
+  background: var(--accent-deep);
+  transform: translateY(-1px);
+}
+.share-btn-copy.copied {
+  background: var(--green);
+  color: white;
+}
+
+.share-qr-card {
+  align-items: center;
+  text-align: center;
+  justify-content: center;
+}
+.qr-wrapper {
+  background: white;
+  padding: 10px;
+  border-radius: 10px;
+  border: 1px solid var(--line);
+  line-height: 0;
+}
+.qr-wrapper img {
+  display: block;
+  width: 140px;
+  height: 140px;
+}
+.qr-note {
+  font-size: 11px;
+  color: var(--ink-mute);
+  font-family: 'JetBrains Mono', monospace;
+  letter-spacing: 0.05em;
+  margin: 0;
+}
+
+.share-social {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 8px;
+  position: relative;
+}
+
+.social-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 12px 14px;
+  border-radius: 10px;
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 700;
+  text-decoration: none;
+  border: none;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  white-space: nowrap;
+}
+
+.social-line {
+  background: #06C755;
+  color: white;
+}
+.social-line:hover {
+  background: #05A849;
+  transform: translateY(-1px);
+  box-shadow: 0 6px 14px rgba(6,199,85,0.3);
+}
+
+.social-x {
+  background: #000;
+  color: white;
+}
+.social-x:hover {
+  background: #1a1a1a;
+  transform: translateY(-1px);
+  box-shadow: 0 6px 14px rgba(0,0,0,0.25);
+}
+
+.social-native {
+  background: var(--bg-card);
+  color: var(--ink);
+  border: 1px solid var(--line);
+}
+.social-native:hover {
+  background: var(--bg);
+  border-color: var(--accent);
+  color: var(--accent-deep);
+}
+
+/* ===== Pre-flight Checklist & Success Box ===== */
+.checklist-card {
+  background: linear-gradient(135deg, #FFFCF6 0%, #FBE9DF 100%);
+  border: 2px solid var(--accent);
+  border-radius: 14px;
+  padding: 28px 26px 24px;
+  margin-bottom: 20px;
+  position: relative;
+}
+
+.checklist-card::before {
+  content: '✓';
+  position: absolute;
+  top: -18px;
+  left: 24px;
+  background: var(--accent-deep);
+  color: white;
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  font-weight: 700;
+  border: 3px solid var(--bg);
+  box-shadow: 0 4px 10px rgba(184,90,63,0.25);
+}
+
+.checklist-card h3 {
+  font-family: 'Fraunces', serif;
+  font-size: 19px;
+  font-weight: 600;
+  margin-top: 6px;
+  margin-bottom: 6px;
+  color: var(--ink);
+}
+
+.checklist-card .checklist-intro {
+  font-size: 13px;
+  color: var(--ink-soft);
+  margin-bottom: 16px;
+  line-height: 1.6;
+}
+
+.checklist {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.checklist li {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 11px 14px;
+  background: var(--bg-card);
+  border-radius: 10px;
+  font-size: 14px;
+  color: var(--ink);
+  border: 1px solid var(--line);
+  line-height: 1.55;
+}
+
+.checklist li::before {
+  content: '';
+  width: 18px;
+  height: 18px;
+  border: 2px solid var(--accent);
+  border-radius: 5px;
+  flex-shrink: 0;
+  margin-top: 1px;
+  background: var(--bg);
+}
+
+.checklist li strong {
+  color: var(--accent-deep);
+}
+
+.checklist li small {
+  display: block;
+  font-size: 12px;
+  color: var(--ink-mute);
+  margin-top: 3px;
+  line-height: 1.5;
+}
+
+/* Success indicator box */
+.success-box {
+  background: linear-gradient(135deg, #F0F7EC, #E5F0E1);
+  border-left: 3px solid var(--green);
+  border-radius: 0 10px 10px 0;
+  padding: 14px 18px;
+  margin: 18px 0;
+  font-size: 14px;
+  color: #2A4A28;
+  line-height: 1.7;
+}
+
+.success-box strong:first-child {
+  display: block;
+  margin-bottom: 6px;
+  color: #1F3D1D;
+  font-size: 12px;
+  letter-spacing: 0.08em;
+  font-family: 'JetBrains Mono', monospace;
+  font-weight: 700;
+}
+
+.success-box code {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12.5px;
+  background: rgba(127, 168, 119, 0.18);
+  padding: 1px 6px;
+  border-radius: 4px;
+  color: #1F3D1D;
+  font-weight: 500;
+}
+
+/* Strong warning */
+.warning-strong {
+  background: #FFF1E5;
+  border: 2px solid var(--accent);
+  border-radius: 10px;
+  padding: 14px 18px;
+  margin: 14px 0;
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+}
+
+.warning-strong .icon {
+  font-size: 22px;
+  flex-shrink: 0;
+  line-height: 1;
+}
+
+.warning-strong .text {
+  flex: 1;
+  font-size: 14px;
+  color: var(--ink);
+  line-height: 1.65;
+}
+
+.warning-strong .text strong {
+  display: block;
+  color: var(--accent-deep);
+  margin-bottom: 4px;
+  font-size: 14px;
+}
+
+/* ===== Idea Cards (project ideas) ===== */
+.idea-level {
+  font-family: 'Fraunces', serif;
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--ink);
+  margin: 28px 0 14px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+.idea-level:first-of-type { margin-top: 8px; }
+
+.idea-level .stars {
+  color: var(--accent);
+  font-size: 17px;
+  letter-spacing: 0.05em;
+}
+
+.idea-level .time {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  color: var(--ink-soft);
+  margin-left: auto;
+  letter-spacing: 0.05em;
+  background: var(--bg);
+  padding: 4px 11px;
+  border-radius: 100px;
+  border: 1px solid var(--line);
+  font-weight: 500;
+}
+
+.idea-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 12px;
+  margin-bottom: 8px;
+}
+
+.idea-card {
+  background: var(--bg-card);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 18px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  transition: all 0.2s ease;
+}
+.idea-card:hover {
+  border-color: var(--accent);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 18px rgba(28,26,23,0.05);
+}
+
+.idea-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.idea-icon {
+  font-size: 26px;
+  flex-shrink: 0;
+  line-height: 1;
+}
+
+.idea-title {
+  font-family: 'Fraunces', serif;
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--ink);
+  line-height: 1.3;
+  margin: 0;
+}
+
+.idea-desc {
+  font-size: 13px;
+  color: var(--ink-soft);
+  line-height: 1.6;
+  margin: 0;
+}
+
+.idea-card .code-block {
+  font-size: 11.5px;
+  padding: 10px 60px 10px 14px;
+  margin: 0;
+  border-radius: 8px;
+  line-height: 1.55;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+.idea-card .code-block::before {
+  content: '📝';
+  margin-right: 6px;
+  font-size: 12px;
+}
+.idea-card .copy-btn {
+  font-size: 10px;
+  padding: 4px 8px;
+  top: 8px;
+  right: 8px;
+}
+
+@media (max-width: 600px) {
+  .idea-grid { grid-template-columns: 1fr; }
+}
+
+/* ===== Video Cards (YouTube) ===== */
+.video-list {
+  display: grid;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.video-card {
+  display: flex;
+  gap: 14px;
+  padding: 12px;
+  background: var(--bg-card);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  text-decoration: none;
+  color: inherit;
+  transition: all 0.2s ease;
+  align-items: center;
+}
+.video-card:hover {
+  border-color: var(--accent);
+  transform: translateY(-1px);
+  box-shadow: 0 8px 18px rgba(28,26,23,0.06);
+}
+
+.video-thumb {
+  width: 140px;
+  aspect-ratio: 16/9;
+  flex-shrink: 0;
+  border-radius: 8px;
+  overflow: hidden;
+  background: linear-gradient(135deg, #2A1A1A, #14110E);
+  position: relative;
+}
+.video-thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.video-thumb::after {
+  content: '▶';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 36px;
+  height: 36px;
+  background: rgba(255, 0, 0, 0.92);
+  color: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 13px;
+  padding-left: 3px;
+  pointer-events: none;
+}
+
+.video-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.video-title {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--ink);
+  line-height: 1.45;
+  margin-bottom: 6px;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.video-meta {
+  font-size: 11px;
+  color: var(--ink-mute);
+  font-family: 'JetBrains Mono', monospace;
+  letter-spacing: 0.05em;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.video-meta .yt-tag {
+  background: #FF0000;
+  color: white;
+  padding: 1px 6px;
+  border-radius: 3px;
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+}
+
+.video-duration {
+  margin-left: auto;
+  background: var(--ink);
+  color: var(--bg);
+  padding: 1px 6px;
+  border-radius: 3px;
+  font-size: 10px;
+}
+
+@media (max-width: 600px) {
+  .video-thumb { width: 100px; }
+  .video-card { padding: 10px; gap: 10px; }
+  .video-title { font-size: 13px; }
+}
+
+.step-text {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  min-width: 0;
+}
+
+.step-eyebrow {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 9px;
+  color: var(--ink-mute);
+  letter-spacing: 0.2em;
+  font-weight: 700;
+}
+
+.step-name {
+  font-family: 'Fraunces', serif;
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--ink);
+  line-height: 1.3;
+}
+
+.step-body {
+  padding: 26px 26px 30px;
+  background: var(--bg-card);
+}
+
+/* H2 inside step-body */
+.step-body > h2 {
+  font-family: 'Fraunces', serif;
+  font-weight: 400;
+  font-size: clamp(22px, 3vw, 28px);
+  line-height: 1.2;
+  margin-bottom: 14px;
+  letter-spacing: -0.015em;
+}
+.step-body > h2 strong { font-weight: 600; }
+.step-body > .desc {
+  font-size: 15px;
+  color: var(--ink-soft);
+  margin-bottom: 28px;
+  max-width: 640px;
+}
+
+/* Mobile */
+@media (max-width: 600px) {
+  .phase-summary { padding: 18px 18px; gap: 12px; }
+  .phase-name { font-size: 18px; }
+  .phase-icon { font-size: 22px; width: 26px; }
+  .phase-count { display: none; }
+  .phase-body { padding: 10px; }
+  .step-summary { padding: 12px 14px; gap: 12px; }
+  .step-badge { width: 30px; height: 30px; font-size: 12px; }
+  .step-name { font-size: 15px; }
+  .step-body { padding: 22px 18px 26px; }
+}
+
+/* ===== Error / Troubleshoot Cards ===== */
+.error-card {
+  background: var(--bg-card);
+  border: 1px solid var(--line);
+  border-left: 3px solid #C84B4B;
+  border-radius: 10px;
+  padding: 22px 24px;
+  margin-bottom: 14px;
+}
+
+.error-card h3 {
+  font-family: 'Fraunces', serif;
+  font-size: 19px;
+  font-weight: 600;
+  margin-bottom: 14px;
+  color: var(--ink);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  line-height: 1.3;
+}
+
+.error-symptom {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12.5px;
+  background: #2A1A1A;
+  color: #FFB4B4;
+  padding: 10px 14px;
+  border-radius: 6px;
+  margin-bottom: 14px;
+  border: 1px solid #4A2828;
+  word-break: break-word;
+  white-space: pre-wrap;
+  line-height: 1.6;
+  position: relative;
+  padding-left: 36px;
+}
+.error-symptom::before {
+  content: '⚠';
+  position: absolute;
+  left: 12px;
+  top: 10px;
+  color: #FF8888;
+  font-weight: 700;
+  font-size: 14px;
+}
+
+.error-card .label {
+  font-size: 10px;
+  font-family: 'JetBrains Mono', monospace;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  color: var(--accent-deep);
+  text-transform: uppercase;
+  margin: 16px 0 6px;
+}
+.error-card .label:first-of-type {
+  margin-top: 0;
+}
+
+.error-card p {
+  color: var(--ink-soft);
+  font-size: 14.5px;
+  margin-bottom: 8px;
+  line-height: 1.7;
+}
+
+.error-card ol,
+.error-card ul {
+  padding-left: 22px;
+  color: var(--ink-soft);
+  font-size: 14.5px;
+  line-height: 1.85;
+}
+.error-card ol li,
+.error-card ul li {
+  margin-bottom: 6px;
+}
+
+.error-card code {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 13px;
+  background: var(--ink);
+  color: var(--bg);
+  padding: 2px 7px;
+  border-radius: 4px;
+}
+</style>
+</head>
+<body>
+
+<nav class="top-nav">
+  <div class="top-nav-inner">
+    <a href="index.html" class="nav-brand-link"><span class="nav-brand-mark">◆</span>Beginner Guides Series</a>
+    <div class="nav-links">
+      <a href="claude-code-guide.html" class="nav-link active"><svg class="brand-icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 1.5c0 5.795 4.705 10.5 10.5 10.5C16.705 12 12 16.705 12 22.5 12 16.705 7.295 12 1.5 12 7.295 12 12 7.295 12 1.5z"/></svg>Claude Code</a>
+      <a href="canva-guide.html" class="nav-link"><svg class="brand-icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10c3.16 0 5.99-1.47 7.83-3.76l-2.9-2.01A6.49 6.49 0 0 1 12 18.5c-3.59 0-6.5-2.91-6.5-6.5S8.41 5.5 12 5.5c2 0 3.78.9 4.97 2.31l2.97-1.94A9.97 9.97 0 0 0 12 2z"/></svg>Canva</a>
+      <a href="github-guide.html" class="nav-link"><svg class="brand-icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></svg>GitHub</a>
+    </div>
+  </div>
+</nav>
+
+
+<div class="container">
+
+  <!-- ===== HERO ===== -->
+  <header class="hero">
+    <span class="eyebrow">FOR BEGINNERS · 2026</span>
+    <h1>Claude と<br>Claude Code を <em>はじめる</em></h1>
+    <p class="lead">
+      ダウンロードからターミナル起動、最初のコマンドまで。<br>
+      初心者がつまずかない順番でまとめた、最短ルートのガイド。
+    </p>
+    <div class="hero-buttons">
+      <a href="https://claude.ai" target="_blank" rel="noopener" class="btn btn-primary">
+        Claude 公式サイト <span class="arrow">↗</span>
+      </a>
+      <a href="https://docs.claude.com/en/docs/claude-code/overview" target="_blank" rel="noopener" class="btn btn-secondary">
+        Claude Code 公式ドキュメント <span class="arrow">↗</span>
+      </a>
+    </div>
+    <p style="margin-top:28px; font-size:13px; color:var(--ink-mute); font-family:'JetBrains Mono', monospace; letter-spacing:0.05em;">
+      💡 わからないときは右下のボタンから AI(Claude / ChatGPT / Gemini)にきけます
+    </p>
+  </header>
+
+  <div class="phase-list">
+  <details class="phase-card" open>
+    <summary class="phase-summary">
+      <span class="phase-icon">🚀</span>
+      <div class="phase-text">
+        <span class="phase-label">PHASE 1</span>
+        <span class="phase-name">はじめる</span>
+      </div>
+      <span class="phase-count">4 ステップ</span>
+      <span class="chevron">›</span>
+    </summary>
+    <div class="phase-body">
+      <details class="step-card">
+        <summary class="step-summary">
+          <span class="step-badge">00</span>
+          <div class="step-text">
+            <span class="step-eyebrow">STEP 00</span>
+            <span class="step-name">準備</span>
+          </div>
+          <span class="chevron">›</span>
+        </summary>
+        <div class="step-body">
+        <h2>はじめに <strong>必要なもの</strong></h2>
+    <p class="desc">スタート前にこれだけ確認してください。準備にかかる時間は約5分、所要時間は全体で約30分です。</p>
+
+    <!-- Pre-flight Checklist -->
+    <div class="checklist-card">
+      <h3>事前チェックリスト</h3>
+      <p class="checklist-intro">これを揃えてから進むと、途中で詰まりません。</p>
+      <ul class="checklist">
+        <li><div><strong>有料プラン(Pro 以上)に登録済み</strong><small>無料プランでは Claude Code は使えません(後ほど詳しく)</small></div></li>
+        <li><div><strong>支払い用クレジットカード</strong><small>登録時に必要。Pro は月 $20</small></div></li>
+        <li><div><strong>パソコン(Mac / Windows / Linux)</strong><small>OS の詳しい条件は下のカード参照</small></div></li>
+        <li><div><strong>インターネット接続</strong><small>常時接続が必要(オフラインでは動きません)</small></div></li>
+        <li><div><strong>30分くらいの時間</strong><small>インストール 5分・最初のお試し 25分</small></div></li>
+      </ul>
+    </div>
+
+    <!-- Strong warning about Pro plan -->
+    <div class="warning-strong">
+      <span class="icon">⚠️</span>
+      <div class="text">
+        <strong>無料プランでは絶対に動きません</strong>
+        登録時のデフォルトは <strong>無料プラン</strong> なので、Pro へのアップグレードを忘れずに。「インストールできたのに起動しない」の8割はこれが原因です。
+      </div>
+    </div>
+
+    <!-- Account + Pro upgrade card (enhanced) -->
+    <div class="card">
+      <h3>① Claude アカウント作成 → Pro 契約 <span class="badge">REQUIRED</span></h3>
+      <p>以下の3ステップで完了します。</p>
+      <ol style="padding-left:22px; color:var(--ink-soft); font-size:14.5px; line-height:2;">
+        <li><strong>claude.ai でアカウント作成</strong>(無料・メール認証あり)</li>
+        <li>ログイン後、左下の自分のアイコン → <strong>「プランをアップグレード」</strong>を選択</li>
+        <li><strong>Claude Pro($20/月)</strong> を選んで支払い情報を入力</li>
+      </ol>
+      <p style="margin-top:14px; font-size:13px; color:var(--ink-mute);">
+        💡 まずは Pro で十分。物足りなくなったら Max($100/月〜)を検討。
+      </p>
+      <div style="display:flex; gap:8px; flex-wrap:wrap; margin-top:14px;">
+        <a href="https://claude.ai" target="_blank" rel="noopener" class="btn btn-primary">
+          claude.ai で登録 <span class="arrow">↗</span>
+        </a>
+        <a href="https://claude.ai/upgrade" target="_blank" rel="noopener" class="btn btn-secondary">
+          Pro にアップグレード <span class="arrow">↗</span>
+        </a>
+      </div>
+    </div>
+
+    <!-- Computer requirements -->
+    <div class="card">
+      <h3>② パソコンの確認</h3>
+      <ul>
+        <li>macOS 13 (Ventura) 以降 / Windows 10 以降 / Ubuntu 20.04 以降</li>
+        <li>インターネット接続(常時)</li>
+        <li>空きメモリ 4GB 以上</li>
+      </ul>
+      <p style="margin-top:10px; font-size:13px; color:var(--ink-mute);">
+        💡 OS のバージョンがわからない時:<br>
+        <strong>Mac</strong> → 画面左上の 🍎 マーク → 「この Mac について」<br>
+        <strong>Windows</strong> → スタート → 設定 → システム → バージョン情報
+      </p>
+    </div>
+
+    <div class="success-box">
+      <strong>✅ ここまで揃ったら次へ</strong>
+      Pro プラン契約済み + パソコン要件OK = STEP 01 へ進める状態です。
+    </div>
+  </div>
+      </details>
+      <details class="step-card">
+        <summary class="step-summary">
+          <span class="step-badge">01</span>
+          <div class="step-text">
+            <span class="step-eyebrow">STEP 01</span>
+            <span class="step-name">ターミナルを開く</span>
+          </div>
+          <span class="chevron">›</span>
+        </summary>
+        <div class="step-body">
+        <h2>まずは <strong>ターミナル</strong> を起動</h2>
+    <p class="desc">「ターミナル」とは、文字でパソコンに命令を出すアプリです。OS によって開き方が違うので、お使いの環境を選んでください。</p>
+
+    <div class="tabs">
+      <button class="tab-btn active" data-tab="mac-term">🍎 macOS</button>
+      <button class="tab-btn" data-tab="win-term">🪟 Windows</button>
+      <button class="tab-btn" data-tab="linux-term">🐧 Linux</button>
+    </div>
+
+    <div class="tab-content active" id="mac-term">
+      <h4>macOS の場合 — 標準で入っています</h4>
+      <p>ターミナルアプリは Mac に最初から入っているので、ダウンロードは不要です。</p>
+      <ol style="padding-left:20px; color:var(--ink-soft); font-size:15px; line-height:2;">
+        <li><kbd>⌘</kbd> + <kbd>Space</kbd> で Spotlight 検索を開く</li>
+        <li>「ターミナル」と入力して Enter</li>
+        <li>黒い画面が出れば準備OK</li>
+      </ol>
+      <div class="tip">
+        <strong>💡 もっと使いやすく</strong>
+        本格的に使うなら <a href="https://iterm2.com" target="_blank" style="color:var(--accent-deep);">iTerm2</a> や <a href="https://www.warp.dev" target="_blank" style="color:var(--accent-deep);">Warp</a> もおすすめ。最初は標準ターミナルで十分です。
+      </div>
+    </div>
+
+    <div class="tab-content" id="win-term">
+      <h4>Windows の場合 — Windows Terminal をインストール</h4>
+      <p>Windows 11 には標準で入っていますが、Windows 10 ではストアからインストールします。</p>
+      <ol style="padding-left:20px; color:var(--ink-soft); font-size:15px; line-height:2;">
+        <li>Microsoft Store を開く</li>
+        <li>「Windows Terminal」を検索してインストール</li>
+        <li>スタートメニューから「Windows Terminal」を起動</li>
+      </ol>
+      <div style="margin-top:14px;">
+        <a href="https://apps.microsoft.com/detail/9n0dx20hk701" target="_blank" rel="noopener" class="btn btn-secondary">
+          Windows Terminal をダウンロード <span class="arrow">↗</span>
+        </a>
+      </div>
+      <div class="warning">
+        <strong>⚠️ 確認ポイント</strong>
+        Claude Code をインストールする際、<strong>PowerShell</strong>(プロンプトが <code>PS C:\</code>)と <strong>CMD</strong>(<code>C:\</code>)で使うコマンドが違います。Windows Terminal を起動すると通常 PowerShell になります。
+      </div>
+    </div>
+
+    <div class="tab-content" id="linux-term">
+      <h4>Linux の場合 — 標準で入っています</h4>
+      <p>多くのディストリビューションでは <kbd>Ctrl</kbd> + <kbd>Alt</kbd> + <kbd>T</kbd> で起動できます。</p>
+      <p>もし反応しない場合は、アプリ一覧から「Terminal」「端末」を探して起動してください。</p>
+    </div>
+  </div>
+      </details>
+      <details class="step-card">
+        <summary class="step-summary">
+          <span class="step-badge">02</span>
+          <div class="step-text">
+            <span class="step-eyebrow">STEP 02</span>
+            <span class="step-name">インストール</span>
+          </div>
+          <span class="chevron">›</span>
+        </summary>
+        <div class="step-body">
+        <h2>Claude Code を <strong>インストール</strong></h2>
+    <p class="desc">ターミナルに以下のコマンドを <strong>1行コピーして貼り付け、Enter</strong> を押すだけ。Node.js などの事前準備は不要です(ネイティブインストーラ)。</p>
+
+    <div class="tabs">
+      <button class="tab-btn active" data-tab="mac-inst">🍎 macOS</button>
+      <button class="tab-btn" data-tab="win-inst">🪟 Windows</button>
+      <button class="tab-btn" data-tab="linux-inst">🐧 Linux</button>
+    </div>
+
+    <!-- macOS Install -->
+    <div class="tab-content active" id="mac-inst">
+      <h4>ネイティブインストーラ(推奨)</h4>
+      <p>ターミナルにこのコマンドを貼り付けて実行してください。</p>
+      <div class="code-block">curl -fsSL https://claude.ai/install.sh | bash<button class="copy-btn">コピー</button></div>
+
+      <h4>Homebrew が入っている方はこちら</h4>
+      <div class="code-block">brew install --cask claude-code<button class="copy-btn">コピー</button></div>
+
+      <div class="tip">
+        <strong>💡 完了の合図</strong>
+        コマンド終了後にターミナルを <strong>一度閉じて開き直す</strong> と確実です(PATH を反映させるため)。
+      </div>
+    </div>
+
+    <!-- Windows Install -->
+    <div class="tab-content" id="win-inst">
+      <h4>PowerShell の場合(推奨)</h4>
+      <p>Windows Terminal で開いた PowerShell に貼り付け。</p>
+      <div class="code-block no-prompt">irm https://claude.ai/install.ps1 | iex<button class="copy-btn">コピー</button></div>
+
+      <h4>CMD(コマンドプロンプト)を使っている方</h4>
+      <div class="code-block no-prompt">curl -fsSL https://claude.ai/install.cmd -o install.cmd &amp;&amp; install.cmd &amp;&amp; del install.cmd<button class="copy-btn">コピー</button></div>
+
+      <div class="warning">
+        <strong>⚠️ よくあるエラー</strong>
+        「'irm' は内部コマンドまたは外部コマンド…として認識されていません」と出たら、それは CMD です。CMD 用のコマンドを使うか、PowerShell に切り替えてください。
+      </div>
+    </div>
+
+    <!-- Linux Install -->
+    <div class="tab-content" id="linux-inst">
+      <h4>ネイティブインストーラ(推奨)</h4>
+      <div class="code-block">curl -fsSL https://claude.ai/install.sh | bash<button class="copy-btn">コピー</button></div>
+
+      <h4>npm 経由でも可(Node.js 18 以上が必要)</h4>
+      <div class="code-block">npm install -g @anthropic-ai/claude-code<button class="copy-btn">コピー</button></div>
+    </div>
+
+    <!-- 確認 -->
+    <div class="card" style="margin-top: 28px;">
+      <h3>インストールできたか確認</h3>
+      <p>新しいターミナルを開いて、次のコマンドを実行します。</p>
+      <div class="code-block">claude --version<button class="copy-btn">コピー</button></div>
+
+      <div class="success-box">
+        <strong>✅ こうなれば成功</strong>
+        <code>2.1.x</code> や <code>2.x.x</code> のような<strong>バージョン番号</strong>が表示されればインストール完了です。例:<br>
+        <code style="display:inline-block; margin-top:6px;">claude version 2.1.126</code>
+      </div>
+
+      <p style="margin-top:18px;">うまく動かないときは健康診断コマンドが便利です。</p>
+      <div class="code-block">claude doctor<button class="copy-btn">コピー</button></div>
+      <p style="font-size:13px; color:var(--ink-mute); margin-top:8px;">
+        ↑ 緑色の ✓ がたくさん並んでいれば OK。赤い ✗ があれば <strong>STEP 09 トラブル対処</strong> へ。
+      </p>
+    </div>
+  </div>
+      </details>
+      <details class="step-card">
+        <summary class="step-summary">
+          <span class="step-badge">03</span>
+          <div class="step-text">
+            <span class="step-eyebrow">STEP 03</span>
+            <span class="step-name">起動</span>
+          </div>
+          <span class="chevron">›</span>
+        </summary>
+        <div class="step-body">
+        <h2>はじめての <strong>起動とログイン</strong></h2>
+    <p class="desc">プロジェクトのフォルダ(または作業したいフォルダ)に移動してから起動するのが基本です。</p>
+
+    <div class="card">
+      <h3>1. 作業フォルダを作って入る</h3>
+      <p>下のコマンドをそのままコピペすると、デスクトップに <code style="background:var(--accent-soft);padding:2px 6px;border-radius:4px;font-family:'JetBrains Mono',monospace;font-size:13px;">test-project</code> という新しいフォルダができて、その中に入ります。</p>
+      <div class="code-block">cd ~/Desktop
+mkdir test-project
+cd test-project<button class="copy-btn">コピー</button></div>
+      <p style="font-size:13px; color:var(--ink-mute); margin-top:8px;">
+        ↑ 3行ありますが、まとめてコピー&ペーストでOK。<code>mkdir</code> はフォルダを作る、<code>cd</code> は中に入るコマンドです。
+      </p>
+      <div class="success-box">
+        <strong>✅ こうなれば成功</strong>
+        画面のプロンプト(行頭の表示)に <code>test-project</code> が含まれていれば、フォルダの中に入っています。<br>
+        例:<code>~/Desktop/test-project $</code> や <code>PS C:\Users\...\test-project&gt;</code>
+      </div>
+    </div>
+
+    <div class="card">
+      <h3>2. Claude Code を起動</h3>
+      <div class="code-block">claude<button class="copy-btn">コピー</button></div>
+      <p>初回起動時は<strong>ブラウザが自動で開いて認証画面</strong>が表示されます。Claude のアカウントでログインして「Allow / 許可する」をクリック。</p>
+      <div class="success-box">
+        <strong>✅ こうなれば成功</strong>
+        ブラウザでの認証後、ターミナルに戻ると <strong>Claude Code のロゴ</strong>(オレンジ色の星型)が表示され、入力待ち状態になります。<code>&gt;</code> のようなプロンプトが点滅していればOK。
+      </div>
+      <p style="font-size:13px; color:var(--ink-mute); margin-top:8px;">
+        ↑ ブラウザが自動で開かない場合は、ターミナルに表示された URL をコピーしてブラウザに貼り付けてください(STEP 09 のエラー5 参照)。
+      </p>
+    </div>
+
+    <div class="card">
+      <h3>3. 話しかけてみる</h3>
+      <p>あとは普通の日本語で話しかければOK。最初は挨拶でも何でも大丈夫です。</p>
+      <div class="code-block no-prompt">こんにちは!まず自己紹介してください<button class="copy-btn">コピー</button></div>
+      <div class="success-box">
+        <strong>✅ こうなれば成功</strong>
+        Claude が日本語で自己紹介してくれれば、すべて正常に動いています 🎉<br>
+        ここまできたら STEP 06「初プロジェクト」に進みましょう。
+      </div>
+    </div>
+  </div>
+      </details>
+    </div>
+  </details>
+
+  <details class="phase-card">
+    <summary class="phase-summary">
+      <span class="phase-icon">🎨</span>
+      <div class="phase-text">
+        <span class="phase-label">PHASE 2</span>
+        <span class="phase-name">使ってみる</span>
+      </div>
+      <span class="phase-count">2 ステップ</span>
+      <span class="chevron">›</span>
+    </summary>
+    <div class="phase-body">
+      <details class="step-card">
+        <summary class="step-summary">
+          <span class="step-badge">06</span>
+          <div class="step-text">
+            <span class="step-eyebrow">STEP 06</span>
+            <span class="step-name">初プロジェクト</span>
+          </div>
+          <span class="chevron">›</span>
+        </summary>
+        <div class="step-body">
+        <h2>はじめての <strong>プロジェクト</strong> を作ってみよう</h2>
+    <p class="desc">百聞は一実行にしかず。Claude Code を使って、自分用のシンプルな自己紹介サイトを一緒に作ってみましょう。所要時間は10分です。</p>
+
+    <div class="card" style="background:var(--accent-soft); border-color:var(--accent);">
+      <h3>🎯 今回作るもの</h3>
+      <p>名前・自己紹介・趣味が載った、おしゃれな1ページ。HTML だけで作るので、ファイルを保存してそのままブラウザで見られます。</p>
+    </div>
+
+    <div class="card">
+      <h3>① 作業フォルダを作る</h3>
+      <p>デスクトップに新しいフォルダを作って、その中に入ります。ターミナルで以下を実行:</p>
+      <div class="code-block">cd ~/Desktop
+mkdir my-first-site
+cd my-first-site<button class="copy-btn">コピー</button></div>
+      <p style="font-size:13px; color:var(--ink-mute);">↑ <code>mkdir</code> はフォルダを作る、<code>cd</code> はそのフォルダに入るコマンドです。</p>
+    </div>
+
+    <div class="card">
+      <h3>② Claude Code を起動</h3>
+      <div class="code-block">claude<button class="copy-btn">コピー</button></div>
+      <p>これで Claude が、いま開いた空っぽのフォルダの中で待機している状態になります。</p>
+    </div>
+
+    <div class="card">
+      <h3>③ 最初のプロンプトを送る</h3>
+      <p>下の文をそのまま Claude にコピーして送信してください。</p>
+      <div class="prompt-card">
+        <span class="label">📝 プロンプト</span>
+        <p class="prompt-text">index.html というファイルを作って。シンプルでおしゃれな自己紹介ページにして。名前・短い自己紹介・趣味リスト・連絡先のセクションを入れて。デザインは白ベースに1色アクセント、CSS は同じファイル内に書いて。</p>
+      </div>
+      <p>Claude が「こういうファイルを作ろうと思います」と内容を提示してきます。問題なければ <strong>Enter キー</strong>(または「y」と入力して Enter)で承認します。</p>
+    </div>
+
+    <div class="card">
+      <h3>④ ブラウザで開いてみる</h3>
+      <p>Claude が <code>index.html</code> を作り終えたら、Finder(Mac)/エクスプローラー(Windows)で <code>my-first-site</code> フォルダを開いて、<code>index.html</code> を <strong>ダブルクリック</strong>。</p>
+      <p>ブラウザに、あなたの自己紹介ページが表示されます 🎉</p>
+    </div>
+
+    <div class="card">
+      <h3>⑤ アレンジする(ここからが楽しい)</h3>
+      <p>そのまま Claude にこんなふうに話しかけてみてください。1つずつ試すのがおすすめ。</p>
+      <ul style="list-style:none; padding-left:0;">
+        <li style="padding:10px 0; border-bottom:1px dashed var(--line); font-size:14.5px;">
+          <code style="background:var(--accent-soft); color:var(--accent-deep);">背景をダークモードに変えて</code>
+        </li>
+        <li style="padding:10px 0; border-bottom:1px dashed var(--line); font-size:14.5px;">
+          <code style="background:var(--accent-soft); color:var(--accent-deep);">SNS のリンクボタンを追加して(X と Instagram)</code>
+        </li>
+        <li style="padding:10px 0; border-bottom:1px dashed var(--line); font-size:14.5px;">
+          <code style="background:var(--accent-soft); color:var(--accent-deep);">スクロールしたら要素がふわっと出るアニメーションを足して</code>
+        </li>
+        <li style="padding:10px 0; font-size:14.5px;">
+          <code style="background:var(--accent-soft); color:var(--accent-deep);">スマホでも見やすくなるよう調整して</code>
+        </li>
+      </ul>
+      <p>変更後はブラウザを <strong>更新(F5 / ⌘+R)</strong> すれば反映されます。</p>
+    </div>
+
+    <div class="tip">
+      <strong>💡 これでマスター</strong>
+      ここまでできたら、Claude Code の基本は身についています。あとは「何を作ろうかな」を考えるだけ。Todo アプリ、メモアプリ、家計簿、ブログ、ポートフォリオ、何でも作れます。
+    </div>
+  </div>
+      </details>
+      <details class="step-card">
+        <summary class="step-summary">
+          <span class="step-badge">07</span>
+          <div class="step-text">
+            <span class="step-eyebrow">STEP 07</span>
+            <span class="step-name">CLAUDE.md</span>
+          </div>
+          <span class="chevron">›</span>
+        </summary>
+        <div class="step-body">
+        <h2><strong>CLAUDE.md</strong> でレベルアップ</h2>
+    <p class="desc">Claude Code を本気で使うなら、これは必須。「<strong>プロジェクトの取扱説明書</strong>」を Claude に渡すことで、毎回の応答精度が劇的に上がります。</p>
+
+    <div class="card">
+      <h3>📋 CLAUDE.md って何?</h3>
+      <p>プロジェクトのルートに置く、<strong>Claude 専用のメモ書き</strong>です。Claude は起動時にこのファイルを自動で読み込んで、毎回の会話の前提知識として使います。</p>
+
+      <div class="chat-section-label" style="margin-top:18px; color:var(--ink-mute);">これがないと…</div>
+      <ul>
+        <li>毎回プロジェクトの説明をしないといけない</li>
+        <li>Claude が独自の流儀でコードを書いてしまう</li>
+        <li>同じ間違いを繰り返す</li>
+      </ul>
+
+      <div class="chat-section-label" style="margin-top:18px; color:var(--ink-mute);">あると…</div>
+      <ul>
+        <li>「いつものスタイル」で書いてくれる</li>
+        <li>使ってほしくないライブラリを避けてくれる</li>
+        <li>プロジェクト固有のルールを守ってくれる</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h3>🚀 作り方は2通り</h3>
+
+      <div class="chat-section-label" style="color:var(--ink-mute);">方法A:Claude に作ってもらう(おすすめ)</div>
+      <p>プロジェクトのルートで Claude Code を起動して、このコマンドを実行するだけ。</p>
+      <div class="code-block no-prompt">/init<button class="copy-btn">コピー</button></div>
+      <p>Claude がフォルダの中身を読み解いて、<strong>適切な CLAUDE.md を自動生成</strong> してくれます。あとから自由に編集して大丈夫。</p>
+
+      <div class="chat-section-label" style="color:var(--ink-mute); margin-top:22px;">方法B:手動で作る</div>
+      <p>プロジェクトのルートに <code>CLAUDE.md</code> という名前のファイルを作って、Markdown で書きます。次のテンプレを参考にしてください。</p>
+    </div>
+
+    <div class="card">
+      <h3>📝 テンプレート(コピペで使える)</h3>
+      <p>このまま使ってもOK。自分のプロジェクトに合わせて編集してください。</p>
+      <div class="code-block no-prompt"># Project: My Portfolio Site
+
+## 概要
+個人用のポートフォリオサイト。HTML/CSS/JS のみで作る。
+
+## ファイル構成
+- index.html — トップページ
+- style.css — 全体のスタイル
+- script.js — インタラクション
+
+## 開発ルール
+- コメントは日本語で書く
+- インデントはスペース2つ
+- 関数名はキャメルケース(例:getUserName)
+- 外部 CDN は使わない(オフラインでも動くように)
+
+## やってほしいこと
+- コードを書く前に、何を変えるか日本語で説明する
+- 大きな変更は確認してから実行する
+- アクセシビリティ(alt属性、コントラスト)を意識する
+
+## やってほしくないこと
+- jQuery を使う
+- インラインstyle属性を多用する
+- 既存の機能を勝手に削除する<button class="copy-btn">コピー</button></div>
+    </div>
+
+    <div class="card">
+      <h3>✨ よく使う書き方の例</h3>
+      <ul style="list-style:none; padding-left:0;">
+        <li style="padding:12px 0; border-bottom:1px dashed var(--line);">
+          <strong style="color:var(--ink); display:block; margin-bottom:4px;">📍 言語の指定</strong>
+          <span style="font-size:14px; color:var(--ink-soft);">「コメントは日本語で書いてください」</span>
+        </li>
+        <li style="padding:12px 0; border-bottom:1px dashed var(--line);">
+          <strong style="color:var(--ink); display:block; margin-bottom:4px;">📍 説明の癖をつけさせる</strong>
+          <span style="font-size:14px; color:var(--ink-soft);">「ファイルを変更する前に、必ず変更内容を箇条書きで説明してください」</span>
+        </li>
+        <li style="padding:12px 0; border-bottom:1px dashed var(--line);">
+          <strong style="color:var(--ink); display:block; margin-bottom:4px;">📍 ライブラリの制約</strong>
+          <span style="font-size:14px; color:var(--ink-soft);">「React は使わず、Vanilla JS のみで書いてください」</span>
+        </li>
+        <li style="padding:12px 0; border-bottom:1px dashed var(--line);">
+          <strong style="color:var(--ink); display:block; margin-bottom:4px;">📍 テストの実行</strong>
+          <span style="font-size:14px; color:var(--ink-soft);">「コードを変更したら必ず npm test を実行してエラーがないか確認してください」</span>
+        </li>
+        <li style="padding:12px 0;">
+          <strong style="color:var(--ink); display:block; margin-bottom:4px;">📍 安全策</strong>
+          <span style="font-size:14px; color:var(--ink-soft);">「.env ファイルや config/secrets/ の中身は絶対に読んだり変更したりしないでください」</span>
+        </li>
+      </ul>
+    </div>
+
+    <div class="tip">
+      <strong>💡 上手に育てるコツ</strong>
+      最初から完璧を目指さなくてOK。使いながら「これも書いておけば伝わるな」というルールが見えてきたら、その都度追記するのが正解です。チームで使う場合は CLAUDE.md を Git で共有すると、メンバー全員の Claude が同じルールで動いてくれます。
+    </div>
+  </div>
+      </details>
+    </div>
+  </details>
+
+  <details class="phase-card">
+    <summary class="phase-summary">
+      <span class="phase-icon">🩺</span>
+      <div class="phase-text">
+        <span class="phase-label">PHASE 3</span>
+        <span class="phase-name">困ったとき</span>
+      </div>
+      <span class="phase-count">1 セクション</span>
+      <span class="chevron">›</span>
+    </summary>
+    <div class="phase-body">
+      <details class="step-card">
+        <summary class="step-summary">
+          <span class="step-badge">09</span>
+          <div class="step-text">
+            <span class="step-eyebrow">STEP 09</span>
+            <span class="step-name">トラブル対処</span>
+          </div>
+          <span class="chevron">›</span>
+        </summary>
+        <div class="step-body">
+        <h2>うまくいかない時の <strong>対処法</strong></h2>
+    <p class="desc">初心者がつまずきやすいポイントを、やさしく具体的に解説します。エラーが出ても焦らないで大丈夫。ほぼ全部、数分で直せます。</p>
+
+    <!-- 基礎知識カード -->
+    <div class="card">
+      <h3>📖 そもそもエラーって何?</h3>
+      <p>ターミナルに赤い文字や英語のメッセージが出たら、それが「エラー」です。<strong>怖がらないで大丈夫</strong>。パソコンが「ここがわからないから教えて」と言っているだけです。</p>
+      <p style="margin-top:14px;">大事なのは、エラーの中に <strong>解決のヒントが必ず書いてある</strong> ということ。「<code style="background:var(--accent-soft);padding:2px 7px;border-radius:4px;font-family:'JetBrains Mono',monospace;font-size:13px;">command not found</code>」と書いてあれば「コマンドが見つからない」、「<code style="background:var(--accent-soft);padding:2px 7px;border-radius:4px;font-family:'JetBrains Mono',monospace;font-size:13px;">permission denied</code>」なら「許可がない」という具合です。</p>
+
+      <div class="chat-section-label" style="margin-top:22px; color:var(--ink-mute);">エラーが出たら最初にすること</div>
+      <ol style="padding-left:22px; color:var(--ink-soft); font-size:14.5px; line-height:2;">
+        <li>エラー文を <strong>マウスで選択してコピー</strong>(Mac: <kbd>⌘</kbd>+<kbd>C</kbd> / Windows: <kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>C</kbd>)</li>
+        <li>右下の <strong>💬 ボタン</strong> から Claude を開いて、エラー文を貼り付けて質問するのが一番速いです</li>
+        <li>または、下の一覧から似たエラーを探してみる</li>
+      </ol>
+
+      <div class="chat-section-label" style="margin-top:22px; color:var(--ink-mute);">これだけ知っておけばOKな用語</div>
+      <ul style="list-style:none; padding-left:0;">
+        <li style="padding:8px 0; border-bottom:1px dashed var(--line); font-size:14.5px; color:var(--ink-soft);">
+          <strong style="color:var(--ink);">ターミナル</strong> — 黒い画面のこと。文字で命令を出すアプリ
+        </li>
+        <li style="padding:8px 0; border-bottom:1px dashed var(--line); font-size:14.5px; color:var(--ink-soft);">
+          <strong style="color:var(--ink);">コマンド</strong> — ターミナルに打つ「命令」(例:<code>claude</code>)
+        </li>
+        <li style="padding:8px 0; border-bottom:1px dashed var(--line); font-size:14.5px; color:var(--ink-soft);">
+          <strong style="color:var(--ink);">PATH(パス)</strong> — パソコン内の「アプリ住所録」。ここに登録されてないと、コマンドを呼んでも見つけられない
+        </li>
+        <li style="padding:8px 0; font-size:14.5px; color:var(--ink-soft);">
+          <strong style="color:var(--ink);">権限(permission)</strong> — 「このフォルダを触っていいよ」という許可。これがないと書き込めない
+        </li>
+      </ul>
+    </div>
+
+    <!-- 困ったらまずこれ -->
+    <div class="card" style="background:var(--accent-soft); border-color:var(--accent);">
+      <h3>🩺 困ったら、まずこの3つを順番に</h3>
+      <ol style="padding-left:22px; color:var(--ink-soft); font-size:15px; line-height:2;">
+        <li><strong>ターミナルを完全に閉じて、開き直す</strong><br>
+          <span style="font-size:13px; color:var(--ink-mute);">→ 9割の問題はこれで直ります。「タブを閉じる」じゃなく「ウィンドウごと閉じる」が大事。</span>
+        </li>
+        <li><code style="background:var(--ink);color:var(--bg);padding:2px 7px;border-radius:4px;font-family:'JetBrains Mono',monospace;font-size:13px;">claude doctor</code> <strong>を実行</strong><br>
+          <span style="font-size:13px; color:var(--ink-mute);">→ 健康診断のように、問題を自動で見つけて教えてくれます。</span>
+        </li>
+        <li>右下の <strong>💬 ボタンから Claude にきく</strong><br>
+          <span style="font-size:13px; color:var(--ink-mute);">→ エラー文をそのまま貼り付ければ、解決法を日本語で教えてくれます。</span>
+        </li>
+      </ol>
+    </div>
+
+    <!-- ============ Error 1 ============ -->
+    <div class="error-card">
+      <h3>1. <code>claude</code> コマンドが見つからない</h3>
+      <div class="error-symptom">command not found: claude
+'claude' is not recognized as an internal or external command</div>
+
+      <div class="label">💬 やさしく言うと</div>
+      <p>パソコンに「<code>claude</code> って呼んで」と言ったのに、「そんな子知らないよ」と返されている状態。インストールはできていても、パソコンがまだ <code>claude</code> の <strong>居場所(PATH)</strong> を覚えていません。</p>
+
+      <div class="label">🔧 直し方(順番にやってみる)</div>
+      <ol>
+        <li><strong>今のターミナルウィンドウを完全に閉じる</strong><br>
+          <span style="font-size:13px; color:var(--ink-mute);">Mac: <kbd>⌘</kbd>+<kbd>Q</kbd> でアプリごと終了 / Windows: ウィンドウ右上の ✕ ボタン</span>
+        </li>
+        <li>少し待ってから、新しくターミナルを起動する</li>
+        <li>次のコマンドを実行:</li>
+      </ol>
+      <div class="code-block">claude --version<button class="copy-btn">コピー</button></div>
+
+      <div class="label">✅ 直ったか確認</div>
+      <p>バージョン番号(例:<code>2.1.x</code>)が表示されれば成功です。それでも同じエラーなら、もう一度インストールコマンドを実行してみてください。</p>
+    </div>
+
+    <!-- ============ Error 2 ============ -->
+    <div class="error-card">
+      <h3>2. <code>irm</code> が認識されない(Windows)</h3>
+      <div class="error-symptom">'irm' is not recognized as an internal or external command,
+operable program or batch file.</div>
+
+      <div class="label">💬 やさしく言うと</div>
+      <p>Windows には「PowerShell」と「CMD(コマンドプロンプト)」の <strong>2種類のターミナル</strong> があります。<code>irm</code> は <strong>PowerShell 専用のコマンド</strong>。今あなたが開いているのは CMD のほうなので、動きません。</p>
+
+      <div class="label">🔍 自分がどっちを使ってるか確認</div>
+      <ul>
+        <li>画面に <code>PS C:\Users\〜&gt;</code> と書いてある → <strong>PowerShell</strong>(これでOK)</li>
+        <li>画面に <code>C:\Users\〜&gt;</code> だけ → <strong>CMD</strong>(切り替えが必要)</li>
+      </ul>
+
+      <div class="label">🔧 直し方</div>
+      <p><strong>方法A:PowerShell に切り替える(おすすめ)</strong></p>
+      <ol>
+        <li>スタートメニューを開く</li>
+        <li>「PowerShell」と検索</li>
+        <li>「Windows PowerShell」をクリック</li>
+        <li>もう一度 <code>irm https://claude.ai/install.ps1 | iex</code> を実行</li>
+      </ol>
+
+      <p style="margin-top:14px;"><strong>方法B:CMD のままで進める</strong></p>
+      <p>CMD 用のコマンドを使ってください。</p>
+      <div class="code-block no-prompt">curl -fsSL https://claude.ai/install.cmd -o install.cmd &amp;&amp; install.cmd &amp;&amp; del install.cmd<button class="copy-btn">コピー</button></div>
+    </div>
+
+    <!-- ============ Error 3 ============ -->
+    <div class="error-card">
+      <h3>3. <code>&amp;&amp;</code> でエラーが出る(Windows)</h3>
+      <div class="error-symptom">The token '&amp;&amp;' is not a valid statement separator in this version.</div>
+
+      <div class="label">💬 やさしく言うと</div>
+      <p>2番のちょうど逆。今度は <strong>PowerShell に CMD 用のコマンド</strong>を打ち込んでしまっています。</p>
+
+      <div class="label">🔧 直し方</div>
+      <p>PowerShell 用のコマンドを使ってください。</p>
+      <div class="code-block no-prompt">irm https://claude.ai/install.ps1 | iex<button class="copy-btn">コピー</button></div>
+
+      <div class="label">✅ 直ったか確認</div>
+      <p>ダウンロードが始まり、最後に「Installation complete」のような表示が出れば成功。新しいターミナルを開いて <code>claude --version</code> でチェック。</p>
+    </div>
+
+    <!-- ============ Error 4 ============ -->
+    <div class="error-card">
+      <h3>4. permission denied / EACCES</h3>
+      <div class="error-symptom">EACCES: permission denied, mkdir '/usr/local/lib/...'
+npm ERR! permission denied</div>
+
+      <div class="label">💬 やさしく言うと</div>
+      <p>npm(ノードのアプリ管理ツール)で Claude Code を入れようとしたら、「そのフォルダに書き込む <strong>許可がないよ</strong>」と言われている状態です。</p>
+
+      <div class="warning">
+        <strong>⛔ 絶対やってはいけないこと</strong>
+        <p style="margin:6px 0 0; font-size:14px; color:#7E641A;">「許可がないなら管理者権限で…」と <code style="background:#FFE0D0;color:#7E641A;padding:2px 6px;border-radius:4px;">sudo npm install</code> を使うのは <strong>NG</strong>。後々もっと大きなトラブルを引き起こします。</p>
+      </div>
+
+      <div class="label">🔧 直し方(一番ラクな方法)</div>
+      <p>npm を諦めて <strong>ネイティブインストーラ</strong> に切り替えるのが圧倒的に簡単です。Node.js も不要になります。</p>
+      <ol>
+        <li>新しいターミナルを開く</li>
+        <li>下のコマンドをコピーして貼り付け、Enter</li>
+      </ol>
+      <div class="code-block">curl -fsSL https://claude.ai/install.sh | bash<button class="copy-btn">コピー</button></div>
+
+      <div class="label">✅ 直ったか確認</div>
+      <p>ターミナルを開き直してから <code>claude --version</code> でバージョン番号が出れば成功。</p>
+    </div>
+
+    <!-- ============ Error 5 ============ -->
+    <div class="error-card">
+      <h3>5. ログインできない・ブラウザが開かない</h3>
+      <div class="error-symptom">Authentication failed
+ブラウザが開かない / ログイン画面に戻ってしまう</div>
+
+      <div class="label">💬 やさしく言うと</div>
+      <p>Claude Code は、初回起動時にあなたが本人か確認するためにブラウザを開きます。それが何らかの理由で動いていない状態。</p>
+
+      <div class="label">🔧 直し方(順番に)</div>
+      <ol>
+        <li>ターミナルに <strong>長い URL が表示されているはず</strong>(<code>https://claude.ai/...</code> のようなもの)</li>
+        <li>その URL を <strong>マウスで選択してコピー</strong></li>
+        <li>すでに claude.ai に <strong>ログイン済みのブラウザ</strong> を開く</li>
+        <li>アドレスバーに貼り付けて Enter</li>
+        <li>「許可する」「Allow」のようなボタンを押す</li>
+        <li>ターミナルに戻ると、自動で進んでいるはずです</li>
+      </ol>
+
+      <p style="margin-top:14px;">それでもダメなら、Claude Code 内で <code>/login</code> と入力してやり直してください。</p>
+
+      <div class="label">⚠️ あらかじめ確認</div>
+      <p>そもそも <strong>有料プラン(Pro 以上)</strong> に入っていないとログインできません。<a href="https://claude.ai" target="_blank" rel="noopener" style="color:var(--accent-deep); font-weight:700;">claude.ai</a> でプラン状況を確認してください。</p>
+    </div>
+
+    <!-- ============ Error 6 ============ -->
+    <div class="error-card">
+      <h3>6. 「Pro プランが必要」と言われる</h3>
+      <div class="error-symptom">This feature requires a Pro plan
+Your plan does not include Claude Code</div>
+
+      <div class="label">💬 やさしく言うと</div>
+      <p>Web版 Claude(claude.ai)は無料でも使えますが、<strong>ターミナル版の Claude Code は無料プランでは使えません</strong>。Pro($20/月)以上が必要です。</p>
+
+      <div class="label">🔧 直し方</div>
+      <ol>
+        <li><a href="https://claude.ai/upgrade" target="_blank" rel="noopener" style="color:var(--accent-deep); font-weight:700;">claude.ai/upgrade</a> にアクセス</li>
+        <li>「Claude Pro」を選択</li>
+        <li>支払い情報を入力</li>
+        <li>登録できたら、ターミナルで Claude Code を再起動</li>
+      </ol>
+      <p style="margin-top:10px;">最初は <strong>Pro で十分</strong>です。物足りなくなったら Max($100/月〜)を検討するくらいで OK。</p>
+    </div>
+
+    <!-- ============ Error 7 ============ -->
+    <div class="error-card">
+      <h3>7. 使いすぎでストップ(レート制限)</h3>
+      <div class="error-symptom">You have reached your usage limit
+rate_limit_exceeded</div>
+
+      <div class="label">💬 やさしく言うと</div>
+      <p>「短時間に使いすぎたので、ちょっと休んでね」というメッセージ。Pro プランは <strong>5時間ごとに使用枠がリセット</strong>されます。</p>
+
+      <div class="label">🔧 直し方</div>
+      <ul>
+        <li><strong>すぐ使いたい場合:</strong> 数時間待つ。スマホでアラームをセットしておくと便利</li>
+        <li><strong>使用量を減らしたい:</strong> 大きな作業の前に <code>/clear</code> で履歴をリセット(過去の会話分も枠を消費しています)</li>
+        <li><strong>頻繁に当たる場合:</strong> Max プラン($100/月〜)に変更すると制限が大幅にゆるくなります</li>
+      </ul>
+
+      <div class="label">💡 普段から気をつけること</div>
+      <p>Claude は会話が長くなるほど消費が増えます。話題が変わったら <code>/clear</code>、別プロジェクトに移るときは <code>exit</code> して入り直すのがおすすめ。</p>
+    </div>
+
+    <!-- ============ Error 8 ============ -->
+    <div class="error-card">
+      <h3>8. Node.js のバージョンが古い(npm のとき)</h3>
+      <div class="error-symptom">npm WARN EBADENGINE Unsupported engine
+required: { node: '&gt;=18.0.0' }</div>
+
+      <div class="label">💬 やさしく言うと</div>
+      <p>npm でインストールしようとしたら、「Node.js が古すぎるよ。18 以上にして」と言われています。</p>
+
+      <div class="label">🔧 直し方(一番ラクな方法)</div>
+      <p>npm を使わず、<strong>ネイティブインストーラ</strong> に切り替えれば Node.js 自体が不要になります。</p>
+      <div class="code-block">curl -fsSL https://claude.ai/install.sh | bash<button class="copy-btn">コピー</button></div>
+
+      <div class="label">🛠 どうしても npm を使いたい場合</div>
+      <ol>
+        <li><a href="https://nodejs.org" target="_blank" rel="noopener" style="color:var(--accent-deep); font-weight:700;">nodejs.org</a> から <strong>LTS版</strong>(緑のボタン)をダウンロード</li>
+        <li>インストーラを実行</li>
+        <li>ターミナルを完全に閉じて、開き直す</li>
+        <li><code>node -v</code> でバージョン確認(<code>v20.x.x</code> などが出ればOK)</li>
+        <li>もう一度 <code>npm install -g @anthropic-ai/claude-code</code></li>
+      </ol>
+    </div>
+
+    <!-- ============ Error 9 ============ -->
+    <div class="error-card">
+      <h3>9. Claude がファイルを見つけてくれない</h3>
+      <div class="error-symptom">そのファイルは存在しません / I cannot find the file</div>
+
+      <div class="label">💬 やさしく言うと</div>
+      <p>Claude Code は <strong>「自分が起動された場所」のフォルダしか見ません</strong>。違うフォルダで起動していて、目的のファイルが見えていない状態です。</p>
+
+      <div class="label">🔧 直し方</div>
+      <ol>
+        <li>Claude を一度終了する:<br>
+          → <code>exit</code> と入力して Enter、または <kbd>Ctrl</kbd>+<kbd>C</kbd> を 2回押す
+        </li>
+        <li>正しいフォルダに移動する:</li>
+      </ol>
+      <div class="code-block">cd ~/Desktop/my-project<button class="copy-btn">コピー</button></div>
+      <p style="margin-top:10px; font-size:13px; color:var(--ink-mute);">↑ <code>my-project</code> の部分は、自分のフォルダ名に置き換えてください。</p>
+      <ol start="3">
+        <li>そこから <code>claude</code> を起動し直す</li>
+      </ol>
+
+      <div class="label">💡 今いる場所がわからなくなったら</div>
+      <ul>
+        <li>Mac/Linux: <code>pwd</code>(今のフォルダのフルパスが表示される)</li>
+        <li>Windows: <code>cd</code>(同上)</li>
+        <li>ファイル一覧を見たい: <code>ls</code>(Mac/Linux)/ <code>dir</code>(Windows)</li>
+      </ul>
+    </div>
+
+    <!-- ============ Error 10 (NEW) ============ -->
+    <div class="error-card">
+      <h3>10. ターミナルでコピペができない</h3>
+      <div class="error-symptom">⌘+V / Ctrl+V を押しても何も起きない、貼り付けられない</div>
+
+      <div class="label">💬 やさしく言うと</div>
+      <p>ターミナルの <strong>コピー&amp;ペーストは、普通のアプリと操作が違うことがあります</strong>。慣れれば一発です。</p>
+
+      <div class="label">🔧 OS別の正しい操作</div>
+      <ul>
+        <li><strong>Mac:</strong> コピー <kbd>⌘</kbd>+<kbd>C</kbd> / 貼り付け <kbd>⌘</kbd>+<kbd>V</kbd>(普通通り)</li>
+        <li><strong>Windows Terminal / PowerShell:</strong><br>
+          コピー <kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>C</kbd> / 貼り付け <kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>V</kbd> または <kbd>右クリック</kbd>
+        </li>
+        <li><strong>Linux:</strong> 多くは <kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>C</kbd> / <kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>V</kbd></li>
+      </ul>
+
+      <div class="label">💡 一番確実な方法</div>
+      <p>マウスで <strong>右クリック</strong> してメニューから「貼り付け」を選ぶと、どの環境でも大体うまくいきます。</p>
+    </div>
+
+    <!-- ============ Error 11 (NEW) ============ -->
+    <div class="error-card">
+      <h3>11. 動かなくなった・止めたい</h3>
+      <div class="error-symptom">Claude が長時間考え込んでいる / 暴走した気がする / 止めたい</div>
+
+      <div class="label">💬 やさしく言うと</div>
+      <p>Claude が思った動きをしないとき、<strong>強制的に止める方法</strong> があります。覚えておくと安心です。</p>
+
+      <div class="label">🛑 強制ストップの方法</div>
+      <ol>
+        <li><kbd>Ctrl</kbd>+<kbd>C</kbd> を <strong>1回</strong> 押す → 今の動作をキャンセル</li>
+        <li>それでも反応しなければ <kbd>Ctrl</kbd>+<kbd>C</kbd> を <strong>もう1回</strong></li>
+        <li>完全に終了したいときは <code>exit</code> と入力して Enter</li>
+        <li>本当に固まったら、ターミナルウィンドウを ✕ で閉じてOK</li>
+      </ol>
+
+      <div class="label">⚠️ 安心ポイント</div>
+      <p>強制終了しても、<strong>パソコンが壊れることはありません</strong>。Claude Code は新しいターミナルを開けばまた起動できます。</p>
+    </div>
+
+    <!-- ============ Error 12 (NEW) ============ -->
+    <div class="error-card">
+      <h3>12. 警告(WARN)が出ているけど大丈夫?</h3>
+      <div class="error-symptom">npm WARN deprecated ...
+warning: package xxx is outdated</div>
+
+      <div class="label">💬 やさしく言うと</div>
+      <p>「<strong>WARN(警告)</strong>」と「<strong>ERROR(エラー)</strong>」は別モノです。</p>
+      <ul>
+        <li><strong>ERROR:</strong> 失敗した。何か対処が必要</li>
+        <li><strong>WARN:</strong> 注意を促しているだけ。<strong>ほとんどの場合、無視してOK</strong></li>
+      </ul>
+
+      <div class="label">✅ 確認方法</div>
+      <p>インストール完了後に <code>claude --version</code> でバージョンが表示されれば <strong>成功しています</strong>。WARN がたくさん出ていても、最終的に動けば問題ありません。</p>
+    </div>
+
+    <!-- ============ Error 13 (NEW) ============ -->
+    <div class="error-card">
+      <h3>13. 間違えて変なコマンドを実行した</h3>
+      <div class="error-symptom">変な記号が出た / 画面が真っ暗 / 入力できない</div>
+
+      <div class="label">💬 やさしく言うと</div>
+      <p>たとえば <code>vim</code> や <code>nano</code> といったエディタが立ち上がってしまったり、引用符を閉じ忘れて入力受付状態になっていたりするケースです。</p>
+
+      <div class="label">🆘 とりあえずの脱出コマンド(順に試す)</div>
+      <ol>
+        <li><kbd>Ctrl</kbd>+<kbd>C</kbd>(キャンセル)</li>
+        <li><kbd>Esc</kbd> を 2〜3回押してから <code>:q!</code> と入力 Enter(vim から脱出)</li>
+        <li><kbd>Ctrl</kbd>+<kbd>X</kbd> → <kbd>n</kbd> → <kbd>Enter</kbd>(nano から脱出)</li>
+        <li>それでもダメなら、ターミナルウィンドウを ✕ で閉じる</li>
+      </ol>
+
+      <div class="label">💡 予防策</div>
+      <p>知らないコマンドを実行するときは、まず <strong>Claude にきいて</strong> から実行する習慣をつけると安心です。</p>
+    </div>
+
+    <!-- 最終手段 -->
+    <div class="card" style="margin-top:24px;">
+      <h3>🆘 それでも解決しないとき</h3>
+      <p>上のどれにも当てはまらなければ、以下を順に試してください。</p>
+      <ol style="padding-left:22px; color:var(--ink-soft); font-size:15px; line-height:2;">
+        <li>ターミナルで <code>claude doctor</code> を実行 → <strong>出力をすべてマウスで選択してコピー</strong></li>
+        <li>右下の <strong>💬 ボタン</strong> から Claude を開く</li>
+        <li>「Claude Code でこんなエラーが出ています」とコピーした内容を貼り付けて質問</li>
+        <li>それでも解決しなければ、<a href="https://github.com/anthropics/claude-code/issues" target="_blank" rel="noopener" style="color:var(--accent-deep); font-weight:700;">公式 GitHub Issues</a> で同じ問題が報告されていないか検索</li>
+        <li>最終手段は <a href="https://support.claude.com" target="_blank" rel="noopener" style="color:var(--accent-deep); font-weight:700;">公式サポート</a> へ</li>
+      </ol>
+
+      <div class="tip" style="margin-top:18px;">
+        <strong>💡 質問するときのコツ</strong>
+        ① <strong>OS</strong>(Mac / Windows / Linux のどれか) ② <strong>使ったコマンド</strong>(自分が打ったもの) ③ <strong>エラー文の全文</strong>。この3つを伝えれば、Claude も人間も的確に答えられます。
+      </div>
+    </div>
+  </div>
+      </details>
+    </div>
+  </details>
+
+  <details class="phase-card">
+    <summary class="phase-summary">
+      <span class="phase-icon">📚</span>
+      <div class="phase-text">
+        <span class="phase-label">OTHERS</span>
+        <span class="phase-name">その他(豆知識・テクニック)</span>
+      </div>
+      <span class="phase-count">6 項目</span>
+      <span class="chevron">›</span>
+    </summary>
+    <div class="phase-body">
+      <details class="step-card">
+        <summary class="step-summary">
+          <span class="step-badge step-badge-icon">⚡</span>
+          <span class="step-name">コマンド一覧</span>
+          <span class="chevron">›</span>
+        </summary>
+        <div class="step-body">
+        <h2>覚えておくと便利な <strong>コマンド</strong></h2>
+    <p class="desc">Claude Code を使い始めたら、まずはこのあたり。すべて <strong>/</strong> から始まる「スラッシュコマンド」です。</p>
+
+    <div class="card">
+      <div class="cmd-list">
+        <div class="cmd-item">
+          <code>/help</code>
+          <div class="desc-text">使えるコマンド一覧を表示</div>
+        </div>
+        <div class="cmd-item">
+          <code>/init</code>
+          <div class="desc-text">プロジェクト用の <strong>CLAUDE.md</strong> を自動生成(超重要)</div>
+        </div>
+        <div class="cmd-item">
+          <code>/clear</code>
+          <div class="desc-text">会話履歴をリセット(動作が遅くなったときに)</div>
+        </div>
+        <div class="cmd-item">
+          <code>/model</code>
+          <div class="desc-text">使うモデル(Opus / Sonnet / Haiku)を切り替え</div>
+        </div>
+        <div class="cmd-item">
+          <code>/status</code>
+          <div class="desc-text">現在のセッション情報・使用量を確認</div>
+        </div>
+        <div class="cmd-item">
+          <code>/login</code>
+          <div class="desc-text">ログインし直す</div>
+        </div>
+        <div class="cmd-item">
+          <code>exit</code>
+          <div class="desc-text">Claude Code を終了する</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="tip">
+      <strong>💡 ターミナル側の便利コマンド</strong>
+      <code style="background:var(--ink);color:var(--bg);padding:2px 6px;border-radius:4px;font-family:'JetBrains Mono',monospace;font-size:12px;">claude --version</code>(バージョン確認)、
+      <code style="background:var(--ink);color:var(--bg);padding:2px 6px;border-radius:4px;font-family:'JetBrains Mono',monospace;font-size:12px;">claude doctor</code>(健康診断)、
+      <code style="background:var(--ink);color:var(--bg);padding:2px 6px;border-radius:4px;font-family:'JetBrains Mono',monospace;font-size:12px;">claude -p "質問"</code>(対話せず一発で答えだけもらう) も覚えておくと便利。
+    </div>
+  </div>
+      </details>
+      <details class="step-card">
+        <summary class="step-summary">
+          <span class="step-badge step-badge-icon">📝</span>
+          <span class="step-name">プロンプト集</span>
+          <span class="chevron">›</span>
+        </summary>
+        <div class="step-body">
+        <h2>最初に試したい <strong>プロンプト例</strong></h2>
+    <p class="desc">Claude Code に「何ができるの?」と思ったら、まずはこれをそのままコピーして試してみてください。</p>
+
+    <div class="prompt-card">
+      <span class="label">📂 コードを理解する</span>
+      <p class="prompt-text">このプロジェクトを読み込んで、ファイル構成と何のアプリか3行で教えて。</p>
+      <p class="note">→ 大きなコードベースを初めて触るときの定番。</p>
+    </div>
+
+    <div class="prompt-card">
+      <span class="label">✨ ファイルを作る</span>
+      <p class="prompt-text">index.html を作って。シンプルなランディングページで、見出しと自己紹介と問い合わせフォームが入ったやつ。</p>
+      <p class="note">→ ゼロから作りたいときに。日本語のままでOK。</p>
+    </div>
+
+    <div class="prompt-card">
+      <span class="label">🐛 バグを直す</span>
+      <p class="prompt-text">app.py を実行するとエラーが出る。原因を調べて修正して。修正前に何を変えるか説明してから直して。</p>
+      <p class="note">→ 「説明してから直して」を入れるとレビューしやすくなる。</p>
+    </div>
+
+    <div class="prompt-card">
+      <span class="label">📝 リファクタ</span>
+      <p class="prompt-text">utils フォルダの関数を読んで、重複してる処理をまとめて。テストは壊さないで。</p>
+      <p class="note">→ ファイル横断の変更が得意なのが Claude Code の強み。</p>
+    </div>
+
+    <div class="prompt-card">
+      <span class="label">📖 ドキュメント生成</span>
+      <p class="prompt-text">このリポジトリの README.md を日本語で書いて。インストール手順、使い方、ライセンスのセクションも入れて。</p>
+      <p class="note">→ 個人プロジェクトの README を整えるのに便利。</p>
+    </div>
+
+    <div class="prompt-card">
+      <span class="label">🔀 Git 操作</span>
+      <p class="prompt-text">今変更したファイルを確認して、適切なコミットメッセージで git commit して。</p>
+      <p class="note">→ Git のコマンドを覚えてなくても自然言語でOK。</p>
+    </div>
+
+    <div class="tip" style="margin-top:24px;">
+      <strong>🎯 上手なプロンプトの書き方</strong>
+      ① <strong>何のファイル/フォルダか</strong>を指定する ② <strong>ゴール</strong>を1〜2文で書く ③ <strong>制約</strong>(壊しちゃダメな部分など)を伝える ④ いきなり書き換えてほしくないときは「<strong>説明してから</strong>」と言う。この4つを意識するだけで精度がグッと上がります。
+    </div>
+  </div>
+      </details>
+      <details class="step-card">
+        <summary class="step-summary">
+          <span class="step-badge step-badge-icon">💡</span>
+          <span class="step-name">何が作れる?(アイデア集16選)</span>
+          <span class="chevron">›</span>
+        </summary>
+        <div class="step-body">
+        <h2>あなたが作れるもの <strong>16選</strong></h2>
+        <p class="desc">「Claude Code 入れたけど、何作ろう…」と止まってしまう人へ。難易度別に並べたアイデア集です。各カードのプロンプトをそのままコピーすれば、すぐに作り始められます。</p>
+
+        <!-- Level 1 -->
+        <div class="idea-level">
+          <span class="stars">⭐</span> レベル1:超簡単
+          <span class="time">1〜2時間で完成</span>
+        </div>
+        <div class="idea-grid">
+          <div class="idea-card">
+            <div class="idea-header">
+              <span class="idea-icon">📝</span>
+              <h4 class="idea-title">シンプルメモ帳</h4>
+            </div>
+            <p class="idea-desc">テキストを保存できるメモ帳。ブラウザを閉じても消えない。</p>
+            <div class="code-block no-prompt">memo.html を作って。複数のメモをタイトル付きで保存・編集・削除できるシンプルなメモ帳。データは localStorage に保存。白ベースで落ち着いたデザイン。<button class="copy-btn">コピー</button></div>
+          </div>
+
+          <div class="idea-card">
+            <div class="idea-header">
+              <span class="idea-icon">⏱</span>
+              <h4 class="idea-title">ポモドーロタイマー</h4>
+            </div>
+            <p class="idea-desc">25分作業 → 5分休憩を繰り返す集中タイマー。</p>
+            <div class="code-block no-prompt">pomodoro.html を作って。25分作業 / 5分休憩を繰り返すポモドーロタイマー。スタート・ストップ・リセットボタン、終了時に音、サイクル数の表示。ミニマルなデザイン。<button class="copy-btn">コピー</button></div>
+          </div>
+
+          <div class="idea-card">
+            <div class="idea-header">
+              <span class="idea-icon">🎲</span>
+              <h4 class="idea-title">ランチガチャ</h4>
+            </div>
+            <p class="idea-desc">「今日のランチ何にする?」をランダムで決定。</p>
+            <div class="code-block no-prompt">lunch.html を作って。ランチの選択肢を自由に追加・削除できて、ボタンを押すとガチャ風アニメーションでランダムに1つ決まるアプリ。楽しい雰囲気のデザイン。<button class="copy-btn">コピー</button></div>
+          </div>
+
+          <div class="idea-card">
+            <div class="idea-header">
+              <span class="idea-icon">🔢</span>
+              <h4 class="idea-title">BMI 計算機</h4>
+            </div>
+            <p class="idea-desc">身長と体重から BMI を計算+健康アドバイス。</p>
+            <div class="code-block no-prompt">bmi.html を作って。身長と体重を入力するとBMIを計算し、低体重/標準/肥満を判定して健康に関する一言コメントを表示。シンプルで見やすいデザイン。<button class="copy-btn">コピー</button></div>
+          </div>
+        </div>
+
+        <!-- Level 2 -->
+        <div class="idea-level">
+          <span class="stars">⭐⭐</span> レベル2:シンプル
+          <span class="time">半日で完成</span>
+        </div>
+        <div class="idea-grid">
+          <div class="idea-card">
+            <div class="idea-header">
+              <span class="idea-icon">✅</span>
+              <h4 class="idea-title">Todo アプリ</h4>
+            </div>
+            <p class="idea-desc">追加・チェック・削除ができるタスク管理。</p>
+            <div class="code-block no-prompt">todo.html を作って。タスクの追加・完了チェック・削除ができる Todo アプリ。完了済みは取り消し線、データは localStorage に保存、すっきりしたモダンデザイン。<button class="copy-btn">コピー</button></div>
+          </div>
+
+          <div class="idea-card">
+            <div class="idea-header">
+              <span class="idea-icon">💰</span>
+              <h4 class="idea-title">家計簿</h4>
+            </div>
+            <p class="idea-desc">収入支出を記録、カテゴリ別合計とグラフ表示。</p>
+            <div class="code-block no-prompt">kakeibo.html を作って。収入と支出を日付・カテゴリ(食費/交通費など)付きで記録、月ごとの合計と簡単なグラフを表示する家計簿。データはブラウザに保存。<button class="copy-btn">コピー</button></div>
+          </div>
+
+          <div class="idea-card">
+            <div class="idea-header">
+              <span class="idea-icon">📚</span>
+              <h4 class="idea-title">単語カード</h4>
+            </div>
+            <p class="idea-desc">表/裏で切り替わるフラッシュカード。学習にも◎。</p>
+            <div class="code-block no-prompt">wordcard.html を作って。表(英単語)/裏(日本語訳)で切り替わる単語カードアプリ。単語の追加・編集・削除、ランダム出題、正解/不正解の記録機能。<button class="copy-btn">コピー</button></div>
+          </div>
+
+          <div class="idea-card">
+            <div class="idea-header">
+              <span class="idea-icon">🎯</span>
+              <h4 class="idea-title">習慣トラッカー</h4>
+            </div>
+            <p class="idea-desc">毎日の習慣をチェック、達成率と連続記録を可視化。</p>
+            <div class="code-block no-prompt">habit.html を作って。複数の習慣(運動・読書など)を登録して毎日チェックできるトラッカー。カレンダー表示で達成率がわかる、連続記録(ストリーク)も表示。<button class="copy-btn">コピー</button></div>
+          </div>
+        </div>
+
+        <!-- Level 3 -->
+        <div class="idea-level">
+          <span class="stars">⭐⭐⭐</span> レベル3:本格的
+          <span class="time">週末でじっくり</span>
+        </div>
+        <div class="idea-grid">
+          <div class="idea-card">
+            <div class="idea-header">
+              <span class="idea-icon">🌐</span>
+              <h4 class="idea-title">ポートフォリオサイト</h4>
+            </div>
+            <p class="idea-desc">自己紹介+作品+連絡先のレスポンシブサイト。</p>
+            <div class="code-block no-prompt">私のポートフォリオサイトを作って。index.html / style.css / script.js のセット。自己紹介・スキル・作品ギャラリー・連絡先のセクション、スマホ対応、おしゃれでモダンなデザイン。<button class="copy-btn">コピー</button></div>
+          </div>
+
+          <div class="idea-card">
+            <div class="idea-header">
+              <span class="idea-icon">📖</span>
+              <h4 class="idea-title">読書記録アプリ</h4>
+            </div>
+            <p class="idea-desc">読んだ本・感想・星評価を記録。本棚風デザイン。</p>
+            <div class="code-block no-prompt">books.html を作って。読んだ本(タイトル/著者/読了日/感想/星5評価)を記録するアプリ。一覧表示、検索、お気に入りマーク、データ保存。本棚っぽい温かみのあるデザイン。<button class="copy-btn">コピー</button></div>
+          </div>
+
+          <div class="idea-card">
+            <div class="idea-header">
+              <span class="idea-icon">📔</span>
+              <h4 class="idea-title">日記アプリ</h4>
+            </div>
+            <p class="idea-desc">日付別の日記・気分タグ・キーワード検索。</p>
+            <div class="code-block no-prompt">diary.html を作って。日記が書けるアプリ。日付別に投稿、過去の日記の一覧、キーワード検索、その日の気分(😊😢など)タグ付け、自動保存。<button class="copy-btn">コピー</button></div>
+          </div>
+
+          <div class="idea-card">
+            <div class="idea-header">
+              <span class="idea-icon">🎮</span>
+              <h4 class="idea-title">三目並べゲーム</h4>
+            </div>
+            <p class="idea-desc">2人プレイ+AI 対戦の○×ゲーム。</p>
+            <div class="code-block no-prompt">tictactoe.html を作って。三目並べ(○×ゲーム)。2人プレイモードと、AI対戦モード(簡単な思考ロジック)の両方、勝敗カウントも表示。シンプルでかわいいデザイン。<button class="copy-btn">コピー</button></div>
+          </div>
+        </div>
+
+        <!-- Level 4 -->
+        <div class="idea-level">
+          <span class="stars">🚀</span> レベル4:挑戦してみよう
+          <span class="time">1週間〜</span>
+        </div>
+        <div class="idea-grid">
+          <div class="idea-card">
+            <div class="idea-header">
+              <span class="idea-icon">🤖</span>
+              <h4 class="idea-title">自分専用チャットボット</h4>
+            </div>
+            <p class="idea-desc">Claude API を使う、自分だけの AI 相棒。</p>
+            <div class="code-block no-prompt">chatbot.html を作って。Claude API を使って動くチャットボット。会話履歴の表示、ストリーミング表示、コードブロック対応。最初に system prompt をカスタマイズできる設定画面付き。<button class="copy-btn">コピー</button></div>
+          </div>
+
+          <div class="idea-card">
+            <div class="idea-header">
+              <span class="idea-icon">🍳</span>
+              <h4 class="idea-title">レシピコレクション</h4>
+            </div>
+            <p class="idea-desc">お気に入りレシピを保存・整理・印刷できる。</p>
+            <div class="code-block no-prompt">recipe.html を作って。お気に入りレシピを保存・整理するアプリ。レシピ追加(名前/材料/手順/写真URL)、カテゴリ分け、検索、お気に入り機能、印刷機能。<button class="copy-btn">コピー</button></div>
+          </div>
+
+          <div class="idea-card">
+            <div class="idea-header">
+              <span class="idea-icon">✈️</span>
+              <h4 class="idea-title">旅行プランナー</h4>
+            </div>
+            <p class="idea-desc">日程・持ち物・予算を一括管理する旅のお供。</p>
+            <div class="code-block no-prompt">travel.html を作って。旅行計画を立てるアプリ。日程ごとの予定、持ち物チェックリスト、予算管理、旅先のメモ、Google マップへのリンク自動生成。<button class="copy-btn">コピー</button></div>
+          </div>
+
+          <div class="idea-card">
+            <div class="idea-header">
+              <span class="idea-icon">💼</span>
+              <h4 class="idea-title">名刺メーカー</h4>
+            </div>
+            <p class="idea-desc">入力するとデザイン+QR付き名刺が完成。</p>
+            <div class="code-block no-prompt">meishi.html を作って。情報を入力すると名刺デザインがリアルタイム生成されるアプリ。名前/会社/役職/連絡先/SNS、QRコード自動生成、PNG画像で書き出し可能。<button class="copy-btn">コピー</button></div>
+          </div>
+        </div>
+
+        <div class="tip" style="margin-top:28px;">
+          <strong>💡 選び方のコツ</strong>
+          <strong>「自分が毎日困っていること」</strong>を解決するアプリが、一番続きます。手持ちのスマホアプリを見て「これの自分専用版が欲しい」と思うものから挑戦するのも◎。最初は <strong>レベル1</strong> を1〜2個作って、Claude Code に慣れるのがおすすめ。
+        </div>
+        </div>
+      </details>
+      <details class="step-card">
+        <summary class="step-summary">
+          <span class="step-badge step-badge-icon">⌨️</span>
+          <span class="step-name">ショートカット</span>
+          <span class="chevron">›</span>
+        </summary>
+        <div class="step-body">
+        <h2>作業を加速する <strong>ショートカット</strong></h2>
+    <p class="desc">覚えると劇的に作業が速くなります。最初は太字の3つだけでも十分効果があります。</p>
+
+    <div class="card">
+      <h3>⌨️ Claude Code 内のショートカット</h3>
+      <div class="cmd-list">
+        <div class="cmd-item">
+          <code>Tab</code>
+          <div class="desc-text"><strong>ファイル名・パスを補完</strong>(超便利)</div>
+        </div>
+        <div class="cmd-item">
+          <code>↑ ↓</code>
+          <div class="desc-text">過去に送ったメッセージを呼び出す</div>
+        </div>
+        <div class="cmd-item">
+          <code>Shift + Tab</code>
+          <div class="desc-text">モード切替(自動承認 / 計画モードなど)</div>
+        </div>
+        <div class="cmd-item">
+          <code>Esc</code>
+          <div class="desc-text">入力中のメッセージを取り消し</div>
+        </div>
+        <div class="cmd-item">
+          <code>Ctrl + C</code>
+          <div class="desc-text"><strong>処理を中断</strong>(暴走したらこれ)</div>
+        </div>
+        <div class="cmd-item">
+          <code>Ctrl + L</code>
+          <div class="desc-text">画面をクリア(履歴は残る)</div>
+        </div>
+        <div class="cmd-item">
+          <code>Ctrl + D</code>
+          <div class="desc-text">Claude Code を終了</div>
+        </div>
+        <div class="cmd-item">
+          <code>@ファイル名</code>
+          <div class="desc-text"><strong>特定のファイルを参照</strong>(例:<code>@index.html を見て</code>)</div>
+        </div>
+        <div class="cmd-item">
+          <code>画像をペースト</code>
+          <div class="desc-text">スクショなどをそのまま貼って質問できる</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h3>🖥 ターミナル自体のショートカット</h3>
+      <p>Claude Code を起動する前のターミナル操作も、知っておくと作業が速くなります。</p>
+      <div class="cmd-list">
+        <div class="cmd-item">
+          <code>Tab</code>
+          <div class="desc-text"><strong>コマンド・ファイル名を自動補完</strong></div>
+        </div>
+        <div class="cmd-item">
+          <code>↑</code>
+          <div class="desc-text">前に実行したコマンドを呼び出す</div>
+        </div>
+        <div class="cmd-item">
+          <code>Ctrl + R</code>
+          <div class="desc-text">過去のコマンドを検索</div>
+        </div>
+        <div class="cmd-item">
+          <code>Ctrl + A</code>
+          <div class="desc-text">行の先頭にカーソル移動</div>
+        </div>
+        <div class="cmd-item">
+          <code>Ctrl + E</code>
+          <div class="desc-text">行の末尾にカーソル移動</div>
+        </div>
+        <div class="cmd-item">
+          <code>Ctrl + U</code>
+          <div class="desc-text">入力中の行をすべて消す</div>
+        </div>
+        <div class="cmd-item">
+          <code>Ctrl + K</code>
+          <div class="desc-text">カーソル位置から行末まで消す</div>
+        </div>
+        <div class="cmd-item">
+          <code>clear</code>
+          <div class="desc-text">画面をクリア(コマンドとして実行)</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="tip">
+      <strong>💡 まずはこの3つだけ</strong>
+      <strong>Tab</strong>(自動補完)・<strong>↑</strong>(履歴)・<strong>Ctrl+C</strong>(中断)。この3つだけ覚えれば、作業効率が体感で2倍くらい変わります。
+    </div>
+  </div>
+      </details>
+      <details class="step-card">
+        <summary class="step-summary">
+          <span class="step-badge step-badge-icon">🎬</span>
+          <span class="step-name">動画で学ぶ(YouTube)</span>
+          <span class="chevron">›</span>
+        </summary>
+        <div class="step-body">
+        <h2>動画で学びたい方へ</h2>
+        <p class="desc">日本語の人気解説動画を厳選。文章より動画派の方や、実際に画面で見たい方はこちらから。</p>
+
+        <div class="chat-section-label" style="color:var(--ink-mute); margin-bottom:10px;">🌐 Claude(Web版)を学ぶ</div>
+        <div class="video-list">
+          <a href="https://www.youtube.com/watch?v=fZD2IlRGBTI" target="_blank" rel="noopener" class="video-card">
+            <div class="video-thumb"><img src="https://img.youtube.com/vi/fZD2IlRGBTI/mqdefault.jpg" alt="" loading="lazy"></div>
+            <div class="video-info">
+              <div class="video-title">【有料級】Claudeの使い方がわからない人、これで全部解決します</div>
+              <div class="video-meta"><span class="yt-tag">YOUTUBE</span> Anthropic Academy 紹介</div>
+            </div>
+          </a>
+          <a href="https://www.youtube.com/watch?v=OhO0WcRP6Ow" target="_blank" rel="noopener" class="video-card">
+            <div class="video-thumb"><img src="https://img.youtube.com/vi/OhO0WcRP6Ow/mqdefault.jpg" alt="" loading="lazy"></div>
+            <div class="video-info">
+              <div class="video-title">【最新版】Claude 完全解説!20以上の便利機能をこの1本で全て解説</div>
+              <div class="video-meta"><span class="yt-tag">YOUTUBE</span> プロセボ AIスクール</div>
+            </div>
+          </a>
+        </div>
+
+        <div class="chat-section-label" style="color:var(--ink-mute); margin-bottom:10px;">🚀 Claude Code 超入門(まずはこれ)</div>
+        <div class="video-list">
+          <a href="https://www.youtube.com/watch?v=4NDb-X624gY" target="_blank" rel="noopener" class="video-card">
+            <div class="video-thumb"><img src="https://img.youtube.com/vi/4NDb-X624gY/mqdefault.jpg" alt="" loading="lazy"></div>
+            <div class="video-info">
+              <div class="video-title">【初心者】Claude Code の全体像がたった9分で丸分かり!始め方〜活用法まで解説</div>
+              <div class="video-meta"><span class="yt-tag">YOUTUBE</span> 短時間で全体像を把握 <span class="video-duration">9分</span></div>
+            </div>
+          </a>
+          <a href="https://www.youtube.com/watch?v=Nd5f3n0ovzc" target="_blank" rel="noopener" class="video-card">
+            <div class="video-thumb"><img src="https://img.youtube.com/vi/Nd5f3n0ovzc/mqdefault.jpg" alt="" loading="lazy"></div>
+            <div class="video-info">
+              <div class="video-title">超簡単!エンジニアじゃなくても分かる Claude Code 入門講座</div>
+              <div class="video-meta"><span class="yt-tag">YOUTUBE</span> 非エンジニア向け解説</div>
+            </div>
+          </a>
+        </div>
+
+        <div class="chat-section-label" style="color:var(--ink-mute); margin-bottom:10px;">🎯 Claude Code 実践編(深掘り)</div>
+        <div class="video-list">
+          <a href="https://www.youtube.com/watch?v=EpUWXT0Fcic" target="_blank" rel="noopener" class="video-card">
+            <div class="video-thumb"><img src="https://img.youtube.com/vi/EpUWXT0Fcic/mqdefault.jpg" alt="" loading="lazy"></div>
+            <div class="video-info">
+              <div class="video-title">【Claude Code 超入門】超基本的なことをたった30分で学べます|使い方・設定・自動化まで全手順</div>
+              <div class="video-meta"><span class="yt-tag">YOUTUBE</span> 設定・自動化まで網羅 <span class="video-duration">30分</span></div>
+            </div>
+          </a>
+          <a href="https://www.youtube.com/watch?v=F6GHmnOuQZc" target="_blank" rel="noopener" class="video-card">
+            <div class="video-thumb"><img src="https://img.youtube.com/vi/F6GHmnOuQZc/mqdefault.jpg" alt="" loading="lazy"></div>
+            <div class="video-info">
+              <div class="video-title">【超入門】初心者でもスグに使える Claude Code の基礎と神活用を徹底解説するで!</div>
+              <div class="video-meta"><span class="yt-tag">YOUTUBE</span> 基礎+応用テクニック</div>
+            </div>
+          </a>
+          <a href="https://www.youtube.com/watch?v=X32pPFe5EIU" target="_blank" rel="noopener" class="video-card">
+            <div class="video-thumb"><img src="https://img.youtube.com/vi/X32pPFe5EIU/mqdefault.jpg" alt="" loading="lazy"></div>
+            <div class="video-info">
+              <div class="video-title">【Claude Code 超入門】実は簡単?!Claude Code で実際に Web サイトを作成する様子を解説</div>
+              <div class="video-meta"><span class="yt-tag">YOUTUBE</span> 実践:Webサイト制作</div>
+            </div>
+          </a>
+          <a href="https://www.youtube.com/watch?v=RWXTmA_BIpE" target="_blank" rel="noopener" class="video-card">
+            <div class="video-thumb"><img src="https://img.youtube.com/vi/RWXTmA_BIpE/mqdefault.jpg" alt="" loading="lazy"></div>
+            <div class="video-info">
+              <div class="video-title">【バイブコーディング超入門講座 第4回】初心者向け!Claude Code を活用したプログラムの作り方</div>
+              <div class="video-meta"><span class="yt-tag">YOUTUBE</span> ゲームアプリ実装デモ</div>
+            </div>
+          </a>
+        </div>
+
+        <div class="tip" style="margin-top:24px;">
+          <strong>💡 動画選びのコツ</strong>
+          まずは <strong>「9分で丸分かり」</strong> で全体像を掴んで、あとは興味のある実践編をどうぞ。動画は2026年4〜5月公開のものを中心に選んでいます(Claude Code は変化が速いので、なるべく新しい動画を見るのがおすすめ)。
+        </div>
+        </div>
+      </details>
+      <details class="step-card">
+        <summary class="step-summary">
+          <span class="step-badge step-badge-icon">🔗</span>
+          <span class="step-name">リソース・公式リンク</span>
+          <span class="chevron">›</span>
+        </summary>
+        <div class="step-body">
+        <h2><strong>公式リンク</strong>集</h2>
+    <p class="desc">困ったときの一次情報。ブックマーク推奨。</p>
+
+    <div class="resources">
+      <a href="https://claude.ai" target="_blank" rel="noopener" class="res-card">
+        <div class="res-title">Claude.ai <span class="arrow">↗</span></div>
+        <div class="res-desc">アカウント登録・Web版Claude・プラン変更</div>
+      </a>
+      <a href="https://docs.claude.com/en/docs/claude-code/overview" target="_blank" rel="noopener" class="res-card">
+        <div class="res-title">Claude Code Docs <span class="arrow">↗</span></div>
+        <div class="res-desc">公式ドキュメント(英語・最も信頼できる情報源)</div>
+      </a>
+      <a href="https://docs.claude.com/en/docs/claude-code/quickstart" target="_blank" rel="noopener" class="res-card">
+        <div class="res-title">Quickstart <span class="arrow">↗</span></div>
+        <div class="res-desc">公式の最短スタートガイド</div>
+      </a>
+      <a href="https://github.com/anthropics/claude-code" target="_blank" rel="noopener" class="res-card">
+        <div class="res-title">GitHub Repository <span class="arrow">↗</span></div>
+        <div class="res-desc">最新リリースノート・バグ報告</div>
+      </a>
+      <a href="https://support.claude.com" target="_blank" rel="noopener" class="res-card">
+        <div class="res-title">Help Center <span class="arrow">↗</span></div>
+        <div class="res-desc">トラブル時のサポート窓口</div>
+      </a>
+      <a href="https://www.anthropic.com/news" target="_blank" rel="noopener" class="res-card">
+        <div class="res-title">Anthropic News <span class="arrow">↗</span></div>
+        <div class="res-desc">新機能・モデルアップデートの情報</div>
+      </a>
+    </div>
+  </div>
+      </details>
+    </div>
+  </details>
+  </div>
+
+  <!-- ===== Other Guides Section ===== -->
+  <section class="other-guides-section">
+    <div class="other-guides-header">
+      <h2>🗺️ 他のガイドも <strong>見てみる</strong></h2>
+      <p>このシリーズには 3 つの初心者ガイドがあります。次に学ぶならどっち?</p>
+    </div>
+    <div class="other-guides-grid">
+    <a href="canva-guide.html" class="guide-card">
+      <span class="guide-icon"><svg class="brand-icon-large brand-canva" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10c3.16 0 5.99-1.47 7.83-3.76l-2.9-2.01A6.49 6.49 0 0 1 12 18.5c-3.59 0-6.5-2.91-6.5-6.5S8.41 5.5 12 5.5c2 0 3.78.9 4.97 2.31l2.97-1.94A9.97 9.97 0 0 0 12 2z"/></svg></span>
+      <span class="guide-card-eyebrow">DESIGN · CANVA</span>
+      <h3 class="guide-title">Canva はじめてガイド</h3>
+      <p class="guide-desc">テンプレを選ぶだけでプロ級デザイン。SNS・チラシ・プレゼン・動画まで。</p>
+      <span class="guide-cta">ガイドを見る <span class="arrow">→</span></span>
+    </a>
+    <a href="github-guide.html" class="guide-card">
+      <span class="guide-icon"><svg class="brand-icon-large brand-github" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></svg></span>
+      <span class="guide-card-eyebrow">STORAGE · GITHUB</span>
+      <h3 class="guide-title">GitHub はじめてガイド</h3>
+      <p class="guide-desc">作ったゲームを保管・公開。GitHub Pages で URL シェアできる魔法。</p>
+      <span class="guide-cta">ガイドを見る <span class="arrow">→</span></span>
+    </a>
+    </div>
+  </section>
+
+  <!-- ===== Share Section ===== -->
+  <section class="share-section">
+    <div class="share-header">
+      <h2>📤 このガイドを <strong>シェアする</strong></h2>
+      <p>Claude Code を始めたい友達やチームに送ってあげてください。1人でも多くの人が AI 時代の波に乗れますように。</p>
+    </div>
+
+    <!-- Local file warning (shown when file://) -->
+    <div class="share-local-notice" id="shareLocalNotice" style="display:none;">
+      <strong>📝 まずはホスティングが必要です</strong>
+      <p>今このページを <strong>ローカル(自分のパソコン)</strong> で開いているようです。シェアするには、<strong>GitHub Pages</strong> や <strong>Netlify</strong> でこのファイルを公開してください。公開すると下のシェア機能が自動で使えるようになります。</p>
+    </div>
+
+    <!-- Share UI (shown when hosted) -->
+    <div class="share-content" id="shareContent" style="display:none;">
+      <div class="share-grid">
+        <div class="share-url-card">
+          <span class="share-card-label">📎 このページの URL</span>
+          <div class="url-display" id="pageUrl">―</div>
+          <button class="share-btn-copy" id="copyUrlBtn">
+            <span class="copy-text">📋 URL をコピー</span>
+          </button>
+        </div>
+
+        <div class="share-qr-card">
+          <span class="share-card-label">📱 QR コード</span>
+          <div class="qr-wrapper">
+            <img id="qrImage" src="" alt="QR Code" loading="lazy">
+          </div>
+          <p class="qr-note">スマホで読み取り</p>
+        </div>
+      </div>
+
+      <div class="share-social">
+        <a href="#" id="shareLine" target="_blank" rel="noopener" class="social-btn social-line">
+          💬 LINE で送る
+        </a>
+        <a href="#" id="shareX" target="_blank" rel="noopener" class="social-btn social-x">
+          𝕏 X で投稿
+        </a>
+        <button id="shareNative" class="social-btn social-native">
+          ↗ その他で共有
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <p>Made with care for first-time users.</p>
+    <p style="margin-top:6px;opacity:0.6;">情報は2026年5月時点のものです。最新情報は公式ドキュメントをご確認ください。</p>
+  </footer>
+
+</div>
+
+<script>
+// Tab switching - groups tabs by their parent container so multiple tab groups work
+document.querySelectorAll('.tabs').forEach(group => {
+  const buttons = group.querySelectorAll('.tab-btn');
+  buttons.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const target = btn.dataset.tab;
+      // siblings in this tab group
+      buttons.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      // Find the tab-content elements adjacent to this group
+      let next = group.nextElementSibling;
+      const contents = [];
+      while (next && next.classList && next.classList.contains('tab-content')) {
+        contents.push(next);
+        next = next.nextElementSibling;
+      }
+      contents.forEach(c => c.classList.remove('active'));
+      const targetEl = document.getElementById(target);
+      if (targetEl) targetEl.classList.add('active');
+    });
+  });
+});
+
+// Copy buttons
+document.querySelectorAll('.copy-btn').forEach(btn => {
+  btn.addEventListener('click', async (e) => {
+    e.stopPropagation();
+    const block = btn.parentElement;
+    // Get text content excluding the button
+    const text = Array.from(block.childNodes)
+      .filter(n => n.nodeType === Node.TEXT_NODE || (n.nodeType === Node.ELEMENT_NODE && !n.classList.contains('copy-btn')))
+      .map(n => n.textContent)
+      .join('')
+      .trim();
+    try {
+      await navigator.clipboard.writeText(text);
+      const original = btn.textContent;
+      btn.textContent = '✓ コピー済';
+      btn.classList.add('copied');
+      setTimeout(() => {
+        btn.textContent = original;
+        btn.classList.remove('copied');
+      }, 1500);
+    } catch (err) {
+      btn.textContent = 'コピー失敗';
+    }
+  });
+});
+</script>
+
+<!-- ===== Help Panel ===== -->
+<button class="chat-launcher" id="chatLauncher" aria-label="ヘルプを開く" title="Claude にきく">💬</button>
+
+<div class="chat-window" id="chatWindow" role="dialog" aria-label="ヘルプパネル" aria-hidden="true">
+  <div class="chat-header">
+    <div class="chat-header-info">
+      <div class="chat-avatar">💡</div>
+      <div>
+        <div class="chat-title">AI にきく</div>
+        <div class="chat-subtitle">CLAUDE / CHATGPT / GEMINI</div>
+      </div>
+    </div>
+    <button class="chat-close" id="chatClose" aria-label="閉じる">✕</button>
+  </div>
+
+  <div class="chat-intro">
+    <h4>わからないことは AI に直接きいてみよう</h4>
+    <p class="lead-text">
+      下の質問をクリックするとコピーされます。お好きな AI(<strong>Claude / ChatGPT / Gemini</strong>)を開いて、貼り付けて送るだけ。
+    </p>
+
+    <div class="chat-section-label">よくある質問</div>
+    <div class="chat-q-list" id="chatQList">
+      <button class="chat-q-card" data-q="Claude Code をインストールしようとしたらエラーが出ました。原因と対処法を初心者にもわかるように教えてください。私の OS は ___ です。">
+        <span>インストールでエラーが出る</span>
+        <span class="q-icon">COPY</span>
+      </button>
+      <button class="chat-q-card" data-q="ターミナルって何ですか?どう使うのか初心者向けに3分で読める長さで教えてください。">
+        <span>ターミナルって何?</span>
+        <span class="q-icon">COPY</span>
+      </button>
+      <button class="chat-q-card" data-q="Claude Code を初めて起動しました。最初に試したほうがいいことを3つ、初心者向けに教えてください。">
+        <span>最初に何を試せばいい?</span>
+        <span class="q-icon">COPY</span>
+      </button>
+      <button class="chat-q-card" data-q="Claude の Pro プランと Max プランの違いを、初心者向けにシンプルに教えてください。どんな人にどっちが向いていますか?">
+        <span>Pro と Max の違いは?</span>
+        <span class="q-icon">COPY</span>
+      </button>
+      <button class="chat-q-card" data-q="ターミナルで claude コマンドを実行したら command not found と表示されました。どう直せばいいですか?">
+        <span>command not found が出る</span>
+        <span class="q-icon">COPY</span>
+      </button>
+      <button class="chat-q-card" data-q="Claude Code でやってはいけないこと、注意するべきことを初心者向けに教えてください。">
+        <span>注意点・気をつけること</span>
+        <span class="q-icon">COPY</span>
+      </button>
+    </div>
+  </div>
+
+  <div class="chat-cta-wrap">
+    <a href="https://claude.ai/new" target="_blank" rel="noopener" class="chat-cta chat-cta-primary">
+      <span class="ai-logo claude">C</span>
+      Claude を開く
+      <span class="recommend-badge">おすすめ</span>
+      <span class="arrow">↗</span>
+    </a>
+    <div class="chat-cta-row">
+      <a href="https://chatgpt.com" target="_blank" rel="noopener" class="chat-cta-secondary">
+        <span class="ai-logo gpt">G</span>
+        ChatGPT <span class="arrow">↗</span>
+      </a>
+      <a href="https://gemini.google.com/app" target="_blank" rel="noopener" class="chat-cta-secondary">
+        <span class="ai-logo gemini">✦</span>
+        Gemini <span class="arrow">↗</span>
+      </a>
+    </div>
+    <p class="chat-tiny">クリックで新しいタブで開きます</p>
+  </div>
+</div>
+
+<script>
+(() => {
+  const launcher = document.getElementById('chatLauncher');
+  const chatWindow = document.getElementById('chatWindow');
+  const chatClose = document.getElementById('chatClose');
+  const qList = document.getElementById('chatQList');
+
+  // Open / close
+  launcher.addEventListener('click', () => {
+    chatWindow.classList.add('open');
+    chatWindow.setAttribute('aria-hidden', 'false');
+    launcher.classList.add('hidden');
+  });
+  chatClose.addEventListener('click', () => {
+    chatWindow.classList.remove('open');
+    chatWindow.setAttribute('aria-hidden', 'true');
+    launcher.classList.remove('hidden');
+  });
+
+  // Copy question text on click
+  qList.querySelectorAll('.chat-q-card').forEach(btn => {
+    btn.addEventListener('click', async () => {
+      const text = btn.dataset.q;
+      const icon = btn.querySelector('.q-icon');
+      const originalIcon = icon.textContent;
+      try {
+        await navigator.clipboard.writeText(text);
+        btn.classList.add('copied');
+        icon.textContent = '✓ COPIED';
+        setTimeout(() => {
+          btn.classList.remove('copied');
+          icon.textContent = originalIcon;
+        }, 1600);
+      } catch (err) {
+        icon.textContent = 'FAILED';
+        setTimeout(() => { icon.textContent = originalIcon; }, 1600);
+      }
+    });
+  });
+
+  // ESC to close
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && chatWindow.classList.contains('open')) {
+      chatClose.click();
+    }
+  });
+})();
+</script>
+
+<script>
+/* ===== Share Section ===== */
+(() => {
+  const url = window.location.href;
+  const isLocal = window.location.protocol === 'file:';
+
+  const localNotice = document.getElementById('shareLocalNotice');
+  const content = document.getElementById('shareContent');
+
+  if (isLocal) {
+    if (localNotice) localNotice.style.display = 'block';
+    if (content) content.style.display = 'none';
+    return;
+  }
+
+  // Show share UI
+  if (localNotice) localNotice.style.display = 'none';
+  if (content) content.style.display = 'block';
+
+  // Display URL
+  const urlDisplay = document.getElementById('pageUrl');
+  if (urlDisplay) urlDisplay.textContent = url;
+
+  // QR code via api.qrserver.com
+  const qrImg = document.getElementById('qrImage');
+  if (qrImg) {
+    qrImg.src = `https://api.qrserver.com/v1/create-qr-code/?size=240x240&data=${encodeURIComponent(url)}&margin=0`;
+  }
+
+  // URL copy button
+  const copyBtn = document.getElementById('copyUrlBtn');
+  if (copyBtn) {
+    copyBtn.addEventListener('click', async () => {
+      const textEl = copyBtn.querySelector('.copy-text');
+      const original = textEl.textContent;
+      try {
+        await navigator.clipboard.writeText(url);
+        copyBtn.classList.add('copied');
+        textEl.textContent = '✓ コピーしました!';
+        setTimeout(() => {
+          copyBtn.classList.remove('copied');
+          textEl.textContent = original;
+        }, 2000);
+      } catch (e) {
+        textEl.textContent = '✗ 失敗(手動でコピーしてください)';
+        setTimeout(() => { textEl.textContent = original; }, 2500);
+      }
+    });
+  }
+
+  const shareTitle = 'Claude / Claude Code 初心者ガイド';
+
+  // LINE share
+  const lineBtn = document.getElementById('shareLine');
+  if (lineBtn) {
+    lineBtn.href = `https://social-plugins.line.me/lineit/share?url=${encodeURIComponent(url)}`;
+  }
+
+  // X (Twitter) share
+  const xBtn = document.getElementById('shareX');
+  if (xBtn) {
+    xBtn.href = `https://twitter.com/intent/tweet?text=${encodeURIComponent(shareTitle)}&url=${encodeURIComponent(url)}`;
+  }
+
+  // Native share (Web Share API - mobile mostly)
+  const nativeBtn = document.getElementById('shareNative');
+  if (nativeBtn) {
+    if (navigator.share) {
+      nativeBtn.addEventListener('click', async () => {
+        try {
+          await navigator.share({
+            title: shareTitle,
+            text: 'Claude Code を始めるための日本語ガイド',
+            url: url
+          });
+        } catch (e) {
+          // User cancelled - no action needed
+        }
+      });
+    } else {
+      // Web Share API not supported, hide the button
+      nativeBtn.style.display = 'none';
+    }
+  }
+})();
+</script>
+
+</body>
+</html>

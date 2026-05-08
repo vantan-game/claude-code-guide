@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI Tools, はじめてガイド — Beginner Guides Series</title>
+<meta name="description" content="Claude Code・Canva・GitHub の3ツールを初心者向けに日本語で。ゼロから自分のゲームを作って公開するまでの最短ルート。">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,400;1,9..144,500&family=Zen+Kaku+Gothic+New:wght@400;500;700;900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #F7F2EA;
+  --bg-card: #FFFCF6;
+  --ink: #1C1A17;
+  --ink-soft: #4A4540;
+  --ink-mute: #8A847C;
+  --line: #E5DDD0;
+  --accent: #D97757;
+  --accent-deep: #B85A3F;
+  --accent-soft: #FBE9DF;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: 'Zen Kaku Gothic New', -apple-system, BlinkMacSystemFont, sans-serif;
+  background: var(--bg);
+  color: var(--ink);
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ===== Top Navigation ===== */
+.top-nav {
+  background: rgba(247, 242, 234, 0.88);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border-bottom: 1px solid rgba(28, 26, 23, 0.08);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  padding: 12px 0;
+}
+.top-nav-inner {
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 0 32px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+.nav-brand-link {
+  font-family: 'Fraunces', serif;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--ink);
+  letter-spacing: -0.01em;
+  white-space: nowrap;
+  text-decoration: none;
+  transition: color 0.18s;
+}
+.nav-brand-link:hover { color: var(--accent-deep); }
+.nav-brand-mark {
+  color: var(--accent-deep);
+  margin-right: 6px;
+}
+.nav-links {
+  display: flex;
+  gap: 4px;
+  flex-wrap: wrap;
+}
+.nav-link {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11.5px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  color: var(--ink-mute);
+  text-decoration: none;
+  padding: 7px 13px;
+  border-radius: 7px;
+  transition: all 0.18s cubic-bezier(0.2, 0.7, 0.3, 1);
+  border: 1px solid transparent;
+  white-space: nowrap;
+  display: inline-flex;
+  align-items: center;
+}
+.nav-link:hover {
+  color: var(--ink);
+  background: rgba(217, 119, 87, 0.07);
+}
+.nav-link.active {
+  color: var(--accent-deep);
+  background: var(--accent-soft);
+  border-color: rgba(217, 119, 87, 0.2);
+}
+.brand-icon {
+  width: 14px;
+  height: 14px;
+  margin-right: 5px;
+  flex-shrink: 0;
+}
+@media (max-width: 600px) {
+  .top-nav-inner { padding: 0 16px; gap: 8px; }
+  .nav-link { font-size: 11px; padding: 6px 10px; }
+}
+
+/* ===== Hero ===== */
+.hero {
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 96px 32px 56px;
+  text-align: center;
+}
+.eyebrow {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  color: var(--accent-deep);
+  text-transform: uppercase;
+  margin-bottom: 24px;
+}
+.eyebrow .dot {
+  display: inline-block;
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: var(--accent);
+  margin: 0 10px 3px;
+  vertical-align: middle;
+}
+.hero h1 {
+  font-family: 'Fraunces', serif;
+  font-weight: 500;
+  font-size: clamp(40px, 6vw, 76px);
+  line-height: 1.05;
+  letter-spacing: -0.025em;
+  color: var(--ink);
+  margin-bottom: 28px;
+}
+.hero h1 em {
+  font-style: italic;
+  font-weight: 400;
+  color: var(--accent-deep);
+}
+.hero .lead {
+  font-size: 17px;
+  line-height: 1.85;
+  color: var(--ink-soft);
+  max-width: 640px;
+  margin: 0 auto;
+}
+
+/* Decorative divider */
+.divider {
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 0 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  color: var(--ink-mute);
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 0.2em;
+}
+.divider::before, .divider::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: var(--line);
+  max-width: 240px;
+}
+
+/* ===== Cards Grid ===== */
+.cards-section {
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 48px 32px 80px;
+  flex: 1;
+}
+.cards-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+.card {
+  background: var(--bg-card);
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  padding: 36px 32px 32px;
+  text-decoration: none;
+  color: inherit;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.28s cubic-bezier(0.2, 0.7, 0.3, 1),
+              box-shadow 0.28s cubic-bezier(0.2, 0.7, 0.3, 1),
+              border-color 0.28s ease;
+}
+.card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(217, 119, 87, 0.0) 0%, rgba(217, 119, 87, 0.06) 100%);
+  opacity: 0;
+  transition: opacity 0.28s ease;
+  pointer-events: none;
+}
+.card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 18px 40px -18px rgba(28, 26, 23, 0.18),
+              0 4px 14px -6px rgba(28, 26, 23, 0.08);
+  border-color: rgba(217, 119, 87, 0.35);
+}
+.card:hover::before { opacity: 1; }
+.card-icon {
+  width: 44px;
+  height: 44px;
+  margin-bottom: 22px;
+  position: relative;
+  z-index: 1;
+}
+.card-icon.brand-claude { color: #D97757; }
+.card-icon.brand-canva { color: #00C4CC; }
+.card-icon.brand-github { color: #1C1A17; }
+.card-num {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  color: var(--ink-mute);
+  margin-bottom: 12px;
+  position: relative;
+  z-index: 1;
+}
+.card-title {
+  font-family: 'Fraunces', serif;
+  font-size: 28px;
+  font-weight: 500;
+  letter-spacing: -0.02em;
+  color: var(--ink);
+  margin-bottom: 10px;
+  position: relative;
+  z-index: 1;
+}
+.card-desc {
+  font-size: 14.5px;
+  line-height: 1.75;
+  color: var(--ink-soft);
+  margin-bottom: 28px;
+  flex: 1;
+  position: relative;
+  z-index: 1;
+}
+.card-arrow {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  color: var(--accent-deep);
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  position: relative;
+  z-index: 1;
+  transition: gap 0.24s ease;
+}
+.card:hover .card-arrow { gap: 14px; }
+.card-arrow svg { width: 14px; height: 14px; }
+
+@media (max-width: 880px) {
+  .cards-grid { grid-template-columns: 1fr; gap: 18px; }
+  .hero { padding: 64px 24px 40px; }
+  .cards-section { padding: 32px 24px 60px; }
+  .card { padding: 28px 24px 26px; }
+}
+
+/* ===== Footer ===== */
+footer {
+  border-top: 1px solid var(--line);
+  padding: 32px 32px 40px;
+  text-align: center;
+}
+footer p {
+  font-family: 'Fraunces', serif;
+  font-style: italic;
+  font-size: 14px;
+  color: var(--ink-mute);
+}
+</style>
+</head>
+<body>
+
+<nav class="top-nav">
+  <div class="top-nav-inner">
+    <a href="index.html" class="nav-brand-link"><span class="nav-brand-mark">◆</span>Beginner Guides Series</a>
+    <div class="nav-links">
+      <a href="index.html" class="nav-link active">Home</a>
+      <a href="claude-code-guide.html" class="nav-link"><svg class="brand-icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 1.5c0 5.795 4.705 10.5 10.5 10.5C16.705 12 12 16.705 12 22.5 12 16.705 7.295 12 1.5 12 7.295 12 12 7.295 12 1.5z"/></svg>Claude Code</a>
+      <a href="canva-guide.html" class="nav-link"><svg class="brand-icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10c3.16 0 5.99-1.47 7.83-3.76l-2.9-2.01A6.49 6.49 0 0 1 12 18.5c-3.59 0-6.5-2.91-6.5-6.5S8.41 5.5 12 5.5c2 0 3.78.9 4.97 2.31l2.97-1.94A9.97 9.97 0 0 0 12 2z"/></svg>Canva</a>
+      <a href="github-guide.html" class="nav-link"><svg class="brand-icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></svg>GitHub</a>
+    </div>
+  </div>
+</nav>
+
+<section class="hero">
+  <div class="eyebrow">FOR BEGINNERS<span class="dot"></span>2026</div>
+  <h1>AI Tools, <em>はじめてガイド</em></h1>
+  <p class="lead">Claude Code・Canva・GitHub の3ツールを初心者向けに日本語で。ゼロから自分のゲームを作って公開するまでの最短ルート。</p>
+</section>
+
+<div class="divider">THREE GUIDES</div>
+
+<section class="cards-section">
+  <div class="cards-grid">
+
+    <a href="claude-code-guide.html" class="card">
+      <svg class="card-icon brand-claude" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 1.5c0 5.795 4.705 10.5 10.5 10.5C16.705 12 12 16.705 12 22.5 12 16.705 7.295 12 1.5 12 7.295 12 12 7.295 12 1.5z"/></svg>
+      <div class="card-num">01 / CODE</div>
+      <h2 class="card-title">Claude Code</h2>
+      <p class="card-desc">AI とペアプロでコードを書く。話しかけるだけで、初心者でもアプリやゲームが完成する新しい開発体験。</p>
+      <span class="card-arrow">READ THE GUIDE
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+      </span>
+    </a>
+
+    <a href="canva-guide.html" class="card">
+      <svg class="card-icon brand-canva" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10c3.16 0 5.99-1.47 7.83-3.76l-2.9-2.01A6.49 6.49 0 0 1 12 18.5c-3.59 0-6.5-2.91-6.5-6.5S8.41 5.5 12 5.5c2 0 3.78.9 4.97 2.31l2.97-1.94A9.97 9.97 0 0 0 12 2z"/></svg>
+      <div class="card-num">02 / DESIGN</div>
+      <h2 class="card-title">Canva</h2>
+      <p class="card-desc">テンプレで誰でもプロ級デザイン。ロゴ・サムネ・SNS素材・動画まで、ドラッグだけで作れる魔法のツール。</p>
+      <span class="card-arrow">READ THE GUIDE
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+      </span>
+    </a>
+
+    <a href="github-guide.html" class="card">
+      <svg class="card-icon brand-github" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></svg>
+      <div class="card-num">03 / SHARE</div>
+      <h2 class="card-title">GitHub</h2>
+      <p class="card-desc">ゲームを保管・公開する。作品を世界中に届けて、友達にURLでシェアできるエンジニアの聖地。</p>
+      <span class="card-arrow">READ THE GUIDE
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+      </span>
+    </a>
+
+  </div>
+</section>
+
+<footer>
+  <p>Made with care for first-time users.</p>
+</footer>
+
+</body>
+</html>
